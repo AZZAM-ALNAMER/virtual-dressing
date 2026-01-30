@@ -19,12 +19,12 @@ except ImportError:
 
 
 class SkinToneAnalyzer:
-    """Analyzes skin tone from facial images"""
+    """Analyzes skin tone and undertone from facial images"""
     
-    SKIN_TONE_CATEGORIES = {
-        'light': 'Light',
-        'medium': 'Medium',
-        'dark': 'Dark'
+    UNDERTONE_CATEGORIES = {
+        'warm': 'Warm',
+        'cool': 'Cool',
+        'neutral': 'Neutral'
     }
     
     def __init__(self):
@@ -42,13 +42,13 @@ class SkinToneAnalyzer:
     
     def analyze_skin_tone(self, image_data: np.ndarray) -> str:
         """
-        Analyze skin tone from an image
+        Analyze skin undertone from an image
         
         Args:
             image_data: Image as numpy array (BGR format from OpenCV)
             
         Returns:
-            Skin tone category: 'light', 'medium', or 'dark'
+            Undertone category: 'warm', 'cool', or 'neutral'
         """
         if not self.use_mediapipe:
             # Fallback: Analyze center region of image
@@ -100,10 +100,10 @@ class SkinToneAnalyzer:
         # Calculate average skin color
         avg_color = self._get_average_skin_color(face_region)
         
-        # Classify skin tone
-        skin_tone = self._classify_skin_tone(avg_color)
+        # Classify undertone
+        undertone = self._classify_undertone(avg_color)
         
-        return skin_tone
+        return undertone
     
     def _analyze_without_mediapipe(self, image_data: np.ndarray) -> str:
         """
@@ -126,8 +126,8 @@ class SkinToneAnalyzer:
         # Calculate average color
         avg_color = self._get_average_skin_color(center_region_rgb)
         
-        # Classify skin tone
-        return self._classify_skin_tone(avg_color)
+        # Classify undertone
+        return self._classify_undertone(avg_color)
     
     def _get_average_skin_color(self, face_region: np.ndarray) -> Tuple[float, float, float]:
         """
@@ -162,60 +162,78 @@ class SkinToneAnalyzer:
         
         return avg_color
     
-    def _classify_skin_tone(self, rgb_color: Tuple[float, float, float]) -> str:
+    def _classify_undertone(self, rgb_color: Tuple[float, float, float]) -> str:
         """
-        Classify skin tone based on RGB color
+        Classify skin undertone based on RGB color ratios
+        Determines whether undertone is warm, cool, or neutral
         
         Args:
             rgb_color: Tuple of (R, G, B) values
             
         Returns:
-            Skin tone category: 'light', 'medium', or 'dark'
+            Undertone category: 'warm', 'cool', or 'neutral'
         """
         r, g, b = rgb_color
         
-        # Calculate luminance (perceived brightness)
-        # Using standard luminance formula
-        luminance = 0.299 * r + 0.587 * g + 0.114 * b
+        # Calculate ratios to determine undertone
+        # Warm undertones: higher red and yellow (R+G > B)
+        # Cool undertones: higher blue (B > R+G)
+        # Neutral: balanced ratio
         
-        # Classify based on luminance thresholds
-        # These thresholds are approximate and can be adjusted
-        if luminance > 170:
-            return 'light'
-        elif luminance > 120:
-            return 'medium'
+        if r == 0 and g == 0 and b == 0:
+            return 'neutral'
+        
+        # Calculate color ratios
+        total = r + g + b
+        r_ratio = r / total
+        g_ratio = g / total
+        b_ratio = b / total
+        
+        # Warm: dominant red/yellow (high R, high G relative to B)
+        warm_score = (r_ratio + g_ratio) - b_ratio
+        
+        # Cool: dominant blue/violet (high B relative to R+G)
+        cool_score = b_ratio - (r_ratio + g_ratio)
+        
+        # Determine undertone with threshold for neutral
+        threshold = 0.05
+        
+        if warm_score > threshold:
+            return 'warm'
+        elif cool_score > threshold:
+            return 'cool'
         else:
-            return 'dark'
+            return 'neutral'
     
-    def get_recommended_colors(self, skin_tone: str) -> list:
+    def get_recommended_colors(self, undertone: str) -> list:
         """
-        Get recommended clothing colors based on skin tone
+        Get recommended clothing colors based on skin undertone
         
         Args:
-            skin_tone: Skin tone category ('light', 'medium', or 'dark')
+            undertone: Undertone category ('warm', 'cool', or 'neutral')
             
         Returns:
             List of recommended color names
         """
         color_recommendations = {
-            'light': [
-                'Pastel Pink', 'Light Blue', 'Lavender', 'Mint Green',
-                'Peach', 'Soft Yellow', 'Baby Blue', 'Coral',
-                'Navy Blue', 'Emerald Green', 'Ruby Red'
+            'warm': [
+                'Warm Coral', 'Peachy Orange', 'Terracotta', 'Burnt Orange',
+                'Warm Brown', 'Golden Yellow', 'Olive Green', 'Warm Red',
+                'Caramel', 'Earth Tones', 'Mustard', 'Warm Beige'
             ],
-            'medium': [
-                'Earth Brown', 'Olive Green', 'Burgundy', 'Mustard Yellow',
-                'Terracotta', 'Teal', 'Warm Orange', 'Camel',
-                'Deep Purple', 'Forest Green', 'Rust'
+            'cool': [
+                'Cool Blue', 'Icy Blue', 'Jewel Tone Purple', 'Magenta',
+                'Cool Pink', 'Emerald Green', 'Plum', 'Cool Gray',
+                'Navy Blue', 'Burgundy', 'Bright Red', 'Cool Mint'
             ],
-            'dark': [
-                'Bright White', 'Vibrant Red', 'Electric Blue', 'Hot Pink',
-                'Sunny Yellow', 'Lime Green', 'Orange', 'Magenta',
-                'Turquoise', 'Gold', 'Silver'
+            'neutral': [
+                'Pure White', 'Black', 'Cool Gray', 'Warm Gray',
+                'Navy Blue', 'Charcoal', 'Cream', 'True Red',
+                'Forest Green', 'Deep Purple', 'Silver', 'Gold'
             ]
         }
         
-        return color_recommendations.get(skin_tone, color_recommendations['medium'])
+        return color_recommendations.get(undertone, color_recommendations['neutral'])
     
     def __del__(self):
         """Cleanup"""
