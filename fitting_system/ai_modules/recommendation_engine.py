@@ -16,6 +16,48 @@ class RecommendationEngine:
         'oversize': {'min_ratio': 0.0, 'max_ratio': 1.1}
     }
     
+    # Garment-specific measurement priorities
+    GARMENT_MEASUREMENTS = {
+        'shirt': {
+            'primary': ['chest', 'shoulder_width'],
+            'secondary': ['arm_length', 'torso_length'],
+            'fit_focus': 'chest',
+        },
+        'pants': {
+            'primary': ['waist', 'hip', 'inseam'],
+            'secondary': ['thigh'],
+            'fit_focus': 'waist',
+        },
+        'dress': {
+            'primary': ['chest', 'waist', 'hip'],
+            'secondary': ['torso_length'],
+            'fit_focus': 'waist',
+        },
+        'jacket': {
+            'primary': ['chest', 'shoulder_width'],
+            'secondary': ['arm_length', 'torso_length'],
+            'fit_focus': 'chest',
+        },
+        'skirt': {
+            'primary': ['waist', 'hip'],
+            'secondary': ['torso_length'],
+            'fit_focus': 'waist',
+        },
+    }
+    
+    # Body shape adjustments for size recommendations
+    # Positive = size up, Negative = size down
+    BODY_SHAPE_ADJUSTMENTS = {
+        'inverted_triangle': {'shirt': 1, 'jacket': 1, 'pants': -1, 'dress': 0, 'skirt': -1},
+        'triangle': {'shirt': -1, 'jacket': 0, 'pants': 1, 'dress': 0, 'skirt': 1},
+        'oval': {'shirt': 1, 'jacket': 1, 'pants': 1, 'dress': 1, 'skirt': 1},
+        'hourglass': {'shirt': 0, 'jacket': 0, 'pants': 0, 'dress': -1, 'skirt': 0},
+        'rectangle': {'shirt': 0, 'jacket': 0, 'pants': 0, 'dress': 0, 'skirt': 0},
+    }
+    
+    # Size order for adjustment calculations
+    SIZE_ORDER = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+    
     def __init__(self):
         pass
     
@@ -63,6 +105,87 @@ class RecommendationEngine:
         
         # Default fallback
         return 'M'
+    
+    def recommend_size_for_garment(
+        self, 
+        measurements: Dict[str, float], 
+        garment_type: str,
+        body_shape: str = 'rectangle'
+    ) -> str:
+        """
+        Recommend size based on garment-specific measurements and body shape.
+        
+        Args:
+            measurements: Body measurements dict
+            garment_type: Type of garment ('shirt', 'pants', 'dress', 'jacket', 'skirt')
+            body_shape: Body shape classification
+            
+        Returns:
+            Recommended size with body shape adjustment applied
+        """
+        from fitting_system.models import Size
+        
+        # Get garment configuration
+        config = self.GARMENT_MEASUREMENTS.get(garment_type, self.GARMENT_MEASUREMENTS['shirt'])
+        fit_focus = config['fit_focus']
+        focus_value = measurements.get(fit_focus, 0)
+        
+        # Find base size using the focus measurement
+        if fit_focus == 'chest':
+            matching_sizes = Size.objects.filter(
+                chest_min__lte=focus_value,
+                chest_max__gte=focus_value
+            )
+        elif fit_focus == 'waist':
+            matching_sizes = Size.objects.filter(
+                waist_min__lte=focus_value,
+                waist_max__gte=focus_value
+            )
+        else:
+            matching_sizes = Size.objects.filter(
+                chest_min__lte=focus_value,
+                chest_max__gte=focus_value
+            )
+        
+        if matching_sizes.exists():
+            base_size = matching_sizes.first().name
+        else:
+            # Fallback to generic size recommendation
+            base_size = self.recommend_size(measurements)
+        
+        # Apply body shape adjustment
+        adjusted_size = self.apply_body_shape_adjustment(base_size, body_shape, garment_type)
+        
+        return adjusted_size
+    
+    def apply_body_shape_adjustment(self, base_size: str, body_shape: str, garment_type: str) -> str:
+        """
+        Adjust size based on body shape.
+        
+        Args:
+            base_size: The base recommended size
+            body_shape: Body shape classification
+            garment_type: Type of garment
+            
+        Returns:
+            Adjusted size
+        """
+        adjustment = self.BODY_SHAPE_ADJUSTMENTS.get(body_shape, {}).get(garment_type, 0)
+        
+        if adjustment == 0:
+            return base_size
+        
+        try:
+            current_index = self.SIZE_ORDER.index(base_size.upper())
+            new_index = current_index + adjustment
+            
+            # Clamp to valid range
+            new_index = max(0, min(new_index, len(self.SIZE_ORDER) - 1))
+            
+            return self.SIZE_ORDER[new_index]
+        except ValueError:
+            # Size not found in order list
+            return base_size
     
     def recommend_fit(self, measurements: Dict[str, float]) -> str:
         """
@@ -176,7 +299,8 @@ class RecommendationEngine:
     
     def generate_recommendations_for_scan(self, body_scan) -> List[object]:
         """
-        Generate and save recommendations for a body scan
+        Generate and save recommendations for a body scan.
+        Uses garment-specific sizing and body shape adjustments.
         
         Args:
             body_scan: BodyScan model instance
@@ -186,6 +310,7 @@ class RecommendationEngine:
         """
         from fitting_system.models import Recommendation
         
+        # Build measurements dict including new fashion measurements
         measurements = {
             'height': float(body_scan.height),
             'chest': float(body_scan.chest),
@@ -193,15 +318,28 @@ class RecommendationEngine:
             'shoulder_width': float(body_scan.shoulder_width)
         }
         
-        recommended_size = self.recommend_size(measurements)
+        # Add fashion-specific measurements if available
+        if body_scan.hip:
+            measurements['hip'] = float(body_scan.hip)
+        if body_scan.torso_length:
+            measurements['torso_length'] = float(body_scan.torso_length)
+        if body_scan.arm_length:
+            measurements['arm_length'] = float(body_scan.arm_length)
+        if body_scan.inseam:
+            measurements['inseam'] = float(body_scan.inseam)
+        
+        # Get body shape (with backward compatibility)
+        body_shape = getattr(body_scan, 'body_shape', 'rectangle') or 'rectangle'
+        
+        # Get base recommendations
+        base_recommended_size = self.recommend_size(measurements)
         recommended_fit = self.recommend_fit(measurements)
+        
         # Use undertone for color recommendations (with backward compatibility)
         undertone = getattr(body_scan, 'undertone', 'warm')
         recommended_colors = self.recommend_colors(body_scan.skin_tone, undertone)
         
         # Get product recommendations
-        # Try to infer gender from product availability (for prototype)
-        # In production, you'd ask the customer
         product_recommendations = []
         
         for gender in ['men', 'women', 'unisex']:
@@ -223,9 +361,16 @@ class RecommendationEngine:
         
         unique_recommendations.sort(key=lambda x: x[1], reverse=True)
         
-        # Create Recommendation objects
+        # Create Recommendation objects with garment-specific sizing
         recommendation_objects = []
         for product, priority in unique_recommendations[:10]:
+            # Get garment-specific size with body shape adjustment
+            recommended_size = self.recommend_size_for_garment(
+                measurements, 
+                product.category,
+                body_shape
+            )
+            
             rec = Recommendation.objects.create(
                 body_scan=body_scan,
                 product=product,

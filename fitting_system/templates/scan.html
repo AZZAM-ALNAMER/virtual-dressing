@@ -312,7 +312,7 @@
             } catch (error) {
                 console.error("Analysis frame error:", error);
             }
-        }, 300); // ~3 FPS for smoother feedback
+        }, 200); // ~5 FPS for smoother feedback
     }
 
     function stopAnalysis() {
@@ -340,7 +340,7 @@
 
         // Draw landmarks if available
         if (result.landmarks && result.landmarks.length > 0) {
-            drawLandmarks(result.landmarks);
+            drawLandmarks(result.landmarks, result.status);
         }
 
         // Handle auto-capture logic
@@ -463,21 +463,72 @@
         }
     }
 
-    function drawLandmarks(landmarks) {
+    const POSE_CONNECTIONS = [
+        [11, 12], // Shoulders
+        [11, 13], [13, 15], // Left arm
+        [12, 14], [14, 16], // Right arm
+        [11, 23], [12, 24], // Torso
+        [23, 24], // Hips
+        [23, 25], [25, 27], // Left leg
+        [24, 26], [26, 28]  // Right leg
+    ];
+
+    function drawLandmarks(landmarks, status) {
         overlayContext.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
 
-        overlayContext.fillStyle = '#00FF00';
-        overlayContext.strokeStyle = '#00FF00';
-        overlayContext.lineWidth = 2;
+        let color = '#34d399'; // emerald-400
+        if (status === 'warning') color = '#fbbf24'; // yellow-400
+        if (status === 'error') color = '#ef4444'; // red-500
 
-        landmarks.forEach(lm => {
-            const x = (1 - lm.x) * overlayCanvas.width; // Flip X for mirrored video
+        overlayContext.strokeStyle = color;
+        overlayContext.lineWidth = 4;
+        overlayContext.lineCap = 'round';
+        overlayContext.lineJoin = 'round';
+
+        // Add glow effect
+        overlayContext.shadowBlur = 15;
+        overlayContext.shadowColor = color;
+
+        // Draw Connections (Skeleton)
+        POSE_CONNECTIONS.forEach(([i, j]) => {
+            const lm1 = landmarks[i];
+            const lm2 = landmarks[j];
+            if (lm1 && lm2 && lm1.x !== undefined && lm2.x !== undefined) {
+                const x1 = (1 - lm1.x) * overlayCanvas.width;
+                const y1 = lm1.y * overlayCanvas.height;
+                const x2 = (1 - lm2.x) * overlayCanvas.width;
+                const y2 = lm2.y * overlayCanvas.height;
+
+                overlayContext.beginPath();
+                overlayContext.moveTo(x1, y1);
+                overlayContext.lineTo(x2, y2);
+                overlayContext.stroke();
+            }
+        });
+
+        // Draw Joint Points
+        landmarks.forEach((lm, index) => {
+            // Focus on key joints for a cleaner look
+            const keyJoints = [11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28, 0];
+            if (!keyJoints.includes(index)) return;
+
+            const x = (1 - lm.x) * overlayCanvas.width;
             const y = lm.y * overlayCanvas.height;
 
+            // Outer glow circle
             overlayContext.beginPath();
-            overlayContext.arc(x, y, 4, 0, 2 * Math.PI);
+            overlayContext.fillStyle = color;
+            overlayContext.arc(x, y, 6, 0, 2 * Math.PI);
+            overlayContext.fill();
+
+            // Inner white dot for "premium" look
+            overlayContext.beginPath();
+            overlayContext.fillStyle = '#FFFFFF';
+            overlayContext.arc(x, y, 3, 0, 2 * Math.PI);
             overlayContext.fill();
         });
+
+        overlayContext.shadowBlur = 0; // Reset shadow for other drawing operations
     }
 
     function clearLandmarks() {

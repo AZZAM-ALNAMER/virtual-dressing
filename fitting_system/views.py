@@ -44,39 +44,73 @@ def process_scan(request):
     
     try:
         data = json.loads(request.body)
+        
+        # Support both single image and multi-frame input
         front_image_data = data.get('front_image')
+        front_frames_data = data.get('front_frames', [])
         side_image_data = data.get('side_image')
+        side_frames_data = data.get('side_frames', [])
         skin_image_data = data.get('skin_image')  # Separate skin tone image
         
-        if not front_image_data:
+        if not front_image_data and not front_frames_data:
             return JsonResponse({'error': 'Front image is required'}, status=400)
         
-        # Decode base64 images
-        front_image = decode_base64_image(front_image_data)
-        side_image = decode_base64_image(side_image_data) if side_image_data else None
-        skin_image = decode_base64_image(skin_image_data) if skin_image_data else None
+        # Import body shape classifier
+        from .ai_modules.body_shape import classify_body_shape
         
-        # Estimate body measurements
         measurement_estimator = get_estimator()
-        measurements = measurement_estimator.estimate_from_front_and_side(
-            front_image, 
-            side_image
-        )
         
-        # Analyze skin tone - use dedicated skin image if available, otherwise fall back to front image
+        # Determine if using multi-frame or single image
+        if front_frames_data and len(front_frames_data) > 0:
+            # Multi-frame mode (fashion-grade)
+            front_images = [decode_base64_image(f) for f in front_frames_data if f]
+            measurements = measurement_estimator.estimate_with_stability(front_images)
+            frame_count = len(front_images)
+        else:
+            # Single image mode (backward compatible)
+            front_image = decode_base64_image(front_image_data)
+            side_image = decode_base64_image(side_image_data) if side_image_data else None
+            measurements = measurement_estimator.estimate_from_front_and_side(
+                front_image, 
+                side_image
+            )
+            frame_count = 1
+        
+        # Classify body shape based on measurements
+        body_shape = classify_body_shape(measurements)
+        
+        # Analyze skin tone - use dedicated skin image if available
+        skin_image = decode_base64_image(skin_image_data) if skin_image_data else None
+        if skin_image is None:
+            # Fall back to first available image
+            if front_frames_data:
+                skin_image = decode_base64_image(front_frames_data[0])
+            elif front_image_data:
+                skin_image = decode_base64_image(front_image_data)
+        
         skin_tone_analyzer = SkinToneAnalyzer()
-        skin_analysis = skin_tone_analyzer.analyze_skin_tone_detailed(
-            skin_image if skin_image is not None else front_image
-        )
+        skin_analysis = skin_tone_analyzer.analyze_skin_tone_detailed(skin_image)
         
-        # Create BodyScan record with skin tone and undertone
+        # Create BodyScan record with all new fields
         body_scan = BodyScan.objects.create(
-            height=measurements['height'],
-            shoulder_width=measurements['shoulder_width'],
-            chest=measurements['chest'],
-            waist=measurements['waist'],
+            # Core measurements
+            height=measurements.get('height', 170),
+            shoulder_width=measurements.get('shoulder_width', 42),
+            chest=measurements.get('chest', 95),
+            waist=measurements.get('waist', 80),
+            # Fashion-specific measurements
+            hip=measurements.get('hip'),
+            torso_length=measurements.get('torso_length'),
+            arm_length=measurements.get('arm_length'),
+            inseam=measurements.get('inseam'),
+            # Body shape
+            body_shape=body_shape,
+            # Skin analysis
             skin_tone=skin_analysis.skin_tone,
-            undertone=skin_analysis.undertone
+            undertone=skin_analysis.undertone,
+            # Quality metrics
+            confidence_score=skin_analysis.confidence,
+            frame_count=frame_count,
         )
         
         # Generate recommendations
@@ -87,12 +121,15 @@ def process_scan(request):
             'success': True,
             'session_id': str(body_scan.session_id),
             'measurements': measurements,
+            'body_shape': body_shape,
+            'body_shape_display': body_shape.replace('_', ' ').title(),
             'skin_tone': skin_analysis.skin_tone,
             'skin_tone_display': skin_analysis.skin_tone.replace('_', ' ').title(),
             'undertone': skin_analysis.undertone,
             'undertone_display': skin_analysis.undertone.title(),
             'ita_value': round(skin_analysis.ita_value, 2),
-            'confidence': round(skin_analysis.confidence, 2)
+            'confidence': round(skin_analysis.confidence, 2),
+            'frame_count': frame_count,
         })
         
     except ValueError as e:

@@ -59,6 +59,42 @@ class BodyMeasurementEstimator:
         
         # Calibration factors (pixels to cm)
         self.PIXEL_TO_CM_RATIO = 0.3  # Approximate, assumes person is ~170cm tall
+    
+    # Fashion segment landmark indices (MediaPipe Pose uses 33 landmarks)
+    # Reference: https://developers.google.com/mediapipe/solutions/vision/pose_landmarker
+    FASHION_SEGMENTS = {
+        'shoulder_width': (11, 12),              # L/R Shoulder
+        'torso_length': ((11, 12), (23, 24)),    # Shoulder midpoint → Hip midpoint
+        'arm_length': (11, 13, 15),              # Shoulder → Elbow → Wrist
+        'upper_arm': (11, 13),                   # Shoulder → Elbow
+        'forearm': (13, 15),                     # Elbow → Wrist
+        'inseam': (23, 25, 27),                  # Hip → Knee → Ankle
+        'outseam': (23, 27),                     # Hip → Ankle (direct)
+        'thigh': (23, 25),                       # Hip → Knee
+        'lower_leg': (25, 27),                   # Knee → Ankle
+        'hip_width': (23, 24),                   # L/R Hip
+    }
+    
+    # Regional scale adjustments for camera perspective
+    REGIONAL_SCALES = {
+        'upper_body': 1.02,   # Shoulders/chest slightly closer to camera
+        'torso': 1.00,        # Base reference
+        'lower_body': 0.98,   # Legs slightly further from camera
+    }
+    
+    # Fit ease adjustments (cm to add for clothing fit)
+    FIT_EASE = {
+        'slim': {'chest': 4, 'waist': 2, 'hip': 3},
+        'regular': {'chest': 8, 'waist': 4, 'hip': 6},
+        'oversize': {'chest': 14, 'waist': 8, 'hip': 10},
+    }
+    
+    # Body-type-specific multipliers for circumference estimation (when no side image)
+    CIRCUMFERENCE_MULTIPLIERS = {
+        'chest': {'slim': 2.2, 'average': 2.5, 'athletic': 2.7},
+        'waist': {'slim': 2.0, 'average': 2.3, 'athletic': 2.5},
+        'hip': {'slim': 2.3, 'average': 2.6, 'athletic': 2.8},
+    }
         
     def analyze_pose(self, image_data: np.ndarray) -> Dict:
         """Analyze pose for real-time feedback"""
@@ -166,26 +202,63 @@ class BodyMeasurementEstimator:
             # Calculate measurements
             measurements = {}
             
-            # Height: top of head to feet
+            # Height: top of head to feet (used for calibration)
             height_pixels = self._calculate_height_new_api(landmarks, h, w)
             
             # Calibrate pixel-to-cm ratio if reference height is provided
             if reference_height_cm:
                 self.PIXEL_TO_CM_RATIO = reference_height_cm / height_pixels
             
-            measurements['height'] = round(height_pixels * self.PIXEL_TO_CM_RATIO, 2)
+            # Apply regional scaling for upper body measurements
+            upper_scale = self.REGIONAL_SCALES['upper_body']
+            lower_scale = self.REGIONAL_SCALES['lower_body']
             
-            # Shoulder width
+            # Height (calibration reference only, but still include)
+            measurements['height'] = self.normalize_measurement(
+                height_pixels * self.PIXEL_TO_CM_RATIO
+            )
+            
+            # Shoulder width (upper body)
             shoulder_width_pixels = self._calculate_shoulder_width_new_api(landmarks, h, w)
-            measurements['shoulder_width'] = round(shoulder_width_pixels * self.PIXEL_TO_CM_RATIO, 2)
+            measurements['shoulder_width'] = self.normalize_measurement(
+                shoulder_width_pixels * self.PIXEL_TO_CM_RATIO * upper_scale
+            )
             
-            # Chest
+            # Chest circumference (upper body)
             chest_pixels = self._calculate_chest_new_api(landmarks, h, w)
-            measurements['chest'] = round(chest_pixels * self.PIXEL_TO_CM_RATIO, 2)
+            measurements['chest'] = self.normalize_measurement(
+                chest_pixels * self.PIXEL_TO_CM_RATIO * upper_scale
+            )
             
-            # Waist
+            # Waist circumference (torso)
             waist_pixels = self._calculate_waist_new_api(landmarks, h, w)
-            measurements['waist'] = round(waist_pixels * self.PIXEL_TO_CM_RATIO, 2)
+            measurements['waist'] = self.normalize_measurement(
+                waist_pixels * self.PIXEL_TO_CM_RATIO
+            )
+            
+            # Hip circumference (lower body)
+            hip_pixels = self._calculate_hip_new_api(landmarks, h, w)
+            measurements['hip'] = self.normalize_measurement(
+                hip_pixels * self.PIXEL_TO_CM_RATIO * lower_scale
+            )
+            
+            # Torso length (shoulder to hip)
+            torso_pixels = self._calculate_torso_length_new_api(landmarks, h, w)
+            measurements['torso_length'] = self.normalize_measurement(
+                torso_pixels * self.PIXEL_TO_CM_RATIO
+            )
+            
+            # Arm length (shoulder → elbow → wrist)
+            arm_pixels = self._calculate_arm_length_new_api(landmarks, h, w)
+            measurements['arm_length'] = self.normalize_measurement(
+                arm_pixels * self.PIXEL_TO_CM_RATIO * upper_scale
+            )
+            
+            # Inseam (hip → knee → ankle for pants)
+            inseam_pixels = self._calculate_inseam_new_api(landmarks, h, w)
+            measurements['inseam'] = self.normalize_measurement(
+                inseam_pixels * self.PIXEL_TO_CM_RATIO * lower_scale
+            )
             
             return measurements
             
@@ -196,24 +269,25 @@ class BodyMeasurementEstimator:
     def _estimate_without_mediapipe(self, image_data: np.ndarray, reference_height_cm: Optional[float] = None) -> Dict[str, float]:
         """
         Fallback method to estimate measurements without MediaPipe
-        Returns average measurements based on image dimensions
+        Returns average measurements based on typical body proportions
         """
-        h, w, _ = image_data.shape
-        
-        # Use reference height or estimate based on image height
-        if reference_height_cm:
-            height = reference_height_cm
+        # Handle case where image_data might be None (from estimate_with_stability)
+        if image_data is None:
+            height = reference_height_cm if reference_height_cm else 170.0
         else:
-            # Assume average height based on image aspect ratio
-            height = 170.0  # Average height in cm
+            height = reference_height_cm if reference_height_cm else 170.0
         
-        # Estimate other measurements based on typical body proportions
-        # These are statistical averages and will be less accurate than pose detection
+        # Estimate measurements based on statistical body proportions
+        # These are population averages and will be less accurate than pose detection
         measurements = {
-            'height': round(height, 2),
-            'shoulder_width': round(height * 0.25, 2),  # ~25% of height
-            'chest': round(height * 0.55, 2),  # ~55% of height for circumference
-            'waist': round(height * 0.47, 2),  # ~47% of height for circumference
+            'height': self.normalize_measurement(height),
+            'shoulder_width': self.normalize_measurement(height * 0.25),      # ~25% of height
+            'chest': self.normalize_measurement(height * 0.55),               # ~55% of height
+            'waist': self.normalize_measurement(height * 0.47),               # ~47% of height
+            'hip': self.normalize_measurement(height * 0.55),                 # ~55% of height
+            'torso_length': self.normalize_measurement(height * 0.30),        # ~30% of height
+            'arm_length': self.normalize_measurement(height * 0.33),          # ~33% of height
+            'inseam': self.normalize_measurement(height * 0.45),              # ~45% of height
         }
         
         return measurements
@@ -346,14 +420,31 @@ class BodyMeasurementEstimator:
         width = np.sqrt((right_x - left_x)**2 + (right_y - left_y)**2)
         return width
     
-    def _calculate_chest_new_api(self, landmarks: List, h: int, w: int) -> float:
-        """Estimate chest circumference using new API landmarks"""
+    def _calculate_chest_new_api(self, landmarks: List, h: int, w: int, side_depth: float = None) -> float:
+        """
+        Estimate chest circumference using ellipse formula when side image available,
+        otherwise use improved multipliers.
+        """
         shoulder_width = self._calculate_shoulder_width_new_api(landmarks, h, w)
-        chest_circumference = shoulder_width * 2.5
-        return chest_circumference
+        
+        if side_depth:
+            # Ellipse-based estimation: C ≈ π × √(2 × (a² + b²))
+            chest_circumference = self._calculate_circumference_ellipse(
+                shoulder_width * self.PIXEL_TO_CM_RATIO,
+                side_depth,
+                'chest'
+            )
+            return chest_circumference / self.PIXEL_TO_CM_RATIO  # Return in pixels
+        else:
+            # Use average multiplier (will be converted to cm later)
+            multiplier = self.CIRCUMFERENCE_MULTIPLIERS['chest']['average']
+            return shoulder_width * multiplier
     
-    def _calculate_waist_new_api(self, landmarks: List, h: int, w: int) -> float:
-        """Estimate waist circumference using new API landmarks"""
+    def _calculate_waist_new_api(self, landmarks: List, h: int, w: int, side_depth: float = None) -> float:
+        """
+        Estimate waist circumference using ellipse formula when side image available,
+        otherwise use improved multipliers.
+        """
         LEFT_HIP = 23
         RIGHT_HIP = 24
         
@@ -366,8 +457,210 @@ class BodyMeasurementEstimator:
         right_y = right_hip.y * h
         
         hip_width = np.sqrt((right_x - left_x)**2 + (right_y - left_y)**2)
-        waist_circumference = hip_width * 2.3
-        return waist_circumference
+        
+        if side_depth:
+            waist_circumference = self._calculate_circumference_ellipse(
+                hip_width * self.PIXEL_TO_CM_RATIO * 0.9,  # Waist ~90% of hip width
+                side_depth * 0.85,  # Waist depth ~85% of hip depth
+                'waist'
+            )
+            return waist_circumference / self.PIXEL_TO_CM_RATIO
+        else:
+            multiplier = self.CIRCUMFERENCE_MULTIPLIERS['waist']['average']
+            return hip_width * multiplier
+    
+    def _calculate_hip_new_api(self, landmarks: List, h: int, w: int, side_depth: float = None) -> float:
+        """Calculate hip circumference."""
+        LEFT_HIP = 23
+        RIGHT_HIP = 24
+        
+        left_hip = landmarks[LEFT_HIP]
+        right_hip = landmarks[RIGHT_HIP]
+        
+        left_x = left_hip.x * w
+        right_x = right_hip.x * w
+        left_y = left_hip.y * h
+        right_y = right_hip.y * h
+        
+        hip_width = np.sqrt((right_x - left_x)**2 + (right_y - left_y)**2)
+        
+        if side_depth:
+            hip_circumference = self._calculate_circumference_ellipse(
+                hip_width * self.PIXEL_TO_CM_RATIO,
+                side_depth,
+                'hip'
+            )
+            return hip_circumference / self.PIXEL_TO_CM_RATIO
+        else:
+            multiplier = self.CIRCUMFERENCE_MULTIPLIERS['hip']['average']
+            return hip_width * multiplier
+    
+    def _calculate_torso_length_new_api(self, landmarks: List, h: int, w: int) -> float:
+        """Calculate torso length from shoulder midpoint to hip midpoint."""
+        LEFT_SHOULDER = 11
+        RIGHT_SHOULDER = 12
+        LEFT_HIP = 23
+        RIGHT_HIP = 24
+        
+        # Shoulder midpoint
+        shoulder_mid_y = ((landmarks[LEFT_SHOULDER].y + landmarks[RIGHT_SHOULDER].y) / 2) * h
+        
+        # Hip midpoint
+        hip_mid_y = ((landmarks[LEFT_HIP].y + landmarks[RIGHT_HIP].y) / 2) * h
+        
+        torso_length = abs(hip_mid_y - shoulder_mid_y)
+        return torso_length
+    
+    def _calculate_arm_length_new_api(self, landmarks: List, h: int, w: int) -> float:
+        """Calculate full arm length (shoulder → elbow → wrist)."""
+        LEFT_SHOULDER = 11
+        LEFT_ELBOW = 13
+        LEFT_WRIST = 15
+        
+        shoulder = landmarks[LEFT_SHOULDER]
+        elbow = landmarks[LEFT_ELBOW]
+        wrist = landmarks[LEFT_WRIST]
+        
+        # Upper arm: shoulder to elbow
+        upper_arm = np.sqrt(
+            ((elbow.x - shoulder.x) * w)**2 + 
+            ((elbow.y - shoulder.y) * h)**2
+        )
+        
+        # Forearm: elbow to wrist
+        forearm = np.sqrt(
+            ((wrist.x - elbow.x) * w)**2 + 
+            ((wrist.y - elbow.y) * h)**2
+        )
+        
+        return upper_arm + forearm
+    
+    def _calculate_inseam_new_api(self, landmarks: List, h: int, w: int) -> float:
+        """Calculate inseam (hip → knee → ankle for pants length)."""
+        LEFT_HIP = 23
+        LEFT_KNEE = 25
+        LEFT_ANKLE = 27
+        
+        hip = landmarks[LEFT_HIP]
+        knee = landmarks[LEFT_KNEE]
+        ankle = landmarks[LEFT_ANKLE]
+        
+        # Upper leg: hip to knee
+        upper_leg = np.sqrt(
+            ((knee.x - hip.x) * w)**2 + 
+            ((knee.y - hip.y) * h)**2
+        )
+        
+        # Lower leg: knee to ankle
+        lower_leg = np.sqrt(
+            ((ankle.x - knee.x) * w)**2 + 
+            ((ankle.y - knee.y) * h)**2
+        )
+        
+        return upper_leg + lower_leg
+    
+    def _calculate_circumference_ellipse(self, front_width: float, side_depth: float, body_part: str = 'chest') -> float:
+        """
+        Fashion-grade circumference estimation using ellipse formula.
+        C ≈ π × √(2 × (a² + b²)) where a, b are semi-axes
+        
+        Args:
+            front_width: Width from front view in cm
+            side_depth: Depth from side view in cm
+            body_part: 'chest', 'waist', or 'hip'
+            
+        Returns:
+            Estimated circumference in cm
+        """
+        a = front_width / 2  # Semi-major axis
+        b = side_depth / 2   # Semi-minor axis
+        
+        # Ramanujan's approximation for ellipse circumference
+        circumference = np.pi * np.sqrt(2 * (a**2 + b**2))
+        
+        return circumference
+    
+    @staticmethod
+    def normalize_measurement(value: float, round_to: float = 0.5, min_val: float = 0, max_val: float = 300) -> float:
+        """
+        Fashion-grade normalization: round to nearest increment and clamp to valid range.
+        
+        Args:
+            value: Raw measurement value in cm
+            round_to: Round to nearest value (default 0.5 cm)
+            min_val: Minimum valid value
+            max_val: Maximum valid value
+            
+        Returns:
+            Normalized measurement
+        """
+        # Clamp to valid range
+        clamped = max(min_val, min(max_val, value))
+        # Round to nearest increment
+        return round(clamped / round_to) * round_to
+    
+    def apply_fit_ease(self, measurements: Dict[str, float], fit_type: str = 'regular') -> Dict[str, float]:
+        """
+        Add ease allowance for clothing fit.
+        
+        Args:
+            measurements: Raw body measurements
+            fit_type: 'slim', 'regular', or 'oversize'
+            
+        Returns:
+            Measurements with ease added for clothing
+        """
+        ease = self.FIT_EASE.get(fit_type, self.FIT_EASE['regular'])
+        result = measurements.copy()
+        
+        for key, ease_value in ease.items():
+            if key in result:
+                result[key] = result[key] + ease_value
+        
+        return result
+    
+    def estimate_with_stability(
+        self, 
+        frames: List[np.ndarray], 
+        reference_height_cm: Optional[float] = None
+    ) -> Dict[str, float]:
+        """
+        Estimate measurements from multiple frames for stability.
+        Uses median for noise rejection.
+        
+        Args:
+            frames: List of image frames (BGR format)
+            reference_height_cm: Optional known height for calibration
+            
+        Returns:
+            Dictionary with stable measurements
+        """
+        if not frames:
+            return self._estimate_without_mediapipe(None, reference_height_cm)
+        
+        all_measurements = []
+        
+        for frame in frames:
+            try:
+                m = self.estimate_from_image(frame, reference_height_cm)
+                if m:
+                    all_measurements.append(m)
+            except Exception:
+                continue
+        
+        if not all_measurements:
+            return self._estimate_without_mediapipe(frames[0], reference_height_cm)
+        
+        # Use median for each measurement to reject outliers
+        stable_measurements = {}
+        keys = all_measurements[0].keys()
+        
+        for key in keys:
+            values = [m[key] for m in all_measurements if key in m]
+            if values:
+                stable_measurements[key] = self.normalize_measurement(np.median(values))
+        
+        return stable_measurements
     
     def __del__(self):
         """Cleanup"""

@@ -138,13 +138,39 @@ class BodyScan(models.Model):
         ('cool', 'Cool'),
     ]
     
+    BODY_SHAPE_CHOICES = [
+        ('hourglass', 'Hourglass'),
+        ('rectangle', 'Rectangle'),
+        ('triangle', 'Triangle (Pear)'),
+        ('inverted_triangle', 'Inverted Triangle (Athletic)'),
+        ('oval', 'Oval (Apple)'),
+    ]
+    
     session_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
-    height = models.DecimalField(max_digits=5, decimal_places=2)  # cm
-    shoulder_width = models.DecimalField(max_digits=5, decimal_places=2)  # cm
-    chest = models.DecimalField(max_digits=5, decimal_places=2)  # cm
-    waist = models.DecimalField(max_digits=5, decimal_places=2)  # cm
+    
+    # Core measurements (required)
+    height = models.DecimalField(max_digits=5, decimal_places=1)  # cm - used for calibration
+    shoulder_width = models.DecimalField(max_digits=5, decimal_places=1)  # cm
+    chest = models.DecimalField(max_digits=5, decimal_places=1)  # cm - circumference
+    waist = models.DecimalField(max_digits=5, decimal_places=1)  # cm - circumference
+    
+    # Fashion-specific measurements (nullable for backward compatibility)
+    hip = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)  # cm - circumference
+    torso_length = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)  # cm
+    arm_length = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)  # cm
+    inseam = models.DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)  # cm - for pants
+    
+    # Body shape classification
+    body_shape = models.CharField(max_length=20, choices=BODY_SHAPE_CHOICES, null=True, blank=True)
+    
+    # Skin analysis
     skin_tone = models.CharField(max_length=15, choices=SKIN_TONE_CHOICES)
     undertone = models.CharField(max_length=10, choices=UNDERTONE_CHOICES, default='warm')
+    
+    # Measurement quality metrics
+    confidence_score = models.DecimalField(max_digits=3, decimal_places=2, default=1.0)  # 0.0-1.0
+    frame_count = models.IntegerField(default=1)  # Number of frames used for averaging
+    
     scanned_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
@@ -159,6 +185,13 @@ class BodyScan(models.Model):
         if self.waist > 0:
             return float(self.chest) / float(self.waist)
         return 1.0
+    
+    @property
+    def body_shape_display(self):
+        """Get human-readable body shape name"""
+        if self.body_shape:
+            return dict(self.BODY_SHAPE_CHOICES).get(self.body_shape, self.body_shape)
+        return None
 
 
 class Recommendation(models.Model):
