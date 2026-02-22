@@ -1,11 +1,13 @@
 {% load static %}
+{% load i18n %}
+{% load i18n_helpers %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Virtual Fitting System{% endblock %}</title>
+    <title>{% block title %}{% trans "Virtual Fitting System" %}{% endblock %}</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -246,6 +248,32 @@
                 left: 100%;
             }
         }
+
+        /* RTL support for Arabic */
+        [dir="rtl"] body {
+            text-align: right;
+        }
+
+        [dir="rtl"] .flex {
+            flex-direction: row-reverse;
+        }
+
+        [dir="rtl"] .space-x-6 > * + * {
+            margin-left: 0;
+            margin-right: 1.5rem;
+        }
+
+        [dir="rtl"] .space-y-2 > * + * {
+            margin-top: 0.5rem;
+        }
+
+        [dir="rtl"] .text-left {
+            text-align: right;
+        }
+
+        [dir="rtl"] .text-right {
+            text-align: left;
+        }
     </style>
 
     {% block extra_css %}{% endblock %}
@@ -265,15 +293,25 @@
 
                 <div class="hidden md:flex items-center space-x-6">
                     <a href="{% url 'fitting_system:index' %}"
-                        class="text-gray-700 hover:text-[#2E5FA3] font-medium transition">Home</a>
+                        class="text-gray-700 hover:text-[#2E5FA3] font-medium transition">{% trans "Home" %}</a>
                     <a href="{% url 'fitting_system:store' %}"
-                        class="text-gray-700 hover:text-[#2E5FA3] font-medium transition">Store</a>
+                        class="text-gray-700 hover:text-[#2E5FA3] font-medium transition">{% trans "Store" %}</a>
                     <a href="{% url 'fitting_system:scan' %}"
                         class="bg-gradient-to-r from-[#1B3A6B] to-[#2E5FA3] text-white px-6 py-2 rounded-lg hover:shadow-lg transition transform hover:scale-105">
-                        Try Virtual Fitting
+                        {% trans "Try Virtual Fitting" %}
                     </a>
                     <a href="{% url 'fitting_system:inventory' %}"
-                        class="text-gray-700 hover:text-[#2E5FA3] font-medium transition">Inventory</a>
+                        class="text-gray-700 hover:text-[#2E5FA3] font-medium transition">{% trans "Inventory" %}</a>
+                    <form id="language-form" action="{% url 'set_language' %}" method="post" class="inline-flex items-center gap-2">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" id="lang-next" value="">
+                        <select name="language" id="lang-select" class="rounded border border-gray-300 px-2 py-1 text-sm focus:ring-[#2E5FA3] focus:border-[#2E5FA3]">
+                            {% get_current_language as CURRENT_LANG %}
+                            {% for code, name in LANGUAGES %}
+                                <option value="{{ code }}" data-next="{% path_for_lang code %}" {% if code == CURRENT_LANG %}selected{% endif %}>{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
                 </div>
 
                 <!-- Mobile menu button -->
@@ -292,14 +330,23 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
             <div class="px-4 py-3 space-y-2">
                 <a href="{% url 'fitting_system:index' %}"
-                    class="block text-gray-700 hover:text-[#2E5FA3] font-medium py-2">Home</a>
+                    class="block text-gray-700 hover:text-[#2E5FA3] font-medium py-2">{% trans "Home" %}</a>
                 <a href="{% url 'fitting_system:store' %}"
-                    class="block text-gray-700 hover:text-[#2E5FA3] font-medium py-2">Store</a>
+                    class="block text-gray-700 hover:text-[#2E5FA3] font-medium py-2">{% trans "Store" %}</a>
                 <a href="{% url 'fitting_system:scan' %}"
-                    class="block bg-gradient-to-r from-[#1B3A6B] to-[#2E5FA3] text-white px-6 py-2 rounded-lg text-center">Try
-                    Virtual Fitting</a>
+                    class="block bg-gradient-to-r from-[#1B3A6B] to-[#2E5FA3] text-white px-6 py-2 rounded-lg text-center">{% trans "Try Virtual Fitting" %}</a>
                 <a href="{% url 'fitting_system:inventory' %}"
-                    class="block text-gray-700 hover:text-[#2E5FA3] font-medium py-2">Inventory</a>
+                    class="block text-gray-700 hover:text-[#2E5FA3] font-medium py-2">{% trans "Inventory" %}</a>
+                <form id="language-form-mobile" action="{% url 'set_language' %}" method="post" class="pt-2">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" id="lang-next-mobile" value="">
+                    <select name="language" id="lang-select-mobile" class="w-full rounded border border-gray-300 px-2 py-1 text-sm">
+                        {% get_current_language as CURRENT_LANG %}
+                        {% for code, name in LANGUAGES %}
+                            <option value="{{ code }}" data-next="{% path_for_lang code %}" {% if code == CURRENT_LANG %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
             </div>
         </div>
     </nav>
@@ -314,24 +361,24 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <h3 class="text-lg font-bold mb-4">Virtual Fitting System</h3>
-                    <p class="text-[#7DB8D8]">AI-powered virtual fitting for the perfect size and style.</p>
+                    <h3 class="text-lg font-bold mb-4">{% trans "Virtual Fitting System" %}</h3>
+                    <p class="text-[#7DB8D8]">{% trans "AI-powered virtual fitting for the perfect size and style." %}</p>
                 </div>
                 <div>
-                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <h3 class="text-lg font-bold mb-4">{% trans "Quick Links" %}</h3>
                     <ul class="space-y-2">
                         <li><a href="{% url 'fitting_system:index' %}"
-                                class="text-[#7DB8D8] hover:text-white transition">Home</a></li>
+                                class="text-[#7DB8D8] hover:text-white transition">{% trans "Home" %}</a></li>
                         <li><a href="{% url 'fitting_system:store' %}"
-                                class="text-[#7DB8D8] hover:text-white transition">Store</a></li>
+                                class="text-[#7DB8D8] hover:text-white transition">{% trans "Store" %}</a></li>
                         <li><a href="{% url 'fitting_system:scan' %}"
-                                class="text-[#7DB8D8] hover:text-white transition">Virtual Fitting</a></li>
+                                class="text-[#7DB8D8] hover:text-white transition">{% trans "Virtual Fitting" %}</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-lg font-bold mb-4">Contact</h3>
-                    <p class="text-[#7DB8D8]">In-store system prototype</p>
-                    <p class="text-[#7DB8D8] mt-2">© 2026 Virtual Fitting System</p>
+                    <h3 class="text-lg font-bold mb-4">{% trans "Contact" %}</h3>
+                    <p class="text-[#7DB8D8]">{% trans "In-store system prototype" %}</p>
+                    <p class="text-[#7DB8D8] mt-2">© 2026 {% trans "Virtual Fitting System" %}</p>
                 </div>
             </div>
         </div>
@@ -343,6 +390,23 @@
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         });
+
+        function initLanguageForm(formId, nextId, selectId) {
+            var form = document.getElementById(formId);
+            var nextInput = document.getElementById(nextId);
+            var select = document.getElementById(selectId);
+            if (form && nextInput && select) {
+                select.addEventListener('change', function() {
+                    var opt = select.options[select.selectedIndex];
+                    nextInput.value = opt.getAttribute('data-next') || opt.value;
+                    form.submit();
+                });
+                var opt = select.options[select.selectedIndex];
+                nextInput.value = opt.getAttribute('data-next') || opt.value;
+            }
+        }
+        initLanguageForm('language-form', 'lang-next', 'lang-select');
+        initLanguageForm('language-form-mobile', 'lang-next-mobile', 'lang-select-mobile');
     </script>
 
     {% block extra_js %}{% endblock %}
