@@ -1,0 +1,516 @@
+# Virtual Fitting System - English
+# Copyright (C) 2026
+# This file is distributed under the same license as the project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-22 12:00+0000\n"
+"PO-Revision-Date: 2026-02-22 12:00+0000\n"
+"Last-Translator: \n"
+"Language: en\n"
+"Language-Team: English\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Django\n"
+
+msgid "Virtual Fitting System"
+msgstr "Virtual Fitting System"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Store"
+msgstr "Store"
+
+msgid "Try Virtual Fitting"
+msgstr "Try Virtual Fitting"
+
+msgid "Inventory"
+msgstr "Inventory"
+
+msgid "AI-powered virtual fitting for the perfect size and style."
+msgstr "AI-powered virtual fitting for the perfect size and style."
+
+msgid "Quick Links"
+msgstr "Quick Links"
+
+msgid "Virtual Fitting"
+msgstr "Virtual Fitting"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "In-store system prototype"
+msgstr "In-store system prototype"
+
+msgid "1. Body Scan"
+msgstr "1. Body Scan"
+
+msgid "2. Skin Tone Analysis"
+msgstr "2. Skin Tone Analysis"
+
+msgid "3. Get Recommendations"
+msgstr "3. Get Recommendations"
+
+msgid "30-day guarantee"
+msgstr "30-day guarantee"
+
+msgid "Accurate Measurements"
+msgstr "Accurate Measurements"
+
+msgid "AI Recommended Size"
+msgstr "AI Recommended Size"
+
+msgid "AI-powered body scanning provides precise measurements"
+msgstr "AI-powered body scanning provides precise measurements"
+
+msgid "Align your body with the guide"
+msgstr "Align your body with the guide"
+
+msgid "Align your full body with the guide outline"
+msgstr "Align your full body with the guide outline"
+
+msgid "All"
+msgstr "All"
+
+msgid "All Categories"
+msgstr "All Categories"
+
+msgid "All Inventory"
+msgstr "All Inventory"
+
+msgid "All items below are available in your size"
+msgstr "All items below are available in your size"
+
+msgid "Analysing with YOLO + AI..."
+msgstr "Analysing with YOLO + AI..."
+
+msgid "Apply"
+msgstr "Apply"
+
+msgid "Auto-capturing when position is correct..."
+msgstr "Auto-capturing when position is correct..."
+
+msgid "Available Color"
+msgstr "Available Color"
+
+msgid "Available Colors"
+msgstr "Available Colors"
+
+msgid "Available Sizes"
+msgstr "Available Sizes"
+
+msgid "Back to Store"
+msgstr "Back to Store"
+
+msgid "Based on your body measurements analysed by YOLO + LLM"
+msgstr "Based on your body measurements analysed by YOLO + LLM"
+
+msgid "Body Pose"
+msgstr "Body Pose"
+
+msgid "Body image ready"
+msgstr "Body image ready"
+
+msgid "Body photo: full body visible from head to toe, good lighting"
+msgstr "Body photo: full body visible from head to toe, good lighting"
+
+msgid "Body photo: stand straight with arms slightly away from body"
+msgstr "Body photo: stand straight with arms slightly away from body"
+
+msgid "Body pose"
+msgstr "Body pose"
+
+msgid "Browse All Products"
+msgstr "Browse All Products"
+
+msgid "Browse Store"
+msgstr "Browse Store"
+
+msgid "Camera Scan"
+msgstr "Camera Scan"
+
+msgid "Camera access denied"
+msgstr "Camera access denied"
+
+msgid "Camera access denied. Please allow camera access."
+msgstr "Camera access denied. Please allow camera access."
+
+msgid "Captured Images:"
+msgstr "Captured Images:"
+
+msgid "Category"
+msgstr "Category"
+
+msgid "Check back later or browse our full catalogue"
+msgstr "Check back later or browse our full catalogue"
+
+msgid "Clear Filters"
+msgstr "Clear Filters"
+
+msgid "Close-up of your face, good lighting"
+msgstr "Close-up of your face, good lighting"
+
+msgid "Come close! Fill the circle with your face"
+msgstr "Come close! Fill the circle with your face"
+
+msgid "Come close to the camera like a selfie!"
+msgstr "Come close to the camera like a selfie!"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Detected from your face selfie using colour analysis"
+msgstr "Detected from your face selfie using colour analysis"
+
+msgid "Detected Skin Tone"
+msgstr "Detected Skin Tone"
+
+msgid "Detecting pose, measuring body, detecting skin tone..."
+msgstr "Detecting pose, measuring body, detecting skin tone..."
+
+msgid "Discover Your Style"
+msgstr "Discover Your Style"
+
+msgid "Drop body photo here"
+msgstr "Drop body photo here"
+
+msgid "Drop face selfie here"
+msgstr "Drop face selfie here"
+
+msgid "Easy Returns"
+msgstr "Easy Returns"
+
+msgid "Ensure good, natural lighting on your face"
+msgstr "Ensure good, natural lighting on your face"
+
+msgid "Explore our curated collection of premium clothing"
+msgstr "Explore our curated collection of premium clothing"
+
+msgid "Face Selfie"
+msgstr "Face Selfie"
+
+msgid "Face image ready"
+msgstr "Face image ready"
+
+msgid "Face selfie"
+msgstr "Face selfie"
+
+msgid "Face selfie: close-up, face fills most of the frame"
+msgstr "Face selfie: close-up, face fills most of the frame"
+
+msgid "Face selfie: natural lighting, no heavy filters"
+msgstr "Face selfie: natural lighting, no heavy filters"
+
+msgid "Find Your Perfect Fit"
+msgstr "Find Your Perfect Fit"
+
+msgid "Fit"
+msgstr "Fit"
+
+msgid "Free Shipping"
+msgstr "Free Shipping"
+
+msgid "Gender"
+msgstr "Gender"
+
+msgid "Get color and style recommendations tailored to you"
+msgstr "Get color and style recommendations tailored to you"
+
+msgid "Get personalized clothing recommendations based on your body measurements and skin tone. No more guessing sizes!"
+msgstr "Get personalized clothing recommendations based on your body measurements and skin tone. No more guessing sizes!"
+
+msgid "Hold still!"
+msgstr "Hold still!"
+
+msgid "How It Works"
+msgstr "How It Works"
+
+msgid "Image captures automatically when you're close enough!"
+msgstr "Image captures automatically when you're close enough!"
+
+msgid "Image captures automatically when you're positioned correctly!"
+msgstr "Image captures automatically when you're positioned correctly!"
+
+msgid "In Stock"
+msgstr "In Stock"
+
+msgid "Initializing camera..."
+msgstr "Initializing camera..."
+
+msgid "Inventory Dashboard"
+msgstr "Inventory Dashboard"
+
+msgid "Inventory Dashboard - Virtual Fitting System"
+msgstr "Inventory Dashboard - Virtual Fitting System"
+
+msgid "Low Stock"
+msgstr "Low Stock"
+
+msgid "Low Stock Alerts"
+msgstr "Low Stock Alerts"
+
+msgid "Manage your product inventory"
+msgstr "Manage your product inventory"
+
+msgid "Manage Inventory in Admin Panel"
+msgstr "Manage Inventory in Admin Panel"
+
+msgid "Men"
+msgstr "Men"
+
+msgid "No colors currently available"
+msgstr "No colors currently available"
+
+msgid "No person detected – step into frame"
+msgstr "No person detected – step into frame"
+
+msgid "No products in size"
+msgstr "No products in size"
+
+msgid "No Products Found"
+msgstr "No Products Found"
+
+msgid "No sizes currently available"
+msgstr "No sizes currently available"
+
+msgid "Not Sure About Your Size?"
+msgstr "Not Sure About Your Size?"
+
+msgid "No more trying on multiple sizes in the fitting room"
+msgstr "No more trying on multiple sizes in the fitting room"
+
+msgid "On orders over $50"
+msgstr "On orders over $50"
+
+msgid "Out of Stock"
+msgstr "Out of Stock"
+
+msgid "Personalized Style"
+msgstr "Personalized Style"
+
+msgid "Please capture a body pose image."
+msgstr "Please capture a body pose image."
+
+msgid "Please capture a face selfie."
+msgstr "Please capture a face selfie."
+
+msgid "Please enter a valid height (100–250 cm) before processing."
+msgstr "Please enter a valid height (100–250 cm) before processing."
+
+msgid "Please enter a valid height between 100 and 250 cm."
+msgstr "Please enter a valid height between 100 and 250 cm."
+
+msgid "Please upload a body pose image."
+msgstr "Please upload a body pose image."
+
+msgid "Please upload a face selfie image."
+msgstr "Please upload a face selfie image."
+
+msgid "Position your face in the centre of the guide"
+msgstr "Position your face in the centre of the guide"
+
+msgid "Premium Quality"
+msgstr "Premium Quality"
+
+msgid "Privacy First"
+msgstr "Privacy First"
+
+msgid "Process Scan"
+msgstr "Process Scan"
+
+msgid "Processing"
+msgstr "Processing"
+
+msgid "Processing failed. Please try again."
+msgstr "Processing failed. Please try again."
+
+msgid "Product"
+msgstr "Product"
+
+msgid "Products That Fit You"
+msgstr "Products That Fit You"
+
+msgid "Quantity"
+msgstr "Quantity"
+
+msgid "Quick Links"
+msgstr "Quick Links"
+
+msgid "Ready to Find Your Perfect Fit?"
+msgstr "Ready to Find Your Perfect Fit?"
+
+msgid "Ready to process your scan!"
+msgstr "Ready to process your scan!"
+
+msgid "Receive personalized size, fit, and style recommendations from our available inventory, all tailored to you."
+msgstr "Receive personalized size, fit, and style recommendations from our available inventory, all tailored to you."
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "required for accurate measurements"
+msgstr "required for accurate measurements"
+
+msgid "required – close-up face for skin tone"
+msgstr "required – close-up face for skin tone"
+
+msgid "required – full body, front view"
+msgstr "required – full body, front view"
+
+msgid "Save Time"
+msgstr "Save Time"
+
+msgid "Save $20"
+msgstr "Save $20"
+
+msgid "Scan Another Customer"
+msgstr "Scan Another Customer"
+
+msgid "Scan Complete!"
+msgstr "Scan Complete!"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Search for products..."
+msgstr "Search for products..."
+
+msgid "Size"
+msgstr "Size"
+
+msgid "Stand 2–3 metres away from the camera"
+msgstr "Stand 2–3 metres away from the camera"
+
+msgid "Stand straight with arms slightly away from your body"
+msgstr "Stand straight with arms slightly away from your body"
+
+msgid "Stand facing the camera, full body visible"
+msgstr "Stand facing the camera, full body visible"
+
+msgid "Start Now"
+msgstr "Start Now"
+
+msgid "Start Over"
+msgstr "Start Over"
+
+msgid "Start Virtual Fitting"
+msgstr "Start Virtual Fitting"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Step 1: Body Pose (Auto-Capture)"
+msgstr "Step 1: Body Pose (Auto-Capture)"
+
+msgid "Step 2: Face Selfie (Auto-Capture)"
+msgstr "Step 2: Face Selfie (Auto-Capture)"
+
+msgid "Step 3: Ready to Process"
+msgstr "Step 3: Ready to Process"
+
+msgid "Store - Virtual Fitting System"
+msgstr "Store - Virtual Fitting System"
+
+msgid "Try Virtual Fitting Now"
+msgstr "Try Virtual Fitting Now"
+
+msgid "Try adjusting your filters or search query."
+msgstr "Try adjusting your filters or search query."
+
+msgid "Try our AI-powered virtual fitting system for personalized size recommendations and perfect fit!"
+msgstr "Try our AI-powered virtual fitting system for personalized size recommendations and perfect fit!"
+
+msgid "Total Variants"
+msgstr "Total Variants"
+
+msgid "Two images needed: full-body pose + face selfie"
+msgstr "Two images needed: full-body pose + face selfie"
+
+msgid "Upload Body Images"
+msgstr "Upload Body Images"
+
+msgid "Upload Images"
+msgstr "Upload Images"
+
+msgid "Upload a full-body photo AND a face selfie for AI analysis"
+msgstr "Upload a full-body photo AND a face selfie for AI analysis"
+
+msgid "View Details"
+msgstr "View Details"
+
+msgid "View Product Details"
+msgstr "View Product Details"
+
+msgid "Virtual Body Scan"
+msgstr "Virtual Body Scan"
+
+msgid "Virtual Body Scan - Virtual Fitting System"
+msgstr "Virtual Body Scan - Virtual Fitting System"
+
+msgid "Virtual Fitting System - Find Your Perfect Fit"
+msgstr "Virtual Fitting System - Find Your Perfect Fit"
+
+msgid "With AI Technology"
+msgstr "With AI Technology"
+
+msgid "Women"
+msgstr "Women"
+
+msgid "Why Virtual Fitting?"
+msgstr "Why Virtual Fitting?"
+
+msgid "You May Also Like"
+msgstr "You May Also Like"
+
+msgid "Your Height"
+msgstr "Your Height"
+
+msgid "Your Size"
+msgstr "Your Size"
+
+msgid "Your face should fill most of the circle"
+msgstr "Your face should fill most of the circle"
+
+msgid "Your height is used to calibrate YOLO body measurements for accuracy."
+msgstr "Your height is used to calibrate YOLO body measurements for accuracy."
+
+msgid "Your images are never stored, only measurements"
+msgstr "Your images are never stored, only measurements"
+
+msgid "Both images captured successfully!"
+msgstr "Both images captured successfully!"
+
+msgid "Click Process Scan to analyse your measurements & skin tone"
+msgstr "Click Process Scan to analyse your measurements & skin tone"
+
+msgid "Experience the future of clothing shopping today"
+msgstr "Experience the future of clothing shopping today"
+
+msgid "Here are your personalised results"
+msgstr "Here are your personalised results"
+
+msgid "in stock right now"
+msgstr "in stock right now"
+
+msgid "left"
+msgstr "left"
+
+msgid "Network error. Please check your connection and try again."
+msgstr "Network error. Please check your connection and try again."
+
+msgid "or click to browse"
+msgstr "or click to browse"
+
+msgid "Three simple steps to find your perfect fit"
+msgstr "Three simple steps to find your perfect fit"
+
+msgid "undertone"
+msgstr "undertone"
+
+msgid "You can start over if needed"
+msgstr "You can start over if needed"

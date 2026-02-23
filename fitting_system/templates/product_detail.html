@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}{{ product.name }} - Virtual Fitting System{% endblock %}
+{% block title %}{{ product.name }} - {% trans "Virtual Fitting System" %}{% endblock %}
 
 {% block content %}
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Breadcrumb -->
     <nav class="flex items-center gap-2 text-sm mb-8 fade-in">
-        <a href="{% url 'fitting_system:index' %}" class="text-gray-500 hover:text-[#2E5FA3] transition">Home</a>
+        <a href="{% url 'fitting_system:index' %}" class="text-gray-500 hover:text-[#2E5FA3] transition">{% trans "Home" %}</a>
         <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
         </svg>
-        <a href="{% url 'fitting_system:store' %}" class="text-gray-500 hover:text-[#2E5FA3] transition">Store</a>
+        <a href="{% url 'fitting_system:store' %}" class="text-gray-500 hover:text-[#2E5FA3] transition">{% trans "Store" %}</a>
         <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
         </svg>
@@ -57,7 +58,7 @@
                     <div class="glass-card px-4 py-2 rounded-full shadow-xl">
                         <span
                             class="text-sm font-bold bg-gradient-to-r from-[#1B3A6B] to-[#2E5FA3] bg-clip-text text-transparent">
-                            Premium Quality
+                            {% trans "Premium Quality" %}
                         </span>
                     </div>
                 </div>
@@ -78,7 +79,7 @@
                     </span>
                     <span
                         class="px-4 py-2 bg-[#EAF3F8] text-[#5B8FC9] rounded-full text-sm font-semibold border border-[#7DB8D8]">
-                        {{ product.fit_type|title }} Fit
+                        {{ product.fit_type|title }} {% trans "Fit" %}
                     </span>
                 </div>
                 <h1 class="text-5xl font-extrabold text-gray-900 mb-6 leading-tight">{{ product.name }}</h1>
@@ -88,7 +89,7 @@
                         ${{ product.price }}
                     </span>
                     <span class="text-gray-500 line-through text-xl">${{ product.price|add:20 }}</span>
-                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-bold">Save $20</span>
+                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-bold">{% trans "Save $20" %}</span>
                 </div>
                 <p class="text-gray-700 text-lg leading-relaxed mb-8">{{ product.description }}</p>
             </div>
@@ -100,7 +101,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
-                    Available Sizes
+                    {% trans "Available Sizes" %}
                 </h3>
                 <div class="flex flex-wrap gap-3">
                     {% for size in available_sizes %}
@@ -109,7 +110,7 @@
                         {{ size.name }}
                     </button>
                     {% empty %}
-                    <p class="text-gray-500 italic">No sizes currently available</p>
+                    <p class="text-gray-500 italic">{% trans "No sizes currently available" %}</p>
                     {% endfor %}
                 </div>
             </div>
@@ -122,7 +123,7 @@
                             d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
                         </path>
                     </svg>
-                    Available Colors
+                    {% trans "Available Colors" %}
                 </h3>
                 <div class="flex flex-wrap gap-3">
                     {% for color in available_colors %}
@@ -134,7 +135,7 @@
                             }}</span>
                     </button>
                     {% empty %}
-                    <p class="text-gray-500 italic">No colors currently available</p>
+                    <p class="text-gray-500 italic">{% trans "No colors currently available" %}</p>
                     {% endfor %}
                 </div>
             </div>
@@ -153,7 +154,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
-                    <span class="relative z-10">🎯 Try Virtual Fitting</span>
+                    <span class="relative z-10">{% trans "Try Virtual Fitting" %}</span>
                 </a>
                 <a href="{% url 'fitting_system:store' %}"
                     class="flex items-center justify-center gap-2 w-full bg-gray-100 text-gray-900 py-4 rounded-xl font-bold hover:bg-gray-200 transition">
@@ -161,7 +162,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>
-                    Back to Store
+                    {% trans "Back to Store" %}
                 </a>
             </div>
 
@@ -177,8 +178,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-bold text-gray-900">Free Shipping</p>
-                            <p class="text-xs text-gray-600">On orders over $50</p>
+                            <p class="font-bold text-gray-900">{% trans "Free Shipping" %}</p>
+                            <p class="text-xs text-gray-600">{% trans "On orders over $50" %}</p>
                         </div>
                     </div>
                 </div>
@@ -193,8 +194,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-bold text-gray-900">Easy Returns</p>
-                            <p class="text-xs text-gray-600">30-day guarantee</p>
+                            <p class="font-bold text-gray-900">{% trans "Easy Returns" %}</p>
+                            <p class="text-xs text-gray-600">{% trans "30-day guarantee" %}</p>
                         </div>
                     </div>
                 </div>
@@ -207,7 +208,7 @@
     <div class="mt-24">
         <h2 class="text-4xl font-extrabold text-gray-900 mb-10 text-center">
             <span class="bg-gradient-to-r from-[#1B3A6B] via-[#2E5FA3] to-[#5B8FC9] bg-clip-text text-transparent">
-                You May Also Like
+                {% trans "You May Also Like" %}
             </span>
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -231,7 +232,7 @@
                     </p>
                     <a href="{% url 'fitting_system:product_detail' rel_product.id %}"
                         class="block w-full bg-gradient-to-r from-[#1B3A6B] to-[#2E5FA3] text-white text-center py-3 rounded-xl font-bold hover:shadow-xl transition transform hover:scale-105">
-                        View Details
+                        {% trans "View Details" %}
                     </a>
                 </div>
             </div>

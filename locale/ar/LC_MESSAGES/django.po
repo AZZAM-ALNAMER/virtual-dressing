@@ -1,37 +1,78 @@
+# Virtual Fitting System - Arabic
+# Copyright (C) 2026
+# This file is distributed under the same license as the project.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-03 12:00+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2026-02-22 12:00+0000\n"
+"PO-Revision-Date: 2026-02-22 12:00+0000\n"
+"Last-Translator: \n"
 "Language: ar\n"
+"Language-Team: Arabic\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Generated-By: Django\n"
+
+msgid "Virtual Fitting System"
+msgstr "نظام القياس الافتراضي"
+
+msgid "Home"
+msgstr "الرئيسية"
+
+msgid "Store"
+msgstr "المتجر"
+
+msgid "Try Virtual Fitting"
+msgstr "جرب القياس الافتراضي"
+
+msgid "Inventory"
+msgstr "المخزون"
+
+msgid "AI-powered virtual fitting for the perfect size and style."
+msgstr "قياس افتراضي مدعوم بالذكاء الاصطناعي للحجم والستايل المثالي."
+
+msgid "Quick Links"
+msgstr "روابط سريعة"
+
+msgid "Virtual Fitting"
+msgstr "القياس الافتراضي"
+
+msgid "Contact"
+msgstr "اتصل بنا"
+
+msgid "In-store system prototype"
+msgstr "نموذج نظام داخل المتجر"
 
 msgid "1. Body Scan"
-msgstr "1. مسح الجسم"
+msgstr "١. مسح الجسم"
 
 msgid "2. Skin Tone Analysis"
-msgstr "2. تحليل لون البشرة"
+msgstr "٢. تحليل لون البشرة"
 
 msgid "3. Get Recommendations"
-msgstr "3. الحصول على التوصيات"
+msgstr "٣. احصل على التوصيات"
 
 msgid "30-day guarantee"
-msgstr "ضمان لمدة 30 يوماً"
-
-msgid "AI Recommended Size"
-msgstr "المقاس الموصى به من قبل الذكاء الاصطناعي"
+msgstr "ضمان ٣٠ يوماً"
 
 msgid "Accurate Measurements"
 msgstr "قياسات دقيقة"
 
+msgid "AI Recommended Size"
+msgstr "المقاس الموصى به بالذكاء الاصطناعي"
+
+msgid "AI-powered body scanning provides precise measurements"
+msgstr "مسح الجسم بالذكاء الاصطناعي يعطي قياسات دقيقة"
+
+msgid "Align your body with the guide"
+msgstr "اصطف جسدك مع الدليل"
+
 msgid "Align your full body with the guide outline"
-msgstr "قم بمحاذاة جسمك بالكامل مع الإطار الإرشادي"
+msgstr "اصطف جسدك بالكامل مع حدود الدليل"
 
 msgid "All"
 msgstr "الكل"
@@ -43,13 +84,19 @@ msgid "All Inventory"
 msgstr "كل المخزون"
 
 msgid "All items below are available in your size"
-msgstr "جميع العناصر أدناه متوفرة بمقاسك"
+msgstr "جميع القطع أدناه متوفرة بمقاسك"
 
 msgid "Analysing with YOLO + AI..."
-msgstr "...جاري التحليل باستخدام YOLO والذكاء الاصطناعي"
+msgstr "جاري التحليل بـ YOLO والذكاء الاصطناعي..."
 
 msgid "Apply"
 msgstr "تطبيق"
+
+msgid "Auto-capturing when position is correct..."
+msgstr "التقاط تلقائي عندما يكون الوضع صحيحاً..."
+
+msgid "Available Color"
+msgstr "اللون المتوفر"
 
 msgid "Available Colors"
 msgstr "الألوان المتوفرة"
@@ -60,6 +107,9 @@ msgstr "المقاسات المتوفرة"
 msgid "Back to Store"
 msgstr "العودة للمتجر"
 
+msgid "Based on your body measurements analysed by YOLO + LLM"
+msgstr "بناءً على قياسات جسمك المحللة بـ YOLO و LLM"
+
 msgid "Body Pose"
 msgstr "وضعية الجسم"
 
@@ -67,100 +117,97 @@ msgid "Body image ready"
 msgstr "صورة الجسم جاهزة"
 
 msgid "Body photo: full body visible from head to toe, good lighting"
-msgstr "صورة الجسم: الجسم بالكامل مرئي من الرأس إلى أخمص القدمين، إضاءة جيدة"
+msgstr "صورة الجسم: الجسم كامل من الرأس للقدمين، إضاءة جيدة"
 
 msgid "Body photo: stand straight with arms slightly away from body"
-msgstr "صورة الجسم: قف بشكل مستقيم مع إبعاد الذراعين قليلاً عن الجسم"
+msgstr "صورة الجسم: قف مستقيماً وذراعاك بعيدتان قليلاً عن الجسد"
 
 msgid "Body pose"
 msgstr "وضعية الجسم"
 
 msgid "Browse All Products"
-msgstr "تصفح جميع المنتجات"
+msgstr "تصفح كل المنتجات"
 
 msgid "Browse Store"
 msgstr "تصفح المتجر"
 
 msgid "Camera Scan"
-msgstr "مسح الكاميرا"
+msgstr "مسح بالكاميرا"
+
+msgid "Camera access denied"
+msgstr "تم رفض الوصول للكاميرا"
+
+msgid "Camera access denied. Please allow camera access."
+msgstr "تم رفض الوصول للكاميرا. يرجى السماح بالوصول للكاميرا."
 
 msgid "Captured Images:"
-msgstr ":الصور الملتقطة"
+msgstr "الصور الملتقطة:"
 
 msgid "Category"
 msgstr "الفئة"
 
 msgid "Check back later or browse our full catalogue"
-msgstr "تحقق لاحقاً أو تصفح كتالوجنا الكامل"
+msgstr "راجع لاحقاً أو تصفح كامل الكتالوج"
 
 msgid "Clear Filters"
 msgstr "مسح الفلاتر"
 
 msgid "Close-up of your face, good lighting"
-msgstr "لقطة قريبة لوجهك، إضاءة جيدة"
-
-msgid "Color"
-msgstr "اللون"
-
-msgid "Color:"
-msgstr "اللون:"
+msgstr "صورة قريبة لوجهك، إضاءة جيدة"
 
 msgid "Come close! Fill the circle with your face"
 msgstr "اقترب! املأ الدائرة بوجهك"
 
-msgid "Contact"
-msgstr "اتصال"
-
-msgid "Cool"
-msgstr "بارد"
-
-msgid "Dark"
-msgstr "داكن"
-
-msgid "Detected Skin Tone"
-msgstr "درجة لون البشرة المكتشفة"
+msgid "Come close to the camera like a selfie!"
+msgstr "اقترب من الكاميرا مثل السيلفي!"
 
 msgid "Detected from your face selfie using colour analysis"
-msgstr "تم اكتشافه من سيلفي وجهك باستخدام تحليل الألوان"
+msgstr "تم اكتشافه من صورة وجهك باستخدام تحليل اللون"
+
+msgid "Detected Skin Tone"
+msgstr "لون البشرة المكتشف"
+
+msgid "Detecting pose, measuring body, detecting skin tone..."
+msgstr "جاري اكتشاف الوضعية وقياس الجسم ولون البشرة..."
 
 msgid "Discover Your Style"
 msgstr "اكتشف أسلوبك"
 
 msgid "Drop body photo here"
-msgstr "ضع صورة الجسم هنا"
+msgstr "أفلت صورة الجسم هنا"
 
 msgid "Drop face selfie here"
-msgstr "ضع سيلفي الوجه هنا"
+msgstr "أفلت صورة الوجه هنا"
 
 msgid "Easy Returns"
 msgstr "إرجاع سهل"
 
-msgid "Experience the future of clothing shopping today"
-msgstr "جرب مستقبل تسوق الملابس اليوم"
+msgid "Ensure good, natural lighting on your face"
+msgstr "تأكد من إضاءة طبيعية جيدة على وجهك"
 
 msgid "Explore our curated collection of premium clothing"
-msgstr "استكشف مجموعتنا المختارة من الملابس الفاخرة"
+msgstr "استكشف مجموعتنا المختارة من الملابس المميزة"
 
 msgid "Face Selfie"
-msgstr "سيلفي الوجه"
+msgstr "صورة الوجه"
 
 msgid "Face image ready"
 msgstr "صورة الوجه جاهزة"
 
 msgid "Face selfie"
-msgstr "سيلفي الوجه"
+msgstr "صورة الوجه"
 
 msgid "Face selfie: close-up, face fills most of the frame"
-msgstr "سيلفي الوجه: لقطة قريبة، الوجه يملأ معظم الإطار"
+msgstr "صورة الوجه: قريبة، الوجه يملأ معظم الإطار"
 
 msgid "Face selfie: natural lighting, no heavy filters"
-msgstr "سيلفي الوجه: إضاءة طبيعية، بدون فلاتر قوية"
+msgstr "صورة الوجه: إضاءة طبيعية، بدون فلاتر قوية"
 
 msgid "Find Your Perfect Fit"
-msgstr "جد مقاسك المثالي"
+msgstr "اعثر على مقاسك المثالي"
 
 msgid "Fit"
-msgstr "القياس"
+msgstr "مقاس"
 
 msgid "Free Shipping"
 msgstr "شحن مجاني"
@@ -168,29 +215,29 @@ msgstr "شحن مجاني"
 msgid "Gender"
 msgstr "الجنس"
 
-msgid "Here are your personalised results"
-msgstr "إليك نتائجك الشخصية"
+msgid "Get color and style recommendations tailored to you"
+msgstr "احصل على توصيات لون وستايل مخصصة لك"
 
-msgid "Home"
-msgstr "الرئيسية"
+msgid "Get personalized clothing recommendations based on your body measurements and skin tone. No more guessing sizes!"
+msgstr "احصل على توصيات ملابس مخصصة حسب قياسات جسمك ولون بشرتك. لا مزيد من تخمين المقاسات!"
+
+msgid "Hold still!"
+msgstr "ابق ثابتاً!"
 
 msgid "How It Works"
 msgstr "كيف يعمل"
 
+msgid "Image captures automatically when you're close enough!"
+msgstr "يتم التقاط الصورة تلقائياً عندما تكون قريباً بما يكفي!"
+
+msgid "Image captures automatically when you're positioned correctly!"
+msgstr "يتم التقاط الصورة تلقائياً عندما تكون في الوضع الصحيح!"
+
 msgid "In Stock"
 msgstr "متوفر"
 
-msgid "In-store system prototype"
-msgstr "نموذج أولي لنظام المتجر"
-
 msgid "Initializing camera..."
-msgstr "...جاري تشغيل الكاميرا"
-
-msgid "Intermediate"
-msgstr "متوسط"
-
-msgid "Inventory"
-msgstr "المخزون"
+msgstr "جاري تهيئة الكاميرا..."
 
 msgid "Inventory Dashboard"
 msgstr "لوحة المخزون"
@@ -198,53 +245,74 @@ msgstr "لوحة المخزون"
 msgid "Inventory Dashboard - Virtual Fitting System"
 msgstr "لوحة المخزون - نظام القياس الافتراضي"
 
-msgid "Light"
-msgstr "فاتح"
-
 msgid "Low Stock"
 msgstr "مخزون منخفض"
 
 msgid "Low Stock Alerts"
-msgstr "تنبيهات انخفاض المخزون"
-
-msgid "Manage Inventory in Admin Panel"
-msgstr "إدارة المخزون في لوحة التحكم"
+msgstr "تنبيهات المخزون المنخفض"
 
 msgid "Manage your product inventory"
-msgstr "إدارة مخزون منتجاتك"
+msgstr "إدارة مخزون المنتجات"
+
+msgid "Manage Inventory in Admin Panel"
+msgstr "إدارة المخزون من لوحة الإدارة"
 
 msgid "Men"
 msgstr "رجال"
 
-msgid "Neutral"
-msgstr "محايد"
+msgid "No colors currently available"
+msgstr "لا ألوان متوفرة حالياً"
+
+msgid "No person detected – step into frame"
+msgstr "لم يُكتشف شخص – ادخل في الإطار"
+
+msgid "No products in size"
+msgstr "لا توجد منتجات بالمقاس"
 
 msgid "No Products Found"
 msgstr "لم يتم العثور على منتجات"
 
-msgid "No colors currently available"
-msgstr "لا توجد ألوان متوفرة حالياً"
-
-msgid "No products in size"
-msgstr "لا توجد منتجات بمقاس"
-
 msgid "No sizes currently available"
-msgstr "لا توجد مقاسات متوفرة حالياً"
+msgstr "لا مقاسات متوفرة حالياً"
 
 msgid "Not Sure About Your Size?"
-msgstr "غير متأكد من مقاسك؟"
+msgstr "لست متأكداً من مقاسك؟"
+
+msgid "No more trying on multiple sizes in the fitting room"
+msgstr "لا مزيد من تجربة مقاسات متعددة في غرفة القياس"
 
 msgid "On orders over $50"
-msgstr "على الطلبات التي تزيد عن $50"
+msgstr "للطلبات فوق ٥٠ دولاراً"
 
 msgid "Out of Stock"
-msgstr "غير متوفر"
+msgstr "نفد من المخزون"
 
 msgid "Personalized Style"
-msgstr "أسلوب شخصي"
+msgstr "ستايل مخصص"
+
+msgid "Please capture a body pose image."
+msgstr "يرجى التقاط صورة لوضعية الجسم."
+
+msgid "Please capture a face selfie."
+msgstr "يرجى التقاط صورة للوجه."
+
+msgid "Please enter a valid height (100–250 cm) before processing."
+msgstr "يرجى إدخال طول صحيح (١٠٠–٢٥٠ سم) قبل المعالجة."
+
+msgid "Please enter a valid height between 100 and 250 cm."
+msgstr "يرجى إدخال طول صحيح بين ١٠٠ و ٢٥٠ سم."
+
+msgid "Please upload a body pose image."
+msgstr "يرجى رفع صورة لوضعية الجسم."
+
+msgid "Please upload a face selfie image."
+msgstr "يرجى رفع صورة للوجه."
+
+msgid "Position your face in the centre of the guide"
+msgstr "ضع وجهك في مركز الدليل"
 
 msgid "Premium Quality"
-msgstr "جودة ممتازة"
+msgstr "جودة مميزة"
 
 msgid "Privacy First"
 msgstr "الخصوصية أولاً"
@@ -255,26 +323,47 @@ msgstr "معالجة المسح"
 msgid "Processing"
 msgstr "جاري المعالجة"
 
+msgid "Processing failed. Please try again."
+msgstr "فشلت المعالجة. يرجى المحاولة مرة أخرى."
+
 msgid "Product"
 msgstr "المنتج"
 
 msgid "Products That Fit You"
-msgstr "المنتجات التي تناسبك"
+msgstr "منتجات تناسبك"
 
 msgid "Quantity"
 msgstr "الكمية"
 
-msgid "Quick Links"
-msgstr "روابط سريعة"
-
 msgid "Ready to Find Your Perfect Fit?"
-msgstr "مستعد لإيجاد مقاسك المثالي؟"
+msgstr "مستعد لمعرفة مقاسك المثالي؟"
+
+msgid "Ready to process your scan!"
+msgstr "جاهز لمعالجة مسحك!"
+
+msgid "Receive personalized size, fit, and style recommendations from our available inventory, all tailored to you."
+msgstr "احصل على توصيات مقاس وستايل مخصصة من مخزوننا المتاح، كلها مصممة لك."
+
+msgid "Remove"
+msgstr "إزالة"
+
+msgid "required for accurate measurements"
+msgstr "مطلوب للقياسات الدقيقة"
+
+msgid "required – close-up face for skin tone"
+msgstr "مطلوب – صورة قريبة للوجه لتحليل لون البشرة"
+
+msgid "required – full body, front view"
+msgstr "مطلوب – الجسم كامل، من الأمام"
 
 msgid "Save Time"
 msgstr "وفر الوقت"
 
+msgid "Save $20"
+msgstr "وفر ٢٠ دولاراً"
+
 msgid "Scan Another Customer"
-msgstr "مسح لعميل آخر"
+msgstr "مسح عميل آخر"
 
 msgid "Scan Complete!"
 msgstr "اكتمل المسح!"
@@ -283,76 +372,67 @@ msgid "Search"
 msgstr "بحث"
 
 msgid "Search for products..."
-msgstr "...البحث عن المنتجات"
+msgstr "ابحث عن منتجات..."
 
 msgid "Size"
 msgstr "المقاس"
 
-msgid "Size:"
-msgstr "المقاس:"
-
 msgid "Stand 2–3 metres away from the camera"
-msgstr "قف على بعد 2-3 أمتار من الكاميرا"
+msgstr "قف على بعد ٢–٣ أمتار من الكاميرا"
 
 msgid "Stand straight with arms slightly away from your body"
-msgstr "قف بشكل مستقيم مع إبعاد الذراعين قليلاً عن جسمك"
+msgstr "قف مستقيماً وذراعاك بعيدتان قليلاً عن جسدك"
+
+msgid "Stand facing the camera, full body visible"
+msgstr "قف مواجهاً الكاميرا، الجسم كامل ظاهر"
 
 msgid "Start Now"
 msgstr "ابدأ الآن"
 
 msgid "Start Over"
-msgstr "البدء من جديد"
+msgstr "ابدأ من جديد"
 
 msgid "Start Virtual Fitting"
-msgstr "بدء القياس الافتراضي"
+msgstr "ابدأ القياس الافتراضي"
 
 msgid "Status"
 msgstr "الحالة"
 
 msgid "Step 1: Body Pose (Auto-Capture)"
-msgstr "(التقاط تلقائي) الخطوة 1: وضعية الجسم"
+msgstr "الخطوة ١: وضعية الجسم (التقاط تلقائي)"
 
-msgid "Store"
-msgstr "المتجر"
+msgid "Step 2: Face Selfie (Auto-Capture)"
+msgstr "الخطوة ٢: صورة الوجه (التقاط تلقائي)"
+
+msgid "Step 3: Ready to Process"
+msgstr "الخطوة ٣: جاهز للمعالجة"
 
 msgid "Store - Virtual Fitting System"
 msgstr "المتجر - نظام القياس الافتراضي"
-
-msgid "Tan"
-msgstr "أسمر"
-
-msgid "Three simple steps to find your perfect fit"
-msgstr "ثلاث خطوات بسيطة لإيجاد مقاسك المثالي"
-
-msgid "Tips for best results:"
-msgstr ":نصائح لأفضل النتائج"
-
-msgid "Total Variants"
-msgstr "إجمالي الخيارات"
-
-msgid "Try Virtual Fitting"
-msgstr "تجربة القياس الافتراضي"
 
 msgid "Try Virtual Fitting Now"
 msgstr "جرب القياس الافتراضي الآن"
 
 msgid "Try adjusting your filters or search query."
-msgstr "حاول ضبط الفلاتر أو استعلام البحث."
+msgstr "حاول تعديل الفلاتر أو عبارة البحث."
+
+msgid "Try our AI-powered virtual fitting system for personalized size recommendations and perfect fit!"
+msgstr "جرب نظام القياس الافتراضي بالذكاء الاصطناعي لتوصيات مقاس مخصصة وملاءمة مثالية!"
+
+msgid "Total Variants"
+msgstr "إجمالي المتغيرات"
 
 msgid "Two images needed: full-body pose + face selfie"
-msgstr "يلزم صورتان: وضعية الجسم الكامل + سيلفي الوجه"
+msgstr "صورتان مطلوبتان: وضعية الجسم كامل + صورة الوجه"
 
 msgid "Upload Body Images"
 msgstr "رفع صور الجسم"
 
 msgid "Upload Images"
-msgstr "رفع الصور"
+msgstr "رفع صور"
 
 msgid "Upload a full-body photo AND a face selfie for AI analysis"
-msgstr "قم برفع صورة للجسم بالكامل وسيلفي للوجه لتحليل الذكاء الاصطناعي"
-
-msgid "Very Light"
-msgstr "فاتح جداً"
+msgstr "ارفع صورة الجسم كامل وصورة الوجه لتحليل الذكاء الاصطناعي"
 
 msgid "View Details"
 msgstr "عرض التفاصيل"
@@ -366,20 +446,8 @@ msgstr "مسح الجسم الافتراضي"
 msgid "Virtual Body Scan - Virtual Fitting System"
 msgstr "مسح الجسم الافتراضي - نظام القياس الافتراضي"
 
-msgid "Virtual Fitting"
-msgstr "القياس الافتراضي"
-
-msgid "Virtual Fitting System"
-msgstr "نظام القياس الافتراضي"
-
 msgid "Virtual Fitting System - Find Your Perfect Fit"
-msgstr "نظام القياس الافتراضي - جد مقاسك المثالي"
-
-msgid "Warm"
-msgstr "دافئ"
-
-msgid "Why Virtual Fitting?"
-msgstr "لماذا القياس الافتراضي؟"
+msgstr "نظام القياس الافتراضي - اعثر على مقاسك المثالي"
 
 msgid "With AI Technology"
 msgstr "بتقنية الذكاء الاصطناعي"
@@ -387,87 +455,56 @@ msgstr "بتقنية الذكاء الاصطناعي"
 msgid "Women"
 msgstr "نساء"
 
+msgid "Why Virtual Fitting?"
+msgstr "لماذا القياس الافتراضي؟"
+
 msgid "You May Also Like"
 msgstr "قد يعجبك أيضاً"
 
 msgid "Your Height"
 msgstr "طولك"
 
-msgid "Your Recommendations - Virtual Fitting System"
-msgstr "ترشيحاتك - نظام القياس الافتراضي"
+msgid "Your Size"
+msgstr "مقاسك"
 
-msgid "Your Size:"
-msgstr ":مقاسك"
+msgid "Your face should fill most of the circle"
+msgstr "يجب أن يملأ وجهك معظم الدائرة"
+
+msgid "Your height is used to calibrate YOLO body measurements for accuracy."
+msgstr "يُستخدم طولك لمعايرة قياسات جسم YOLO للدقة."
 
 msgid "Your images are never stored, only measurements"
-msgstr "لا يتم تخزين صورك أبداً، يتم تخزين القياسات فقط"
+msgstr "صورك لا تُخزن أبداً، فقط القياسات"
 
-msgid "e.g. 175"
-msgstr "مثال: 175"
+msgid "Both images captured successfully!"
+msgstr "تم التقاط الصورتين بنجاح!"
+
+msgid "Click Process Scan to analyse your measurements & skin tone"
+msgstr "اضغط معالجة المسح لتحليل قياساتك ولون بشرتك"
+
+msgid "Experience the future of clothing shopping today"
+msgstr "جرّب مستقبل تسوق الملابس اليوم"
+
+msgid "Here are your personalised results"
+msgstr "إليك نتائجك المخصصة"
+
+msgid "in stock right now"
+msgstr "متوفر في المخزون الآن"
 
 msgid "left"
 msgstr "متبقي"
 
+msgid "Network error. Please check your connection and try again."
+msgstr "خطأ في الشبكة. يرجى التحقق من الاتصال والمحاولة مرة أخرى."
+
 msgid "or click to browse"
 msgstr "أو اضغط للتصفح"
 
-msgid "required for accurate measurements"
-msgstr "مطلوب لقياسات دقيقة"
+msgid "Three simple steps to find your perfect fit"
+msgstr "ثلاث خطوات بسيطة لمعرفة مقاسك المثالي"
 
 msgid "undertone"
-msgstr "لون تحتي"
+msgstr "درجة لونية"
 
-msgid "in stock right now"
-msgstr "في المخزون الآن"
-
-msgid "Hold still!"
-msgstr "اثبت مكانك!"
-
-msgid "Auto-capturing when position is correct..."
-msgstr "...التقاط تلقائي عند صحة الوضعية"
-
-msgid "Detecting pose, measuring body, detecting skin tone..."
-msgstr "...كشف الوضعية، قياس الجسم، كشف لون البشرة"
-
-msgid "Image captures automatically when you're positioned correctly!"
-msgstr "!يتم التقاط الصورة تلقائياً عندما تكون في الوضع الصحيح"
-
-msgid "Body Pose ✓"
-msgstr "✓ وضعية الجسم"
-
-msgid "Face Selfie ✓"
-msgstr "✓ سيلفي الوجه"
-
-msgid "Your Size"
-msgstr "مقاسك"
-
-msgid "Available Color"
-msgstr "اللون المتوفر"
-
-msgid "Try our AI-powered virtual fitting system for personalized size recommendations and perfect fit!"
-msgstr "جرب نظام القياس الافتراضي المدعوم بالذكاء الاصطناعي للحصول على توصيات مقاسات مخصصة وملاءمة مثالية!"
-
-msgid "required – full body, front view"
-msgstr "مطلوب – الجسم كامل، رؤية أمامية"
-
-msgid "Stand facing the camera, full body visible"
-msgstr "قف في مواجهة الكاميرا، الجسم بالكامل مرئي"
-
-msgid "Remove"
-msgstr "إزالة"
-
-msgid "required – close-up face for skin tone"
-msgstr "مطلوب – لقطة قريبة للوجه للون البشرة"
-
-msgid "Natural lighting, clear skin visible"
-msgstr "إضاءة طبيعية، بشرة واضحة مرئية"
-
-msgid "Please enter a valid height between 100 and 250 cm."
-msgstr ".يرجى إدخال طول صحيح بين 100 و 250 سم"
-
-msgid "Your height is used to calibrate YOLO body measurements for accuracy."
-msgstr ".يستخدم طولك لمعايرة قياسات الجسم لضمان الدقة"
-
-msgid "Based on your body measurements analysed by YOLO + LLM"
-msgstr "بناءً على قياسات جسمك المحللة بواسطة YOLO + LLM"
-
+msgid "You can start over if needed"
+msgstr "يمكنك البدء من جديد إذا لزم الأمر"

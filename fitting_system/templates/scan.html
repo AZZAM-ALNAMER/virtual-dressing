@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Virtual Body Scan - Virtual Fitting System{% endblock %}
+{% block title %}{% trans "Virtual Body Scan - Virtual Fitting System" %}{% endblock %}
 
 {% block content %}
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="text-center mb-8">
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">Virtual Body Scan</h1>
-        <p class="text-xl text-gray-600">Two images needed: full-body pose + face selfie</p>
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">{% trans "Virtual Body Scan" %}</h1>
+        <p class="text-xl text-gray-600">{% trans "Two images needed: full-body pose + face selfie" %}</p>
     </div>
 
     <!-- Height Input -->
     <div class="max-w-md mx-auto mb-8">
         <div class="bg-white rounded-2xl shadow-lg p-6 border border-[#7DB8D8]/40">
             <label for="user-height" class="block text-sm font-semibold text-gray-700 mb-2">
-                📏 Your Height <span class="text-red-500">*</span>
-                <span class="text-gray-400 font-normal">(required for accurate measurements)</span>
+                {% trans "Your Height" %} <span class="text-red-500">*</span>
+                <span class="text-gray-400 font-normal">({% trans "required for accurate measurements" %})</span>
             </label>
             <div class="flex items-center gap-3">
                 <div class="relative flex-1">
@@ -34,10 +35,8 @@
                     </span>
                 </div>
             </div>
-            <p id="height-error" class="hidden text-red-500 text-sm mt-2">Please enter a valid height between 100 and
-                250 cm.</p>
-            <p class="text-gray-400 text-xs mt-2">Your height is used to calibrate YOLO body measurements for accuracy.
-            </p>
+            <p id="height-error" class="hidden text-red-500 text-sm mt-2">{% trans "Please enter a valid height between 100 and 250 cm." %}</p>
+            <p class="text-gray-400 text-xs mt-2">{% trans "Your height is used to calibrate YOLO body measurements for accuracy." %}</p>
         </div>
     </div>
 
@@ -51,7 +50,7 @@
                         d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
                     </path>
                 </svg>
-                Camera Scan
+                {% trans "Camera Scan" %}
             </button>
             <button id="tab-upload" onclick="switchMode('upload')"
                 class="flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 text-gray-500 hover:text-gray-700">
@@ -60,7 +59,7 @@
                         d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
                     </path>
                 </svg>
-                Upload Images
+                {% trans "Upload Images" %}
             </button>
         </div>
     </div>
@@ -75,21 +74,21 @@
                     <div
                         class="w-10 h-10 bg-[#1B3A6B] text-white rounded-full flex items-center justify-center font-bold">
                         1</div>
-                    <span class="ml-2 font-medium text-gray-900">Body Pose</span>
+                    <span class="ml-2 font-medium text-gray-900">{% trans "Body Pose" %}</span>
                 </div>
                 <div class="w-8 md:w-16 h-1 bg-gray-300"></div>
                 <div id="step2" class="flex items-center opacity-50">
                     <div
                         class="w-10 h-10 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-bold">
                         2</div>
-                    <span class="ml-2 font-medium text-gray-600">Face Selfie</span>
+                    <span class="ml-2 font-medium text-gray-600">{% trans "Face Selfie" %}</span>
                 </div>
                 <div class="w-8 md:w-16 h-1 bg-gray-300"></div>
                 <div id="step3" class="flex items-center opacity-50">
                     <div
                         class="w-10 h-10 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-bold">
                         3</div>
-                    <span class="ml-2 font-medium text-gray-600">Processing</span>
+                    <span class="ml-2 font-medium text-gray-600">{% trans "Processing" %}</span>
                 </div>
             </div>
         </div>
@@ -121,7 +120,7 @@
                             class="w-64 h-80 border-4 border-dashed border-amber-400/80 rounded-full transition-colors duration-300">
                         </div>
                         <p class="text-amber-400 font-bold mt-4 text-lg bg-black/40 px-4 py-2 rounded-lg">
-                            📱 Come close! Fill the circle with your face
+                            {% trans "Come close! Fill the circle with your face" %}
                         </p>
                     </div>
 
@@ -131,8 +130,7 @@
                         <div class="text-center">
                             <div id="countdown-number"
                                 class="text-9xl font-black text-white drop-shadow-2xl animate-pulse"></div>
-                            <p class="text-2xl font-bold text-white mt-4 bg-green-600/80 px-6 py-2 rounded-full">Hold
-                                still!</p>
+                            <p class="text-2xl font-bold text-white mt-4 bg-green-600/80 px-6 py-2 rounded-full">{% trans "Hold still!" %}</p>
                         </div>
                     </div>
 
@@ -146,7 +144,7 @@
                         <div id="status-badge"
                             class="bg-black/60 backdrop-blur-md text-white px-6 py-2 rounded-full flex items-center gap-2 transition-all duration-300">
                             <div id="status-indicator" class="w-3 h-3 rounded-full bg-yellow-400 animate-pulse"></div>
-                            <span id="status-text" class="font-medium">Initializing camera...</span>
+                            <span id="status-text" class="font-medium">{% trans "Initializing camera..." %}</span>
                         </div>
                     </div>
 
@@ -157,8 +155,7 @@
                                 class="h-2 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 transition-all duration-100"
                                 style="width: 0%"></div>
                         </div>
-                        <p class="text-center text-white text-sm mt-2 font-medium">Auto-capturing when position is
-                            correct...</p>
+                        <p class="text-center text-white text-sm mt-2 font-medium">{% trans "Auto-capturing when position is correct..." %}</p>
                     </div>
 
                     <!-- Loading spinner -->
@@ -167,9 +164,8 @@
                             <div
                                 class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-white mx-auto mb-4">
                             </div>
-                            <p class="text-white text-lg">Analysing with YOLO + AI...</p>
-                            <p class="text-gray-300 text-sm mt-2">Detecting pose, measuring body, detecting skin tone...
-                            </p>
+                            <p class="text-white text-lg">{% trans "Analysing with YOLO + AI..." %}</p>
+                            <p class="text-gray-300 text-sm mt-2">{% trans "Detecting pose, measuring body, detecting skin tone..." %}</p>
                         </div>
                     </div>
                 </div>
@@ -177,26 +173,26 @@
 
             <!-- Instructions -->
             <div id="instructions" class="bg-[#EAF3F8] rounded-xl p-6 mb-6">
-                <h3 class="font-bold text-lg text-[#1B3A6B] mb-3">📸 Step 1: Body Pose (Auto-Capture)</h3>
+                <h3 class="font-bold text-lg text-[#1B3A6B] mb-3">{% trans "Step 1: Body Pose (Auto-Capture)" %}</h3>
                 <ul class="space-y-2 text-[#2E5FA3]">
-                    <li>✓ Stand 2–3 metres away from the camera</li>
-                    <li>✓ Align your full body with the guide outline</li>
-                    <li>✓ Stand straight with arms slightly away from your body</li>
-                    <li>⚡ <strong>Image captures automatically when you're positioned correctly!</strong></li>
+                    <li>✓ {% trans "Stand 2–3 metres away from the camera" %}</li>
+                    <li>✓ {% trans "Align your full body with the guide outline" %}</li>
+                    <li>✓ {% trans "Stand straight with arms slightly away from your body" %}</li>
+                    <li>⚡ <strong>{% trans "Image captures automatically when you're positioned correctly!" %}</strong></li>
                 </ul>
             </div>
 
             <!-- Preview Images -->
             <div id="preview-container" class="hidden mb-6">
-                <h3 class="font-bold text-lg text-gray-900 mb-3">Captured Images:</h3>
+                <h3 class="font-bold text-lg text-gray-900 mb-3">{% trans "Captured Images:" %}</h3>
                 <div class="grid grid-cols-2 gap-4">
                     <div id="front-preview-container" class="hidden">
-                        <p class="text-sm text-gray-600 mb-2">Body Pose ✓</p>
-                        <img id="front-preview" class="w-full rounded-lg border-2 border-green-400" alt="Body pose">
+                        <p class="text-sm text-gray-600 mb-2">{% trans "Body Pose" %} ✓</p>
+                        <img id="front-preview" class="w-full rounded-lg border-2 border-green-400" alt="{% trans 'Body pose' %}">
                     </div>
                     <div id="face-preview-container" class="hidden">
-                        <p class="text-sm text-gray-600 mb-2">Face Selfie ✓</p>
-                        <img id="face-preview" class="w-full rounded-lg border-2 border-amber-400" alt="Face selfie">
+                        <p class="text-sm text-gray-600 mb-2">{% trans "Face Selfie" %} ✓</p>
+                        <img id="face-preview" class="w-full rounded-lg border-2 border-amber-400" alt="{% trans 'Face selfie' %}">
                     </div>
                 </div>
             </div>
@@ -210,11 +206,11 @@
             <div class="flex gap-4 justify-center flex-wrap">
                 <button id="process-scan"
                     class="hidden bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-lg transition transform hover:scale-105">
-                    ✨ Process Scan
+                    {% trans "Process Scan" %}
                 </button>
                 <button id="retake"
                     class="hidden bg-gray-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-600 transition">
-                    🔄 Start Over
+                    {% trans "Start Over" %}
                 </button>
             </div>
         </div>
@@ -225,8 +221,8 @@
     <div id="upload-mode" class="hidden">
         <div class="bg-white rounded-2xl shadow-xl p-8">
             <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-900 mb-2">Upload Body Images</h2>
-                <p class="text-gray-500">Upload a full-body photo AND a face selfie for AI analysis</p>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">{% trans "Upload Body Images" %}</h2>
+                <p class="text-gray-500">{% trans "Upload a full-body photo AND a face selfie for AI analysis" %}</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -234,8 +230,8 @@
                 <!-- Front / Body Image Upload -->
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">
-                        🧍 Body Pose <span class="text-red-500">*</span>
-                        <span class="text-gray-400 font-normal">(required – full body, front view)</span>
+                        {% trans "Body Pose" %} <span class="text-red-500">*</span>
+                        <span class="text-gray-400 font-normal">({% trans "required – full body, front view" %})</span>
                     </label>
                     <div id="front-dropzone"
                         class="relative border-2 border-dashed border-[#5B8FC9] rounded-xl p-8 text-center cursor-pointer transition-all duration-300 hover:border-[#1B3A6B] hover:bg-[#EAF3F8]/50 group"
@@ -254,15 +250,15 @@
                                     </path>
                                 </svg>
                             </div>
-                            <p class="text-gray-600 font-medium">Drop body photo here</p>
-                            <p class="text-gray-400 text-sm mt-1">or click to browse</p>
-                            <p class="text-gray-400 text-xs mt-3">Stand facing the camera, full body visible</p>
+                            <p class="text-gray-600 font-medium">{% trans "Drop body photo here" %}</p>
+                            <p class="text-gray-400 text-sm mt-1">{% trans "or click to browse" %}</p>
+                            <p class="text-gray-400 text-xs mt-3">{% trans "Stand facing the camera, full body visible" %}</p>
                         </div>
                         <div id="front-upload-preview" class="hidden">
-                            <img id="front-upload-img" class="max-h-64 mx-auto rounded-lg shadow-md" alt="Body pose">
-                            <p class="text-green-600 font-medium mt-3">✓ Body image ready</p>
+                            <img id="front-upload-img" class="max-h-64 mx-auto rounded-lg shadow-md" alt="{% trans 'Body pose' %}">
+                            <p class="text-green-600 font-medium mt-3">✓ {% trans "Body image ready" %}</p>
                             <button type="button" onclick="event.stopPropagation(); removeUpload('front')"
-                                class="mt-2 text-sm text-red-500 hover:text-red-700 underline">Remove</button>
+                                class="mt-2 text-sm text-red-500 hover:text-red-700 underline">{% trans "Remove" %}</button>
                         </div>
                     </div>
                 </div>
@@ -270,8 +266,8 @@
                 <!-- Face / Selfie Image Upload -->
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">
-                        🤳 Face Selfie <span class="text-red-500">*</span>
-                        <span class="text-gray-400 font-normal">(required – close-up face for skin tone)</span>
+                        {% trans "Face Selfie" %} <span class="text-red-500">*</span>
+                        <span class="text-gray-400 font-normal">({% trans "required – close-up face for skin tone" %})</span>
                     </label>
                     <div id="face-dropzone"
                         class="relative border-2 border-dashed border-amber-300 rounded-xl p-8 text-center cursor-pointer transition-all duration-300 hover:border-amber-500 hover:bg-amber-50/50 group"
@@ -290,15 +286,15 @@
                                     </path>
                                 </svg>
                             </div>
-                            <p class="text-gray-600 font-medium">Drop face selfie here</p>
-                            <p class="text-gray-400 text-sm mt-1">or click to browse</p>
-                            <p class="text-gray-400 text-xs mt-3">Close-up of your face, good lighting</p>
+                            <p class="text-gray-600 font-medium">{% trans "Drop face selfie here" %}</p>
+                            <p class="text-gray-400 text-sm mt-1">{% trans "or click to browse" %}</p>
+                            <p class="text-gray-400 text-xs mt-3">{% trans "Close-up of your face, good lighting" %}</p>
                         </div>
                         <div id="face-upload-preview" class="hidden">
-                            <img id="face-upload-img" class="max-h-64 mx-auto rounded-lg shadow-md" alt="Face selfie">
-                            <p class="text-amber-600 font-medium mt-3">✓ Face image ready</p>
+                            <img id="face-upload-img" class="max-h-64 mx-auto rounded-lg shadow-md" alt="{% trans 'Face selfie' %}">
+                            <p class="text-amber-600 font-medium mt-3">✓ {% trans "Face image ready" %}</p>
                             <button type="button" onclick="event.stopPropagation(); removeUpload('face')"
-                                class="mt-2 text-sm text-red-500 hover:text-red-700 underline">Remove</button>
+                                class="mt-2 text-sm text-red-500 hover:text-red-700 underline">{% trans "Remove" %}</button>
                         </div>
                     </div>
                 </div>
@@ -306,12 +302,12 @@
 
             <!-- Upload Tips -->
             <div class="bg-[#EAF3F8] rounded-xl p-5 mb-6">
-                <h3 class="font-bold text-[#1B3A6B] mb-2">📋 Tips for best results:</h3>
+                <h3 class="font-bold text-[#1B3A6B] mb-2">{% trans "Tips for best results:" %}</h3>
                 <ul class="space-y-1.5 text-sm text-[#2E5FA3]">
-                    <li>✓ Body photo: full body visible from head to toe, good lighting</li>
-                    <li>✓ Body photo: stand straight with arms slightly away from body</li>
-                    <li>✓ Face selfie: close-up, face fills most of the frame</li>
-                    <li>✓ Face selfie: natural lighting, no heavy filters</li>
+                    <li>✓ {% trans "Body photo: full body visible from head to toe, good lighting" %}</li>
+                    <li>✓ {% trans "Body photo: stand straight with arms slightly away from body" %}</li>
+                    <li>✓ {% trans "Face selfie: close-up, face fills most of the frame" %}</li>
+                    <li>✓ {% trans "Face selfie: natural lighting, no heavy filters" %}</li>
                 </ul>
             </div>
 
@@ -326,8 +322,8 @@
                     <div
                         class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#5B8FC9] mx-auto mb-4">
                     </div>
-                    <p class="text-white text-lg font-medium">Analysing with YOLO + AI...</p>
-                    <p class="text-gray-400 text-sm mt-2">Detecting pose, measuring body, detecting skin tone...</p>
+                    <p class="text-white text-lg font-medium">{% trans "Analysing with YOLO + AI..." %}</p>
+                    <p class="text-gray-400 text-sm mt-2">{% trans "Detecting pose, measuring body, detecting skin tone..." %}</p>
                 </div>
             </div>
 
@@ -335,7 +331,7 @@
             <div class="flex justify-center">
                 <button id="upload-process-btn" onclick="processUpload()" disabled
                     class="bg-gradient-to-r from-[#1B3A6B] to-[#2E5FA3] text-white px-10 py-4 rounded-xl font-bold text-lg shadow-lg transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-xl hover:scale-105 disabled:hover:scale-100 disabled:hover:shadow-lg">
-                    ✨ Process Scan
+                    {% trans "Process Scan" %}
                 </button>
             </div>
         </div>
@@ -380,6 +376,40 @@
 
 {% block extra_js %}
 <script>
+    window.LANG_PREFIX = "{% if request.LANGUAGE_CODE == 'ar' %}/ar{% endif %}";
+    window.SCAN_I18N = {
+        statusInit: "{% trans 'Initializing camera...' %}",
+        statusAlign: "{% trans 'Align your body with the guide' %}",
+        statusNoPerson: "{% trans 'No person detected – step into frame' %}",
+        statusReady: "{% trans 'Ready to process your scan!' %}",
+        statusCameraDenied: "{% trans 'Camera access denied' %}",
+        errorCamera: "{% trans 'Camera access denied. Please allow camera access.' %}",
+        errorBodyImage: "{% trans 'Please capture a body pose image.' %}",
+        errorFaceImage: "{% trans 'Please capture a face selfie.' %}",
+        errorHeight: "{% trans 'Please enter a valid height (100–250 cm) before processing.' %}",
+        errorProcess: "{% trans 'Processing failed. Please try again.' %}",
+        errorNetwork: "{% trans 'Network error. Please check your connection and try again.' %}",
+        errorUploadBody: "{% trans 'Please upload a body pose image.' %}",
+        errorUploadFace: "{% trans 'Please upload a face selfie image.' %}",
+        errorUploadHeight: "{% trans 'Please enter a valid height (100–250 cm) before processing.' %}",
+        step1Title: "{% trans 'Step 1: Body Pose (Auto-Capture)' %}",
+        step1_1: "{% trans 'Stand 2–3 metres away from the camera' %}",
+        step1_2: "{% trans 'Align your full body with the guide outline' %}",
+        step1_3: "{% trans 'Stand straight with arms slightly away from your body' %}",
+        step1_4: "{% trans 'Image captures automatically when you\'re positioned correctly!' %}",
+        step2Title: "{% trans 'Step 2: Face Selfie (Auto-Capture)' %}",
+        step2_1: "{% trans 'Come close to the camera like a selfie!' %}",
+        step2_2: "{% trans 'Your face should fill most of the circle' %}",
+        step2_3: "{% trans 'Position your face in the centre of the guide' %}",
+        step2_4: "{% trans 'Ensure good, natural lighting on your face' %}",
+        step2_5: "{% trans 'Image captures automatically when you\'re close enough!' %}",
+        step3Title: "{% trans 'Step 3: Ready to Process' %}",
+        step3_1: "{% trans 'Both images captured successfully!' %}",
+        step3_2: "{% trans 'Click Process Scan to analyse your measurements & skin tone' %}",
+        step3_3: "{% trans 'You can start over if needed' %}"
+    };
+</script>
+<script>
     // ===== STATE =====
     let video, canvas, context, overlayCanvas, overlayContext;
     let frontImageData = null;   // body pose image
@@ -418,8 +448,8 @@
                 startRealTimeAnalysis();
             };
         } catch (error) {
-            showError('Camera access denied. Please allow camera access.');
-            updateStatus('error', 'Camera access denied');
+            showError(window.SCAN_I18N ? window.SCAN_I18N.errorCamera : 'Camera access denied. Please allow camera access.');
+            updateStatus('error', window.SCAN_I18N ? window.SCAN_I18N.statusCameraDenied : 'Camera access denied');
         }
     }
 
@@ -434,7 +464,7 @@
         isAnalyzing = true;
         goodPoseStartTime = null;
 
-        updateStatus('warning', 'Align your body with the guide');
+        updateStatus('warning', window.SCAN_I18N ? window.SCAN_I18N.statusAlign : 'Align your body with the guide');
         document.getElementById('auto-capture-bar').classList.remove('hidden');
 
         analysisInterval = setInterval(async () => {
@@ -473,7 +503,7 @@
 
     function handleAnalysisResult(result) {
         if (!result.detected) {
-            updateStatus('error', 'No person detected – step into frame');
+            updateStatus('error', window.SCAN_I18N ? window.SCAN_I18N.statusNoPerson : 'No person detected – step into frame');
             clearLandmarks();
             goodPoseStartTime = null;
             updateCaptureProgress(0);
@@ -590,14 +620,15 @@
 
         updateStep(2);
 
+        var i = window.SCAN_I18N || {};
         document.getElementById('instructions').innerHTML = `
-            <h3 class="font-bold text-lg text-amber-700 mb-3">🤳 Step 2: Face Selfie (Auto-Capture)</h3>
+            <h3 class="font-bold text-lg text-amber-700 mb-3">` + (i.step2Title || 'Step 2: Face Selfie (Auto-Capture)') + `</h3>
             <ul class="space-y-2 text-amber-800">
-                <li>📱 <strong>Come close to the camera like a selfie!</strong></li>
-                <li>✓ Your face should fill most of the circle</li>
-                <li>✓ Position your face in the centre of the guide</li>
-                <li>✓ Ensure good, natural lighting on your face</li>
-                <li>⚡ <strong>Image captures automatically when you're close enough!</strong></li>
+                <li>📱 <strong>` + (i.step2_1 || 'Come close to the camera like a selfie!') + `</strong></li>
+                <li>✓ ` + (i.step2_2 || 'Your face should fill most of the circle') + `</li>
+                <li>✓ ` + (i.step2_3 || 'Position your face in the centre of the guide') + `</li>
+                <li>✓ ` + (i.step2_4 || 'Ensure good, natural lighting on your face') + `</li>
+                <li>⚡ <strong>` + (i.step2_5 || "Image captures automatically when you're close enough!") + `</strong></li>
             </ul>
         `;
 
@@ -620,16 +651,17 @@
 
         updateStep(3);
 
+        var i3 = window.SCAN_I18N || {};
         document.getElementById('instructions').innerHTML = `
-            <h3 class="font-bold text-lg text-emerald-700 mb-3">✨ Step 3: Ready to Process</h3>
+            <h3 class="font-bold text-lg text-emerald-700 mb-3">` + (i3.step3Title || 'Step 3: Ready to Process') + `</h3>
             <ul class="space-y-2 text-emerald-800">
-                <li>✓ Both images captured successfully!</li>
-                <li>✓ Click "Process Scan" to analyse your measurements & skin tone</li>
-                <li>✓ You can start over if needed</li>
+                <li>✓ ` + (i3.step3_1 || 'Both images captured successfully!') + `</li>
+                <li>✓ ` + (i3.step3_2 || 'Click "Process Scan" to analyse your measurements & skin tone') + `</li>
+                <li>✓ ` + (i3.step3_3 || 'You can start over if needed') + `</li>
             </ul>
         `;
 
-        updateStatus('good', 'Ready to process your scan!');
+        updateStatus('good', window.SCAN_I18N ? window.SCAN_I18N.statusReady : 'Ready to process your scan!');
     }
 
     // ===== PROCESS SCAN =====
@@ -666,12 +698,13 @@
     }
 
     async function processScan() {
-        if (!frontImageData) { showError('Please capture a body pose image.'); return; }
-        if (!faceImageData) { showError('Please capture a face selfie.'); return; }
+        var i = window.SCAN_I18N || {};
+        if (!frontImageData) { showError(i.errorBodyImage || 'Please capture a body pose image.'); return; }
+        if (!faceImageData) { showError(i.errorFaceImage || 'Please capture a face selfie.'); return; }
 
         const userHeight = getValidatedHeight();
         if (!userHeight) {
-            showError('Please enter a valid height (100–250 cm) before processing.');
+            showError(i.errorHeight || 'Please enter a valid height (100–250 cm) before processing.');
             document.getElementById('user-height').focus();
             return;
         }
@@ -693,14 +726,14 @@
             const data = await response.json();
 
             if (data.success) {
-                window.location.href = `/recommendations/${data.session_id}/`;
+                window.location.href = `${window.LANG_PREFIX || ''}/recommendations/${data.session_id}/`;
             } else {
-                showError(data.error || 'Processing failed. Please try again.');
+                showError(data.error || (window.SCAN_I18N && window.SCAN_I18N.errorProcess) || 'Processing failed. Please try again.');
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('process-scan').disabled = false;
             }
         } catch (error) {
-            showError('Network error. Please check your connection and try again.');
+            showError(window.SCAN_I18N && window.SCAN_I18N.errorNetwork ? window.SCAN_I18N.errorNetwork : 'Network error. Please check your connection and try again.');
             document.getElementById('loading').classList.add('hidden');
             document.getElementById('process-scan').disabled = false;
         }
@@ -724,13 +757,14 @@
         document.getElementById('visual-guide-body').classList.remove('hidden');
         document.getElementById('visual-guide-face').classList.add('hidden');
 
+        var i1 = window.SCAN_I18N || {};
         document.getElementById('instructions').innerHTML = `
-            <h3 class="font-bold text-lg text-[#1B3A6B] mb-3">📸 Step 1: Body Pose (Auto-Capture)</h3>
+            <h3 class="font-bold text-lg text-[#1B3A6B] mb-3">` + (i1.step1Title || 'Step 1: Body Pose (Auto-Capture)') + `</h3>
             <ul class="space-y-2 text-[#2E5FA3]">
-                <li>✓ Stand 2–3 metres away from the camera</li>
-                <li>✓ Align your full body with the guide outline</li>
-                <li>✓ Stand straight with arms slightly away from your body</li>
-                <li>⚡ <strong>Image captures automatically when you're positioned correctly!</strong></li>
+                <li>✓ ` + (i1.step1_1 || 'Stand 2–3 metres away from the camera') + `</li>
+                <li>✓ ` + (i1.step1_2 || 'Align your full body with the guide outline') + `</li>
+                <li>✓ ` + (i1.step1_3 || 'Stand straight with arms slightly away from your body') + `</li>
+                <li>⚡ <strong>` + (i1.step1_4 || "Image captures automatically when you're positioned correctly!") + `</strong></li>
             </ul>
         `;
 
@@ -937,12 +971,13 @@
     }
 
     async function processUpload() {
-        if (!uploadFrontData) { showUploadError('Please upload a body pose image.'); return; }
-        if (!uploadFaceData) { showUploadError('Please upload a face selfie image.'); return; }
+        var i = window.SCAN_I18N || {};
+        if (!uploadFrontData) { showUploadError(i.errorUploadBody || 'Please upload a body pose image.'); return; }
+        if (!uploadFaceData) { showUploadError(i.errorUploadFace || 'Please upload a face selfie image.'); return; }
 
         const userHeight = getValidatedHeight();
         if (!userHeight) {
-            showUploadError('Please enter a valid height (100–250 cm) before processing.');
+            showUploadError(i.errorUploadHeight || i.errorHeight || 'Please enter a valid height (100–250 cm) before processing.');
             document.getElementById('user-height').focus();
             return;
         }
@@ -965,14 +1000,14 @@
             const data = await response.json();
 
             if (data.success) {
-                window.location.href = `/recommendations/${data.session_id}/`;
+                window.location.href = `${window.LANG_PREFIX || ''}/recommendations/${data.session_id}/`;
             } else {
-                showUploadError(data.error || 'Processing failed. Please try again.');
+                showUploadError(data.error || (window.SCAN_I18N && window.SCAN_I18N.errorProcess) || 'Processing failed. Please try again.');
                 document.getElementById('upload-loading').classList.add('hidden');
                 document.getElementById('upload-process-btn').disabled = false;
             }
         } catch (error) {
-            showUploadError('Network error. Please check your connection and try again.');
+            showUploadError(window.SCAN_I18N && window.SCAN_I18N.errorNetwork ? window.SCAN_I18N.errorNetwork : 'Network error. Please check your connection and try again.');
             document.getElementById('upload-loading').classList.add('hidden');
             document.getElementById('upload-process-btn').disabled = false;
         }
