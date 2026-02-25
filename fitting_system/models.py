@@ -71,7 +71,7 @@ class Product(models.Model):
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
-    image_url = models.URLField(blank=True, null=True)
+    image = models.ImageField(upload_to='products/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
