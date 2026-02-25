@@ -1,0 +1,835 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Your 3D Avatar - Virtual Fitting System" %}{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Avatar page overrides — dark theme for the 3D viewer area */
+    .avatar-page {
+        display: flex;
+        min-height: calc(100vh - 64px);
+    }
+
+    /* Sidebar */
+    .avatar-sidebar {
+        width: 320px;
+        min-width: 320px;
+        max-height: calc(100vh - 64px);
+        background: linear-gradient(160deg, #0f1729 0%, #1B3A6B 60%, #16213e 100%);
+        border-right: 1px solid rgba(255, 255, 255, 0.07);
+        overflow-y: auto;
+        position: relative;
+        z-index: 10;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+    }
+
+    .avatar-sidebar::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .avatar-sidebar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+    }
+
+    .sidebar-inner {
+        padding: 24px 20px;
+    }
+
+    /* Canvas area */
+    .avatar-canvas-area {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #0f1729 0%, #1a1a2e 50%, #16213e 100%);
+    }
+
+    .avatar-canvas-area canvas {
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    /* Section styling */
+    .av-section {
+        margin-bottom: 20px;
+        animation: avFadeUp 0.5s ease both;
+    }
+
+    .av-section:nth-child(2) {
+        animation-delay: 0.05s;
+    }
+
+    .av-section:nth-child(3) {
+        animation-delay: 0.10s;
+    }
+
+    .av-section:nth-child(4) {
+        animation-delay: 0.15s;
+    }
+
+    .av-section-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+
+    .av-section-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        flex-shrink: 0;
+    }
+
+    .av-section-icon.skin {
+        background: rgba(201, 169, 110, 0.15);
+    }
+
+    .av-section-icon.shirt {
+        background: rgba(99, 179, 237, 0.12);
+    }
+
+    .av-section-icon.pants {
+        background: rgba(154, 117, 255, 0.12);
+    }
+
+    .av-section-title {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* Skin swatches grid */
+    .av-swatches-skin {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 7px;
+    }
+
+    .av-swatches-clothes {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 7px;
+    }
+
+    .av-swatch {
+        aspect-ratio: 1;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        position: relative;
+    }
+
+    .av-swatch:hover {
+        transform: scale(1.2);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    }
+
+    .av-swatch.active {
+        border-color: #fff;
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25), 0 4px 14px rgba(0, 0, 0, 0.5);
+        transform: scale(1.1);
+    }
+
+    .av-swatch[data-tip]:hover::after {
+        content: attr(data-tip);
+        position: absolute;
+        bottom: calc(100% + 6px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.9);
+        color: #fff;
+        font-size: 10px;
+        white-space: nowrap;
+        padding: 3px 8px;
+        border-radius: 4px;
+        pointer-events: none;
+        z-index: 300;
+    }
+
+    .av-suggest-label {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #c9a96e;
+        margin-bottom: 7px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .av-suggest-label::before {
+        content: '';
+        display: inline-block;
+        width: 18px;
+        height: 1px;
+        background: #c9a96e;
+        opacity: 0.5;
+    }
+
+    .av-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent);
+        margin: 4px 0 20px;
+    }
+
+    /* Info cards inside sidebar */
+    .av-info-card {
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .av-info-label {
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.35);
+        margin-bottom: 4px;
+    }
+
+    .av-info-value {
+        color: #fff;
+        font-weight: 700;
+        font-size: 24px;
+    }
+
+    .av-info-sub {
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 11px;
+        margin-top: 2px;
+    }
+
+    /* Debug overlay */
+    #av-debug {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        background: rgba(0, 0, 0, 0.75);
+        color: #4eff91;
+        font-size: 10px;
+        font-family: monospace;
+        padding: 10px 14px;
+        border-radius: 6px;
+        z-index: 50;
+        max-width: 460px;
+        line-height: 1.8;
+        pointer-events: none;
+    }
+
+    /* Swatch pop animation */
+    @keyframes avSwatchPop {
+        from {
+            opacity: 0;
+            transform: scale(0.7);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .av-swatch.pop {
+        animation: avSwatchPop 0.22s ease both;
+    }
+
+    @keyframes avFadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Back link */
+    .av-back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 12px;
+        font-weight: 500;
+        text-decoration: none;
+        margin-bottom: 20px;
+        transition: color 0.2s;
+    }
+
+    .av-back-link:hover {
+        color: #fff;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .avatar-page {
+            flex-direction: column;
+        }
+
+        .avatar-sidebar {
+            width: 100%;
+            min-width: 100%;
+            max-height: none;
+            border-right: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .avatar-canvas-area {
+            min-height: 50vh;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="avatar-page">
+
+    <!-- ===== SIDEBAR ===== -->
+    <div class="avatar-sidebar">
+        <div class="sidebar-inner">
+
+            <!-- Back link -->
+            <a href="{% url 'fitting_system:recommendations' body_scan.session_id %}" class="av-back-link">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                {% trans "Back to Recommendations" %}
+            </a>
+
+            <!-- Info Cards -->
+            <div class="av-info-card">
+                <div class="av-info-label">{% trans "AI Recommended Size" %}</div>
+                <div class="av-info-value">{{ recommended_size }}</div>
+                <div class="av-info-sub">{% trans "Based on your body scan" %}</div>
+            </div>
+
+            <div class="av-info-card" style="display: flex; align-items: center; gap: 12px;">
+                <div class="av-swatch"
+                    style="background:#{{ skin_tone_hex }}; width: 40px; height: 40px; flex-shrink: 0; cursor: default; border: 2px solid rgba(255,255,255,0.2);">
+                </div>
+                <div>
+                    <div class="av-info-label">{% trans "Your Skin Tone" %}</div>
+                    <div style="color: #fff; font-weight: 600; font-size: 15px;">{{ skin_tone_display }}</div>
+                    <div class="av-info-sub">{{ undertone_display }} {% trans "undertone" %}</div>
+                </div>
+            </div>
+
+            <div class="av-divider"></div>
+
+            <!-- SKIN TONE SWATCHES -->
+            <div class="av-section">
+                <div class="av-section-header">
+                    <div class="av-section-icon skin">🧬</div>
+                    <div class="av-section-title">{% trans "Skin Tone" %}</div>
+                </div>
+                <div class="av-swatches-skin" id="avSkinSwatches">
+                    <div class="av-swatch" style="background:#fde8d0" data-hex="fde8d0" data-skin="0"
+                        data-tip="Porcelain"></div>
+                    <div class="av-swatch" style="background:#f5cba7" data-hex="f5cba7" data-skin="1" data-tip="Ivory">
+                    </div>
+                    <div class="av-swatch" style="background:#e8a87c" data-hex="e8a87c" data-skin="2" data-tip="Peach">
+                    </div>
+                    <div class="av-swatch" style="background:#c68642" data-hex="c68642" data-skin="3" data-tip="Tan">
+                    </div>
+                    <div class="av-swatch" style="background:#8d5524" data-hex="8d5524" data-skin="4" data-tip="Brown">
+                    </div>
+                    <div class="av-swatch" style="background:#3d2c23" data-hex="3d2c23" data-skin="5" data-tip="Deep">
+                    </div>
+                </div>
+            </div>
+
+            <div class="av-divider"></div>
+
+            <!-- SHIRT COLORS -->
+            <div class="av-section">
+                <div class="av-section-header">
+                    <div class="av-section-icon shirt">👕</div>
+                    <div class="av-section-title">{% trans "T-Shirt Color" %}</div>
+                </div>
+                <div class="av-suggest-label" id="avShirtSuggest">✦ {% trans "Suggested for your skin tone" %}</div>
+                <div class="av-swatches-clothes" id="avShirtSwatches"></div>
+            </div>
+
+            <div class="av-divider"></div>
+
+            <!-- PANTS COLORS -->
+            <div class="av-section">
+                <div class="av-section-header">
+                    <div class="av-section-icon pants">👖</div>
+                    <div class="av-section-title">{% trans "Pants Color" %}</div>
+                </div>
+                <div class="av-suggest-label" id="avPantsSuggest">✦ {% trans "Suggested for your skin tone" %}</div>
+                <div class="av-swatches-clothes" id="avPantsSwatches"></div>
+            </div>
+
+            <div class="av-divider"></div>
+
+            <!-- Footer hint -->
+            <div style="text-align: center; padding: 8px 0;">
+                <p style="font-size: 10px; color: rgba(255,255,255,0.2); line-height: 1.7;">
+                    <span style="display: block; color: rgba(255,255,255,0.3); margin-bottom: 2px;">🖱 {% trans "Drag to
+                        rotate · Scroll to zoom" %}</span>
+                    {% trans "Colors update with your skin tone" %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 3D CANVAS ===== -->
+    <div class="avatar-canvas-area" id="av-canvas-container">
+        <div id="av-debug">⏳ {% trans "Loading 3D model..." %}</div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+}
+</script>
+
+<script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+    // ── Django context ──
+    const INITIAL_SKIN_INDEX = {{ skin_tone_index }};
+    const GENDER = '{{ gender }}';
+    const MODEL_URL = GENDER === 'women'
+        ? '{% static "avatar/FEMALE.glb" %}'
+        : '{% static "avatar/MALE.glb" %}';
+
+    const dbg = document.getElementById('av-debug');
+    const container = document.getElementById('av-canvas-container');
+
+    // ────────────────────────────────────────────────────────────────
+    //  CURATED PALETTES — one entry per skin tone (0-5)
+    // ────────────────────────────────────────────────────────────────
+    const SKIN_PALETTES = [
+        // 0 — Porcelain
+        {
+            shirts: [
+                { hex: 'e8d5f5', tip: 'Lavender' }, { hex: 'b5d8f7', tip: 'Baby Blue' },
+                { hex: 'f7c5d0', tip: 'Blush Pink' }, { hex: 'a8d8a8', tip: 'Sage Green' },
+                { hex: 'f5e6c8', tip: 'Cream' }, { hex: '8b9dc3', tip: 'Periwinkle' },
+                { hex: 'd4a5c9', tip: 'Mauve' }, { hex: '7fb5b5', tip: 'Teal Mist' },
+                { hex: 'c8e6c9', tip: 'Mint' }, { hex: 'ffccbc', tip: 'Peach Tint' },
+                { hex: '546e7a', tip: 'Blue Grey' }, { hex: '37474f', tip: 'Charcoal' },
+            ],
+            pants: [
+                { hex: 'cfd8dc', tip: 'Ash Grey' }, { hex: 'b0bec5', tip: 'Silver' },
+                { hex: '90a4ae', tip: 'Steel' }, { hex: '607d8b', tip: 'Slate' },
+                { hex: '455a64', tip: 'Dark Slate' }, { hex: '37474f', tip: 'Graphite' },
+                { hex: 'd7ccc8', tip: 'Warm Cream' }, { hex: 'bcaaa4', tip: 'Latte' },
+                { hex: '8d6e63', tip: 'Mocha' }, { hex: '5d4037', tip: 'Espresso' },
+                { hex: '1a237e', tip: 'Indigo' }, { hex: '111111', tip: 'Black' },
+            ],
+        },
+        // 1 — Ivory
+        {
+            shirts: [
+                { hex: 'e3f2fd', tip: 'Ice Blue' }, { hex: 'bbdefb', tip: 'Sky Blue' },
+                { hex: '90caf9', tip: 'Cornflower' }, { hex: 'ce93d8', tip: 'Lilac' },
+                { hex: 'f48fb1', tip: 'Pink Bloom' }, { hex: 'a5d6a7', tip: 'Mint Green' },
+                { hex: 'fff176', tip: 'Pale Yellow' }, { hex: 'ffcc80', tip: 'Peach' },
+                { hex: '80cbc4', tip: 'Seafoam' }, { hex: 'ef9a9a', tip: 'Rose' },
+                { hex: '546e7a', tip: 'Blue Grey' }, { hex: 'ffffff', tip: 'White' },
+            ],
+            pants: [
+                { hex: 'e0e0e0', tip: 'Pearl' }, { hex: 'bdbdbd', tip: 'Light Grey' },
+                { hex: '9e9e9e', tip: 'Mid Grey' }, { hex: '757575', tip: 'Ash' },
+                { hex: 'c3b091', tip: 'Khaki' }, { hex: 'a1887f', tip: 'Rosy Brown' },
+                { hex: '6d4c41', tip: 'Walnut' }, { hex: '4e342e', tip: 'Dark Brown' },
+                { hex: '1565c0', tip: 'Royal Blue' }, { hex: '0d47a1', tip: 'Deep Navy' },
+                { hex: '1b5e20', tip: 'Forest' }, { hex: '111111', tip: 'Black' },
+            ],
+        },
+        // 2 — Peach
+        {
+            shirts: [
+                { hex: 'ffffff', tip: 'White' }, { hex: 'f5f5f5', tip: 'Off-White' },
+                { hex: 'b3e5fc', tip: 'Light Blue' }, { hex: '0277bd', tip: 'Ocean Blue' },
+                { hex: '00695c', tip: 'Deep Teal' }, { hex: '558b2f', tip: 'Olive Green' },
+                { hex: 'f9a825', tip: 'Golden' }, { hex: 'e64a19', tip: 'Burnt Orange' },
+                { hex: '6a1b9a', tip: 'Deep Purple' }, { hex: 'ad1457', tip: 'Raspberry' },
+                { hex: '37474f', tip: 'Slate Grey' }, { hex: '111111', tip: 'Black' },
+            ],
+            pants: [
+                { hex: 'e8f5e9', tip: 'Pale Green' }, { hex: 'c3b091', tip: 'Khaki' },
+                { hex: 'd4c5a9', tip: 'Sand' }, { hex: '795548', tip: 'Brown' },
+                { hex: '4e342e', tip: 'Dark Brown' }, { hex: '263238', tip: 'Dark Slate' },
+                { hex: '1565c0', tip: 'Cobalt' }, { hex: '283593', tip: 'Indigo' },
+                { hex: '4a148c', tip: 'Plum' }, { hex: '880e4f', tip: 'Burgundy' },
+                { hex: '1b5e20', tip: 'Forest' }, { hex: '111111', tip: 'Black' },
+            ],
+        },
+        // 3 — Tan
+        {
+            shirts: [
+                { hex: 'ffffff', tip: 'White' }, { hex: 'fffde7', tip: 'Cream' },
+                { hex: 'e3f2fd', tip: 'Ice Blue' }, { hex: '0288d1', tip: 'Sky Blue' },
+                { hex: '01579b', tip: 'Navy' }, { hex: '004d40', tip: 'Deep Green' },
+                { hex: 'f57f17', tip: 'Amber' }, { hex: 'bf360c', tip: 'Rust Red' },
+                { hex: '4a148c', tip: 'Royal Purple' }, { hex: '880e4f', tip: 'Deep Rose' },
+                { hex: 'ffd600', tip: 'Sun Yellow' }, { hex: '111111', tip: 'Black' },
+            ],
+            pants: [
+                { hex: 'f5f5f5', tip: 'Off-White' }, { hex: 'd4c5a9', tip: 'Sand' },
+                { hex: 'c3b091', tip: 'Khaki' }, { hex: '8d6e63', tip: 'Mocha' },
+                { hex: '5d4037', tip: 'Espresso' }, { hex: '3e2723', tip: 'Mahogany' },
+                { hex: '1a237e', tip: 'Deep Blue' }, { hex: '0d47a1', tip: 'Navy' },
+                { hex: '006064', tip: 'Dark Teal' }, { hex: '1b5e20', tip: 'Dark Green' },
+                { hex: '37474f', tip: 'Graphite' }, { hex: '111111', tip: 'Black' },
+            ],
+        },
+        // 4 — Brown
+        {
+            shirts: [
+                { hex: 'ffffff', tip: 'White' }, { hex: 'fff9c4', tip: 'Butter' },
+                { hex: 'ffd54f', tip: 'Gold' }, { hex: 'ff8f00', tip: 'Mango' },
+                { hex: 'e65100', tip: 'Tangerine' }, { hex: '00bcd4', tip: 'Cyan' },
+                { hex: '0097a7', tip: 'Deep Cyan' }, { hex: '7c4dff', tip: 'Violet' },
+                { hex: 'd500f9', tip: 'Magenta' }, { hex: '76ff03', tip: 'Lime' },
+                { hex: 'f5f5f5', tip: 'Off-White' }, { hex: '111111', tip: 'Black' },
+            ],
+            pants: [
+                { hex: 'fafafa', tip: 'White' }, { hex: 'ffe082', tip: 'Pale Gold' },
+                { hex: 'd4c5a9', tip: 'Sand' }, { hex: 'a1887f', tip: 'Rosy Brown' },
+                { hex: '6d4c41', tip: 'Walnut' }, { hex: '3e2723', tip: 'Mahogany' },
+                { hex: '0d47a1', tip: 'Navy' }, { hex: '006064', tip: 'Teal' },
+                { hex: '1b5e20', tip: 'Forest' }, { hex: '880e4f', tip: 'Burgundy' },
+                { hex: '212121', tip: 'Almost Black' }, { hex: '111111', tip: 'Black' },
+            ],
+        },
+        // 5 — Deep
+        {
+            shirts: [
+                { hex: 'ffffff', tip: 'White' }, { hex: 'fffde7', tip: 'Ivory' },
+                { hex: 'fff176', tip: 'Lemon' }, { hex: 'ffd740', tip: 'Gold' },
+                { hex: 'ff6d00', tip: 'Bright Orange' }, { hex: '00e5ff', tip: 'Electric Blue' },
+                { hex: '00bfa5', tip: 'Aqua' }, { hex: '69f0ae', tip: 'Neon Mint' },
+                { hex: 'ea80fc', tip: 'Orchid' }, { hex: 'ff4081', tip: 'Hot Pink' },
+                { hex: 'f5f5f5', tip: 'Off-White' }, { hex: 'e0e0e0', tip: 'Light Grey' },
+            ],
+            pants: [
+                { hex: 'ffffff', tip: 'White' }, { hex: 'f5f5f5', tip: 'Off-White' },
+                { hex: 'e0e0e0', tip: 'Pearl' }, { hex: 'bdbdbd', tip: 'Silver' },
+                { hex: 'ffd740', tip: 'Gold' }, { hex: 'ffe082', tip: 'Pale Gold' },
+                { hex: '0d47a1', tip: 'Navy' }, { hex: '006064', tip: 'Teal' },
+                { hex: '880e4f', tip: 'Burgundy' }, { hex: '4a148c', tip: 'Plum' },
+                { hex: '212121', tip: 'Almost Black' }, { hex: '111111', tip: 'Black' },
+            ],
+        },
+    ];
+
+    // ────────────────────────────────────────────────────────────────
+    //  THREE.JS SETUP
+    // ────────────────────────────────────────────────────────────────
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0f1729);
+
+    const camera = new THREE.PerspectiveCamera(
+        36,
+        Math.max(container.clientWidth, 1) / Math.max(container.clientHeight, 1),
+        0.1, 100
+    );
+    camera.position.set(0, 1.0, 6);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(Math.max(container.clientWidth, 1), Math.max(container.clientHeight, 1));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
+    container.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 1.0, 0);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.07;
+    controls.minDistance = 1.0;
+    controls.maxDistance = 20;
+    controls.update();
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    const key = new THREE.DirectionalLight(0xfff5e6, 1.4);
+    key.position.set(3, 6, 4); key.castShadow = true;
+    key.shadow.mapSize.set(1024, 1024); scene.add(key);
+    const fill = new THREE.DirectionalLight(0xd0e8ff, 0.6);
+    fill.position.set(-3, 3, -2); scene.add(fill);
+    const rim = new THREE.DirectionalLight(0xc9a96e, 0.8);
+    rim.position.set(0, 4, -4); scene.add(rim);
+
+    const floor = new THREE.Mesh(
+        new THREE.CircleGeometry(2.5, 64),
+        new THREE.MeshStandardMaterial({ color: 0x16213e, roughness: 0.85, metalness: 0.05, transparent: true, opacity: 0.65 })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    // ────────────────────────────────────────────────────────────────
+    //  MESH BUCKETS
+    // ────────────────────────────────────────────────────────────────
+    const skinMeshes = [];
+    const shirtMeshes = [];
+    const pantsMeshes = [];
+    const lockedMeshes = [];
+
+    function avgWorldY(mesh) {
+        const pos = mesh.geometry.attributes.position;
+        if (!pos || pos.count === 0) return 0;
+        let sum = 0;
+        const v = new THREE.Vector3();
+        for (let i = 0; i < pos.count; i++) {
+            v.fromBufferAttribute(pos, i);
+            v.applyMatrix4(mesh.matrixWorld);
+            sum += v.y;
+        }
+        return sum / pos.count;
+    }
+    function getMat(mesh) {
+        return Array.isArray(mesh.material) ? mesh.material[0] : mesh.material;
+    }
+
+    function applySkinColor(hexStr) {
+        const hex = parseInt(hexStr, 16);
+        const r = ((hex >> 16) & 0xff) / 255;
+        const g = ((hex >> 8) & 0xff) / 255;
+        const b = (hex & 0xff) / 255;
+        skinMeshes.forEach(mesh => {
+            const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+            mats.forEach(mat => { mat.color.setRGB(r, g, b); mat.needsUpdate = true; });
+        });
+        lockedMeshes.forEach(applyLocked);
+    }
+
+    function applyClothingColor(meshList, hexStr) {
+        const hex = parseInt(hexStr, 16);
+        meshList.forEach(mesh => {
+            const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+            mats.forEach(mat => { mat.color.setHex(hex); mat.map = null; mat.needsUpdate = true; });
+        });
+        lockedMeshes.forEach(applyLocked);
+    }
+
+    function applyLocked(entry) {
+        const mats = Array.isArray(entry.mesh.material) ? entry.mesh.material : [entry.mesh.material];
+        mats.forEach(mat => { mat.color.setHex(entry.hexColor); mat.map = null; mat.needsUpdate = true; });
+    }
+
+    // ────────────────────────────────────────────────────────────────
+    //  PALETTE UI
+    // ────────────────────────────────────────────────────────────────
+    let currentShirtHex = null;
+    let currentPantsHex = null;
+
+    function buildClothingSwatches(skinIndex) {
+        const palette = SKIN_PALETTES[skinIndex];
+        const shirtGrid = document.getElementById('avShirtSwatches');
+        const pantsGrid = document.getElementById('avPantsSwatches');
+
+        const lightHexes = new Set(['ffffff', 'f5f5f5', 'fffde7', 'e3f2fd', 'e8f5e9', 'fff9c4', 'fafafa', 'e0e0e0', 'cfd8dc']);
+
+        shirtGrid.innerHTML = '';
+        palette.shirts.forEach((item, i) => {
+            const sw = document.createElement('div');
+            sw.className = 'av-swatch pop';
+            sw.style.background = '#' + item.hex;
+            sw.style.animationDelay = (i * 0.025) + 's';
+            if (lightHexes.has(item.hex)) sw.style.borderColor = 'rgba(255,255,255,0.3)';
+            sw.dataset.hex = item.hex;
+            sw.dataset.tip = item.tip;
+            sw.addEventListener('click', () => {
+                shirtGrid.querySelectorAll('.av-swatch').forEach(s => s.classList.remove('active'));
+                sw.classList.add('active');
+                currentShirtHex = item.hex;
+                applyClothingColor(shirtMeshes, item.hex);
+            });
+            shirtGrid.appendChild(sw);
+        });
+
+        pantsGrid.innerHTML = '';
+        palette.pants.forEach((item, i) => {
+            const sw = document.createElement('div');
+            sw.className = 'av-swatch pop';
+            sw.style.background = '#' + item.hex;
+            sw.style.animationDelay = (i * 0.025) + 's';
+            if (lightHexes.has(item.hex)) sw.style.borderColor = 'rgba(255,255,255,0.3)';
+            sw.dataset.hex = item.hex;
+            sw.dataset.tip = item.tip;
+            sw.addEventListener('click', () => {
+                pantsGrid.querySelectorAll('.av-swatch').forEach(s => s.classList.remove('active'));
+                sw.classList.add('active');
+                currentPantsHex = item.hex;
+                applyClothingColor(pantsMeshes, item.hex);
+            });
+            pantsGrid.appendChild(sw);
+        });
+
+        currentShirtHex = palette.shirts[0].hex;
+        currentPantsHex = palette.pants[0].hex;
+        applyClothingColor(shirtMeshes, currentShirtHex);
+        applyClothingColor(pantsMeshes, currentPantsHex);
+
+        shirtGrid.querySelectorAll('.av-swatch')[0]?.classList.add('active');
+        pantsGrid.querySelectorAll('.av-swatch')[0]?.classList.add('active');
+    }
+
+    // ────────────────────────────────────────────────────────────────
+    //  LOAD MODEL
+    // ────────────────────────────────────────────────────────────────
+    new GLTFLoader().load(
+        MODEL_URL,
+        function (gltf) {
+            const model = gltf.scene;
+
+            {
+                const box = new THREE.Box3().setFromObject(model);
+                const size = box.getSize(new THREE.Vector3());
+                model.scale.setScalar(2.0 / Math.max(size.x, size.y, size.z));
+                model.updateMatrixWorld(true);
+                const box2 = new THREE.Box3().setFromObject(model);
+                const cen = box2.getCenter(new THREE.Vector3());
+                model.position.set(-cen.x, -box2.min.y, -cen.z);
+            }
+            scene.add(model);
+            model.updateMatrixWorld(true);
+
+            const wb = new THREE.Box3().setFromObject(model);
+            const wh = wb.max.y - wb.min.y;
+            const minY = wb.min.y;
+
+            const ankleY = minY + wh * 0.11;
+            const waistY = minY + wh * 0.47;
+            const neckY = minY + wh * 0.80;
+            const midY = minY + wh * 0.50;
+
+            const fovRad = THREE.MathUtils.degToRad(camera.fov);
+            const camDist = (wh / 2 / Math.tan(fovRad / 2)) * 1.65;
+            camera.position.set(0, midY, camDist);
+            controls.target.set(0, midY, 0);
+            controls.minDistance = camDist * 0.25;
+            controls.maxDistance = camDist * 5;
+            controls.update();
+
+            const allMeshes = [];
+            model.traverse(child => {
+                if (!child.isMesh) return;
+                child.material = Array.isArray(child.material)
+                    ? child.material.map(m => m.clone())
+                    : child.material.clone();
+                child.castShadow = true;
+                child.receiveShadow = true;
+                allMeshes.push(child);
+            });
+
+            const lockBlack = ['eye', 'lash', 'iris', 'pupil', 'cornea', 'sclera', 'brow', 'eyebrow', 'hair', 'shoe', 'boot', 'sole', 'lace', 'sneaker', 'eyelid'];
+            const lockWhite = ['sock'];
+            const lockDefault = ['teeth', 'tooth', 'tongue', 'lip', 'mouth', 'gum', 'nose', 'nail'];
+            const pantsWords = ['pant', 'trouser', 'jean', 'denim', 'short', 'skirt', 'bottom', 'lower'];
+            const shirtWords = ['shirt', 'tee', 'jacket', 'hoodie', 'sweater', 'cloth', 'wear', 'blouse'];
+
+            const unclassified = [];
+
+            allMeshes.forEach(mesh => {
+                const n = mesh.name.toLowerCase();
+                if (lockBlack.some(w => n.includes(w))) { lockedMeshes.push({ mesh, hexColor: 0x0a0a0a }); return; }
+                if (lockWhite.some(w => n.includes(w))) { lockedMeshes.push({ mesh, hexColor: 0xfafafa }); return; }
+                if (lockDefault.some(w => n.includes(w))) { return; }
+                if (pantsWords.some(w => n.includes(w))) { pantsMeshes.push(mesh); return; }
+                if (shirtWords.some(w => n.includes(w))) { shirtMeshes.push(mesh); return; }
+
+                const yc = avgWorldY(mesh);
+                const mat = getMat(mesh);
+                const { r, g, b } = mat ? mat.color : { r: 0.5, g: 0.5, b: 0.5 };
+                const isDark = (r + g + b) < 0.8 || (r < 0.25 && g < 0.25);
+
+                if (yc < ankleY) { return; }
+                if (yc <= waistY) { isDark ? pantsMeshes.push(mesh) : unclassified.push(mesh); return; }
+                if (yc <= neckY) { isDark ? shirtMeshes.push(mesh) : unclassified.push(mesh); return; }
+                unclassified.push(mesh);
+            });
+
+            unclassified.forEach(m => { skinMeshes.push(m); });
+
+            if (skinMeshes.length === 0) {
+                const used = new Set([...pantsMeshes, ...shirtMeshes, ...lockedMeshes.map(e => e.mesh)]);
+                allMeshes.forEach(m => { if (!used.has(m)) skinMeshes.push(m); });
+            }
+
+            lockedMeshes.forEach(applyLocked);
+
+            dbg.innerHTML =
+                `🧬 Skin: <b>${skinMeshes.length}</b> &nbsp;👕 Shirt: <b>${shirtMeshes.length}</b> &nbsp;👖 Pants: <b>${pantsMeshes.length}</b> &nbsp;🔒 Locked: <b>${lockedMeshes.length}</b><br>` +
+                `<span style="opacity:.5;font-size:9px">Model: ${GENDER === 'women' ? 'FEMALE' : 'MALE'}.glb</span>`;
+
+            // Auto-select the detected skin tone
+            const skinSwatches = document.getElementById('avSkinSwatches').querySelectorAll('.av-swatch');
+            const targetSwatch = skinSwatches[INITIAL_SKIN_INDEX];
+            if (targetSwatch) {
+                skinSwatches.forEach(s => s.classList.remove('active'));
+                targetSwatch.classList.add('active');
+                applySkinColor(targetSwatch.dataset.hex);
+                buildClothingSwatches(INITIAL_SKIN_INDEX);
+            } else {
+                buildClothingSwatches(0);
+            }
+        },
+        undefined,
+        err => { console.error(err); dbg.innerHTML = `<span style="color:#ff6b6b">❌ ${err.message}</span>`; }
+    );
+
+    // ────────────────────────────────────────────────────────────────
+    //  SKIN SWATCH CLICK
+    // ────────────────────────────────────────────────────────────────
+    document.getElementById('avSkinSwatches').querySelectorAll('.av-swatch').forEach(sw => {
+        sw.addEventListener('click', () => {
+            document.getElementById('avSkinSwatches').querySelectorAll('.av-swatch').forEach(s => s.classList.remove('active'));
+            sw.classList.add('active');
+            const skinIndex = parseInt(sw.dataset.skin);
+            applySkinColor(sw.dataset.hex);
+            buildClothingSwatches(skinIndex);
+        });
+    });
+
+    // ── Render loop ──
+    (function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+    })();
+
+    // ── Resize ──
+    new ResizeObserver(() => {
+        const w = Math.max(container.clientWidth, 1);
+        const h = Math.max(container.clientHeight, 1);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+    }).observe(container);
+</script>
+{% endblock %}

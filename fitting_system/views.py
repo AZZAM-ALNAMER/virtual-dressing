@@ -193,6 +193,124 @@ def process_scan(request):
 
 
 # ---------------------------------------------------------------------------
+# API: process women scan (manual measurements + hand image)
+# ---------------------------------------------------------------------------
+
+@csrf_exempt
+def process_scan_women(request):
+    """
+    Process women's scan:
+        hand_image       – photo of hand → skin-tone extraction
+        measurements     – manually entered body measurements (dict)
+    Then ask the LLM for a recommended size letter.
+    """
+    if request.method != 'POST':
+        return JsonResponse({'error': 'POST method required'}, status=400)
+
+    try:
+        data = json.loads(request.body)
+
+        hand_image_data = data.get('hand_image')
+        measurements    = data.get('measurements', {})
+
+        if not hand_image_data:
+            return JsonResponse({'error': 'Hand image is required for skin tone detection'}, status=400)
+
+        # Validate required measurements
+        required_fields = ['height', 'chest', 'waist', 'hip']
+        for field in required_fields:
+            val = measurements.get(field)
+            if val is None:
+                return JsonResponse({'error': f'{field.title()} is required.'}, status=400)
+            try:
+                measurements[field] = float(val)
+            except (TypeError, ValueError):
+                return JsonResponse({'error': f'{field.title()} must be a valid number.'}, status=400)
+
+        # Convert optional fields to float if present
+        optional_fields = ['shoulder_width', 'inseam', 'arm_length', 'torso_length']
+        for field in optional_fields:
+            val = measurements.get(field)
+            if val is not None and val != '':
+                try:
+                    measurements[field] = float(val)
+                except (TypeError, ValueError):
+                    measurements.pop(field, None)
+            else:
+                measurements.pop(field, None)
+
+        # Validate height range
+        height = measurements['height']
+        if height < 100 or height > 250:
+            return JsonResponse({'error': 'Height must be between 100 and 250 cm.'}, status=400)
+
+        hand_image = decode_base64_image(hand_image_data)
+
+        analyzer = get_yolo_analyzer()
+
+        # Women pipeline: manual measurements + hand skin tone + LLM size
+        analysis = analyzer.women_analysis(
+            measurements=measurements,
+            hand_image_bgr=hand_image,
+        )
+
+        skin_tone        = analysis['skin_tone']
+        undertone        = analysis['undertone']
+        recommended_size = analysis['recommended_size']
+        confidence       = analysis.get('confidence', 0.90)
+
+        # Persist to DB
+        body_scan = BodyScan.objects.create(
+            height          = measurements.get('height', 170),
+            shoulder_width  = measurements.get('shoulder_width', 0),
+            chest           = measurements.get('chest', 0),
+            waist           = measurements.get('waist', 0),
+            hip             = measurements.get('hip'),
+            torso_length    = measurements.get('torso_length'),
+            arm_length      = measurements.get('arm_length'),
+            inseam          = measurements.get('inseam'),
+            body_shape      = 'hourglass',
+            skin_tone       = skin_tone,
+            undertone       = undertone,
+            confidence_score= confidence,
+            frame_count     = 0,
+        )
+
+        # Store as Recommendation record
+        try:
+            Recommendation.objects.create(
+                body_scan         = body_scan,
+                product           = Product.objects.first(),
+                recommended_size  = recommended_size,
+                recommended_fit   = 'regular',
+                recommended_colors= '',
+                priority          = 100,
+            )
+        except Exception:
+            pass
+
+        return JsonResponse({
+            'success':          True,
+            'session_id':       str(body_scan.session_id),
+            'skin_tone':        skin_tone,
+            'skin_tone_display': skin_tone.replace('_', ' ').title(),
+            'undertone':        undertone,
+            'recommended_size': recommended_size,
+            'confidence':       round(confidence, 2),
+        })
+
+    except ValueError as e:
+        logger.error(f"Validation error in process_scan_women: {e}")
+        return JsonResponse({'error': str(e)}, status=400)
+    except RuntimeError as e:
+        logger.error(f"Runtime error in process_scan_women: {e}")
+        return JsonResponse({'error': str(e)}, status=503)
+    except Exception as e:
+        logger.exception(f"Unexpected error in process_scan_women: {e}")
+        return JsonResponse({'error': f'Processing failed: {str(e)}'}, status=500)
+
+
+# ---------------------------------------------------------------------------
 # Recommendations page
 # ---------------------------------------------------------------------------
 
@@ -251,6 +369,51 @@ def _get_matching_products(recommended_size: str, gender=None, limit=12):
             })
 
     return results[:limit]
+
+
+# ---------------------------------------------------------------------------
+# Avatar page (3D avatar viewer with skin tone & color recommendations)
+# ---------------------------------------------------------------------------
+
+# Map BodyScan skin_tone values → avatar swatch index & hex
+SKIN_TONE_MAP = {
+    'very_light':   {'index': 0, 'hex': 'fde8d0', 'label': 'Porcelain'},
+    'light':        {'index': 1, 'hex': 'f5cba7', 'label': 'Ivory'},
+    'intermediate': {'index': 2, 'hex': 'e8a87c', 'label': 'Peach'},
+    'tan':          {'index': 3, 'hex': 'c68642', 'label': 'Tan'},
+    'dark':         {'index': 4, 'hex': '8d5524', 'label': 'Brown'},
+}
+
+
+def avatar(request, session_id):
+    """3D avatar page with skin tone and color recommendations."""
+    body_scan = get_object_or_404(BodyScan, session_id=session_id)
+
+    # Retrieve recommended size
+    first_rec = body_scan.recommendations.first()
+    recommended_size = first_rec.recommended_size if first_rec else 'M'
+
+    # Determine gender: women scans use frame_count=0, men use frame_count>=1
+    # Also allow override via query param
+    gender = request.GET.get('gender', None)
+    if not gender:
+        gender = 'women' if body_scan.frame_count == 0 else 'men'
+
+    # Map skin tone to avatar swatch
+    skin_info = SKIN_TONE_MAP.get(body_scan.skin_tone, SKIN_TONE_MAP['intermediate'])
+
+    context = {
+        'body_scan':        body_scan,
+        'session_id':       str(session_id),
+        'recommended_size': recommended_size,
+        'gender':           gender,
+        'skin_tone_index':  skin_info['index'],
+        'skin_tone_hex':    skin_info['hex'],
+        'skin_tone_label':  skin_info['label'],
+        'skin_tone_display': body_scan.skin_tone.replace('_', ' ').title(),
+        'undertone_display': body_scan.undertone.title(),
+    }
+    return render(request, 'avatar.html', context)
 
 
 # ---------------------------------------------------------------------------

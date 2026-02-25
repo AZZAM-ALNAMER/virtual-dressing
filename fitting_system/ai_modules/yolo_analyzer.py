@@ -451,6 +451,67 @@ class YOLOBodyAnalyzer:
         }
 
     # ------------------------------------------------------------------
+    # Women flow helpers
+    # ------------------------------------------------------------------
+
+    def extract_skin_tone_from_hand_image(
+        self, hand_image_bgr: np.ndarray
+    ) -> Tuple[str, str]:
+        """
+        Detect skin tone from a hand image.
+        Uses the central region of the image (no face detection needed).
+        Returns (skin_tone, undertone).
+        """
+        h, w = hand_image_bgr.shape[:2]
+
+        # Sample the central 40% of the image (palm area)
+        y1, y2 = int(h * 0.3), int(h * 0.7)
+        x1, x2 = int(w * 0.3), int(w * 0.7)
+        roi = hand_image_bgr[y1:y2, x1:x2]
+
+        if roi.size == 0:
+            return "intermediate", "warm"
+
+        roi_rgb  = cv2.cvtColor(roi, cv2.COLOR_BGR2RGB)
+        mean_rgb = roi_rgb.reshape(-1, 3).mean(axis=0)
+
+        skin_tone = self._classify_skin_tone(mean_rgb)
+        undertone = self._classify_undertone(mean_rgb)
+
+        logger.info(f"Hand skin tone: {skin_tone}, undertone: {undertone}, mean_rgb: {mean_rgb}")
+        return skin_tone, undertone
+
+    def women_analysis(
+        self,
+        measurements: Dict[str, float],
+        hand_image_bgr: np.ndarray,
+        body_shape: str = "hourglass",
+    ) -> Dict:
+        """
+        Women's analysis pipeline (no YOLO needed):
+          1. Use manually entered measurements directly.
+          2. Extract skin tone from hand image.
+          3. Get recommended size from LLM.
+
+        Args:
+            measurements:    Dict with keys like height, chest, waist, hip, etc.
+            hand_image_bgr:  Hand photo (BGR numpy array) for skin tone.
+            body_shape:      Body shape string for Gemini.
+
+        Returns same structure as full_analysis.
+        """
+        skin_tone, undertone = self.extract_skin_tone_from_hand_image(hand_image_bgr)
+        recommended_size = self.get_size_recommendation_from_llm(measurements, body_shape=body_shape)
+
+        return {
+            "measurements":      measurements,
+            "skin_tone":         skin_tone,
+            "undertone":         undertone,
+            "recommended_size":  recommended_size,
+            "confidence":        0.90,
+        }
+
+    # ------------------------------------------------------------------
     # Private helpers
     # ------------------------------------------------------------------
 
