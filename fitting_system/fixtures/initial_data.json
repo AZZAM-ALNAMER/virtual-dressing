@@ -1,0 +1,3296 @@
+[
+{
+    "model": "fitting_system.size",
+    "pk": 1,
+    "fields": {
+        "name": "S",
+        "chest_min": "85.00",
+        "chest_max": "92.00",
+        "waist_min": "70.00",
+        "waist_max": "77.00",
+        "shoulder_min": "40.00",
+        "shoulder_max": "43.00",
+        "height_min": "160.00",
+        "height_max": "170.00"
+    }
+},
+{
+    "model": "fitting_system.size",
+    "pk": 2,
+    "fields": {
+        "name": "M",
+        "chest_min": "93.00",
+        "chest_max": "100.00",
+        "waist_min": "78.00",
+        "waist_max": "85.00",
+        "shoulder_min": "44.00",
+        "shoulder_max": "47.00",
+        "height_min": "168.00",
+        "height_max": "178.00"
+    }
+},
+{
+    "model": "fitting_system.size",
+    "pk": 3,
+    "fields": {
+        "name": "L",
+        "chest_min": "101.00",
+        "chest_max": "108.00",
+        "waist_min": "86.00",
+        "waist_max": "93.00",
+        "shoulder_min": "48.00",
+        "shoulder_max": "51.00",
+        "height_min": "175.00",
+        "height_max": "185.00"
+    }
+},
+{
+    "model": "fitting_system.size",
+    "pk": 4,
+    "fields": {
+        "name": "XL",
+        "chest_min": "109.00",
+        "chest_max": "116.00",
+        "waist_min": "94.00",
+        "waist_max": "101.00",
+        "shoulder_min": "52.00",
+        "shoulder_max": "55.00",
+        "height_min": "180.00",
+        "height_max": "190.00"
+    }
+},
+{
+    "model": "fitting_system.color",
+    "pk": 1,
+    "fields": {
+        "name": "Black",
+        "hex_code": "#000000",
+        "category": "neutral"
+    }
+},
+{
+    "model": "fitting_system.color",
+    "pk": 2,
+    "fields": {
+        "name": "White",
+        "hex_code": "#FFFFFF",
+        "category": "neutral"
+    }
+},
+{
+    "model": "fitting_system.color",
+    "pk": 3,
+    "fields": {
+        "name": "Navy Blue",
+        "hex_code": "#000080",
+        "category": "neutral"
+    }
+},
+{
+    "model": "fitting_system.color",
+    "pk": 4,
+    "fields": {
+        "name": "Gray",
+        "hex_code": "#808080",
+        "category": "neutral"
+    }
+},
+{
+    "model": "fitting_system.color",
+    "pk": 5,
+    "fields": {
+        "name": "Beige",
+        "hex_code": "#F5F5DC",
+        "category": "neutral"
+    }
+},
+{
+    "model": "fitting_system.color",
+    "pk": 6,
+    "fields": {
+        "name": "Burgundy",
+        "hex_code": "#800020",
+        "category": "medium"
+    }
+},
+{
+    "model": "fitting_system.color",
+    "pk": 7,
+    "fields": {
+        "name": "Light Blue",
+        "hex_code": "#ADD8E6",
+        "category": "light"
+    }
+},
+{
+    "model": "fitting_system.color",
+    "pk": 8,
+    "fields": {
+        "name": "Pastel Pink",
+        "hex_code": "#FFD1DC",
+        "category": "light"
+    }
+},
+{
+    "model": "fitting_system.product",
+    "pk": 1,
+    "fields": {
+        "name": "Classic Cotton Shirt",
+        "category": "shirt",
+        "fit_type": "regular",
+        "gender": "men",
+        "price": "49.99",
+        "description": "A timeless classic cotton shirt perfect for any occasion. Made from 100% premium cotton for maximum comfort and breathability.",
+        "image": "",
+        "created_at": "2026-02-06T08:10:47.701Z"
+    }
+},
+{
+    "model": "fitting_system.product",
+    "pk": 2,
+    "fields": {
+        "name": "Casual Denim Jeans",
+        "category": "pants",
+        "fit_type": "regular",
+        "gender": "men",
+        "price": "79.99",
+        "description": "Comfortable denim jeans with a classic fit. Durable and stylish for everyday wear with premium denim fabric.",
+        "image": "",
+        "created_at": "2026-02-06T08:10:47.718Z"
+    }
+},
+{
+    "model": "fitting_system.product",
+    "pk": 3,
+    "fields": {
+        "name": "Leather Jacket",
+        "category": "jacket",
+        "fit_type": "regular",
+        "gender": "men",
+        "price": "199.99",
+        "description": "Premium leather jacket with a classic design. Timeless piece that never goes out of style, crafted from genuine leather.",
+        "image": "",
+        "created_at": "2026-02-06T08:10:47.736Z"
+    }
+},
+{
+    "model": "fitting_system.product",
+    "pk": 4,
+    "fields": {
+        "name": "Elegant Blouse",
+        "category": "shirt",
+        "fit_type": "regular",
+        "gender": "women",
+        "price": "54.99",
+        "description": "Sophisticated blouse with delicate details. Perfect for both office and evening wear with premium silk-like fabric.",
+        "image": "",
+        "created_at": "2026-02-06T08:10:47.755Z"
+    }
+},
+{
+    "model": "fitting_system.product",
+    "pk": 5,
+    "fields": {
+        "name": "Summer Dress",
+        "category": "dress",
+        "fit_type": "regular",
+        "gender": "women",
+        "price": "89.99",
+        "description": "Light and breezy summer dress perfect for warm weather. Comfortable and stylish with a flattering silhouette.",
+        "image": "",
+        "created_at": "2026-02-06T08:10:47.770Z"
+    }
+},
+{
+    "model": "fitting_system.product",
+    "pk": 6,
+    "fields": {
+        "name": "High-Waist Trousers",
+        "category": "pants",
+        "fit_type": "regular",
+        "gender": "women",
+        "price": "74.99",
+        "description": "Flattering high-waist trousers with a comfortable fit. Versatile for any occasion from office to casual outings.",
+        "image": "",
+        "created_at": "2026-02-06T08:10:47.788Z"
+    }
+},
+{
+    "model": "fitting_system.product",
+    "pk": 7,
+    "fields": {
+        "name": "Modern T shirt",
+        "category": "shirt",
+        "fit_type": "slim",
+        "gender": "men",
+        "price": "10.00",
+        "description": "The best shirt ever",
+        "image": "",
+        "created_at": "2026-02-24T01:10:42.582Z"
+    }
+},
+{
+    "model": "fitting_system.product",
+    "pk": 8,
+    "fields": {
+        "name": "grenn shirt",
+        "category": "shirt",
+        "fit_type": "slim",
+        "gender": "men",
+        "price": "10.00",
+        "description": "the best ever",
+        "image": "",
+        "created_at": "2026-02-24T01:18:39.741Z"
+    }
+},
+{
+    "model": "fitting_system.product",
+    "pk": 9,
+    "fields": {
+        "name": "Green Tshirt",
+        "category": "shirt",
+        "fit_type": "regular",
+        "gender": "men",
+        "price": "20.00",
+        "description": "The best T shirt ever",
+        "image": "products/Gemini_Generated_Image_u7btrfu7btrfu7bt.png",
+        "created_at": "2026-02-24T01:27:49.388Z"
+    }
+},
+{
+    "model": "fitting_system.product",
+    "pk": 10,
+    "fields": {
+        "name": "Green Tshirt(2)",
+        "category": "shirt",
+        "fit_type": "oversize",
+        "gender": "men",
+        "price": "90.00",
+        "description": "oooooo",
+        "image": "products/Gemini_Generated_Image_u7btrfu7btrfu7bt_DmLFSAa.png",
+        "created_at": "2026-02-24T21:18:53.644Z"
+    }
+},
+{
+    "model": "fitting_system.product",
+    "pk": 11,
+    "fields": {
+        "name": "white T shirt",
+        "category": "shirt",
+        "fit_type": "slim",
+        "gender": "men",
+        "price": "90.00",
+        "description": "nothhing",
+        "image": "products/Gemini_Generated_Image_u7btrfu7btrfu7bt_h0fZdOE.png",
+        "created_at": "2026-02-25T13:09:02.864Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 1,
+    "fields": {
+        "product": 1,
+        "size": 1,
+        "color": 5,
+        "sku": "1-S-5-1",
+        "created_at": "2026-02-06T08:10:47.817Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 2,
+    "fields": {
+        "product": 1,
+        "size": 1,
+        "color": 1,
+        "sku": "1-S-1-2",
+        "created_at": "2026-02-06T08:10:47.849Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 3,
+    "fields": {
+        "product": 1,
+        "size": 1,
+        "color": 6,
+        "sku": "1-S-6-3",
+        "created_at": "2026-02-06T08:10:47.886Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 4,
+    "fields": {
+        "product": 1,
+        "size": 2,
+        "color": 5,
+        "sku": "1-M-5-4",
+        "created_at": "2026-02-06T08:10:47.925Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 5,
+    "fields": {
+        "product": 1,
+        "size": 2,
+        "color": 1,
+        "sku": "1-M-1-5",
+        "created_at": "2026-02-06T08:10:47.971Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 6,
+    "fields": {
+        "product": 1,
+        "size": 2,
+        "color": 6,
+        "sku": "1-M-6-6",
+        "created_at": "2026-02-06T08:10:48.013Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 7,
+    "fields": {
+        "product": 1,
+        "size": 3,
+        "color": 5,
+        "sku": "1-L-5-7",
+        "created_at": "2026-02-06T08:10:48.092Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 8,
+    "fields": {
+        "product": 1,
+        "size": 3,
+        "color": 1,
+        "sku": "1-L-1-8",
+        "created_at": "2026-02-06T08:10:48.136Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 9,
+    "fields": {
+        "product": 1,
+        "size": 3,
+        "color": 6,
+        "sku": "1-L-6-9",
+        "created_at": "2026-02-06T08:10:48.168Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 10,
+    "fields": {
+        "product": 2,
+        "size": 1,
+        "color": 5,
+        "sku": "2-S-5-1",
+        "created_at": "2026-02-06T08:10:48.202Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 11,
+    "fields": {
+        "product": 2,
+        "size": 1,
+        "color": 1,
+        "sku": "2-S-1-2",
+        "created_at": "2026-02-06T08:10:48.238Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 12,
+    "fields": {
+        "product": 2,
+        "size": 1,
+        "color": 6,
+        "sku": "2-S-6-3",
+        "created_at": "2026-02-06T08:10:48.268Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 13,
+    "fields": {
+        "product": 2,
+        "size": 2,
+        "color": 5,
+        "sku": "2-M-5-4",
+        "created_at": "2026-02-06T08:10:48.299Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 14,
+    "fields": {
+        "product": 2,
+        "size": 2,
+        "color": 1,
+        "sku": "2-M-1-5",
+        "created_at": "2026-02-06T08:10:48.329Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 15,
+    "fields": {
+        "product": 2,
+        "size": 2,
+        "color": 6,
+        "sku": "2-M-6-6",
+        "created_at": "2026-02-06T08:10:48.374Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 16,
+    "fields": {
+        "product": 2,
+        "size": 3,
+        "color": 5,
+        "sku": "2-L-5-7",
+        "created_at": "2026-02-06T08:10:48.405Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 17,
+    "fields": {
+        "product": 2,
+        "size": 3,
+        "color": 1,
+        "sku": "2-L-1-8",
+        "created_at": "2026-02-06T08:10:48.436Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 18,
+    "fields": {
+        "product": 2,
+        "size": 3,
+        "color": 6,
+        "sku": "2-L-6-9",
+        "created_at": "2026-02-06T08:10:48.471Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 19,
+    "fields": {
+        "product": 3,
+        "size": 1,
+        "color": 5,
+        "sku": "3-S-5-1",
+        "created_at": "2026-02-06T08:10:48.504Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 20,
+    "fields": {
+        "product": 3,
+        "size": 1,
+        "color": 1,
+        "sku": "3-S-1-2",
+        "created_at": "2026-02-06T08:10:48.536Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 21,
+    "fields": {
+        "product": 3,
+        "size": 1,
+        "color": 6,
+        "sku": "3-S-6-3",
+        "created_at": "2026-02-06T08:10:48.568Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 22,
+    "fields": {
+        "product": 3,
+        "size": 2,
+        "color": 5,
+        "sku": "3-M-5-4",
+        "created_at": "2026-02-06T08:10:48.598Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 23,
+    "fields": {
+        "product": 3,
+        "size": 2,
+        "color": 1,
+        "sku": "3-M-1-5",
+        "created_at": "2026-02-06T08:10:48.638Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 24,
+    "fields": {
+        "product": 3,
+        "size": 2,
+        "color": 6,
+        "sku": "3-M-6-6",
+        "created_at": "2026-02-06T08:10:48.669Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 25,
+    "fields": {
+        "product": 3,
+        "size": 3,
+        "color": 5,
+        "sku": "3-L-5-7",
+        "created_at": "2026-02-06T08:10:48.700Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 26,
+    "fields": {
+        "product": 3,
+        "size": 3,
+        "color": 1,
+        "sku": "3-L-1-8",
+        "created_at": "2026-02-06T08:10:48.730Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 27,
+    "fields": {
+        "product": 3,
+        "size": 3,
+        "color": 6,
+        "sku": "3-L-6-9",
+        "created_at": "2026-02-06T08:10:48.760Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 28,
+    "fields": {
+        "product": 4,
+        "size": 1,
+        "color": 5,
+        "sku": "4-S-5-1",
+        "created_at": "2026-02-06T08:10:48.791Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 29,
+    "fields": {
+        "product": 4,
+        "size": 1,
+        "color": 1,
+        "sku": "4-S-1-2",
+        "created_at": "2026-02-06T08:10:48.820Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 30,
+    "fields": {
+        "product": 4,
+        "size": 1,
+        "color": 6,
+        "sku": "4-S-6-3",
+        "created_at": "2026-02-06T08:10:48.849Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 31,
+    "fields": {
+        "product": 4,
+        "size": 2,
+        "color": 5,
+        "sku": "4-M-5-4",
+        "created_at": "2026-02-06T08:10:48.908Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 32,
+    "fields": {
+        "product": 4,
+        "size": 2,
+        "color": 1,
+        "sku": "4-M-1-5",
+        "created_at": "2026-02-06T08:10:48.946Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 33,
+    "fields": {
+        "product": 4,
+        "size": 2,
+        "color": 6,
+        "sku": "4-M-6-6",
+        "created_at": "2026-02-06T08:10:48.981Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 34,
+    "fields": {
+        "product": 4,
+        "size": 3,
+        "color": 5,
+        "sku": "4-L-5-7",
+        "created_at": "2026-02-06T08:10:49.011Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 35,
+    "fields": {
+        "product": 4,
+        "size": 3,
+        "color": 1,
+        "sku": "4-L-1-8",
+        "created_at": "2026-02-06T08:10:49.052Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 36,
+    "fields": {
+        "product": 4,
+        "size": 3,
+        "color": 6,
+        "sku": "4-L-6-9",
+        "created_at": "2026-02-06T08:10:49.092Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 37,
+    "fields": {
+        "product": 5,
+        "size": 1,
+        "color": 5,
+        "sku": "5-S-5-1",
+        "created_at": "2026-02-06T08:10:49.128Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 38,
+    "fields": {
+        "product": 5,
+        "size": 1,
+        "color": 1,
+        "sku": "5-S-1-2",
+        "created_at": "2026-02-06T08:10:49.168Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 39,
+    "fields": {
+        "product": 5,
+        "size": 1,
+        "color": 6,
+        "sku": "5-S-6-3",
+        "created_at": "2026-02-06T08:10:49.205Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 40,
+    "fields": {
+        "product": 5,
+        "size": 2,
+        "color": 5,
+        "sku": "5-M-5-4",
+        "created_at": "2026-02-06T08:10:49.237Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 41,
+    "fields": {
+        "product": 5,
+        "size": 2,
+        "color": 1,
+        "sku": "5-M-1-5",
+        "created_at": "2026-02-06T08:10:49.297Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 42,
+    "fields": {
+        "product": 5,
+        "size": 2,
+        "color": 6,
+        "sku": "5-M-6-6",
+        "created_at": "2026-02-06T08:10:49.332Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 43,
+    "fields": {
+        "product": 5,
+        "size": 3,
+        "color": 5,
+        "sku": "5-L-5-7",
+        "created_at": "2026-02-06T08:10:49.373Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 44,
+    "fields": {
+        "product": 5,
+        "size": 3,
+        "color": 1,
+        "sku": "5-L-1-8",
+        "created_at": "2026-02-06T08:10:49.406Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 45,
+    "fields": {
+        "product": 5,
+        "size": 3,
+        "color": 6,
+        "sku": "5-L-6-9",
+        "created_at": "2026-02-06T08:10:49.452Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 46,
+    "fields": {
+        "product": 6,
+        "size": 1,
+        "color": 5,
+        "sku": "6-S-5-1",
+        "created_at": "2026-02-06T08:10:49.497Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 47,
+    "fields": {
+        "product": 6,
+        "size": 1,
+        "color": 1,
+        "sku": "6-S-1-2",
+        "created_at": "2026-02-06T08:10:49.538Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 48,
+    "fields": {
+        "product": 6,
+        "size": 1,
+        "color": 6,
+        "sku": "6-S-6-3",
+        "created_at": "2026-02-06T08:10:49.582Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 49,
+    "fields": {
+        "product": 6,
+        "size": 2,
+        "color": 5,
+        "sku": "6-M-5-4",
+        "created_at": "2026-02-06T08:10:49.629Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 50,
+    "fields": {
+        "product": 6,
+        "size": 2,
+        "color": 1,
+        "sku": "6-M-1-5",
+        "created_at": "2026-02-06T08:10:49.672Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 51,
+    "fields": {
+        "product": 6,
+        "size": 2,
+        "color": 6,
+        "sku": "6-M-6-6",
+        "created_at": "2026-02-06T08:10:49.717Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 52,
+    "fields": {
+        "product": 6,
+        "size": 3,
+        "color": 5,
+        "sku": "6-L-5-7",
+        "created_at": "2026-02-06T08:10:49.758Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 53,
+    "fields": {
+        "product": 6,
+        "size": 3,
+        "color": 1,
+        "sku": "6-L-1-8",
+        "created_at": "2026-02-06T08:10:49.793Z"
+    }
+},
+{
+    "model": "fitting_system.productvariant",
+    "pk": 54,
+    "fields": {
+        "product": 6,
+        "size": 3,
+        "color": 6,
+        "sku": "6-L-6-9",
+        "created_at": "2026-02-06T08:10:49.831Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 1,
+    "fields": {
+        "product_variant": 1,
+        "quantity": 0,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:47.833Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 2,
+    "fields": {
+        "product_variant": 2,
+        "quantity": 0,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:47.867Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 3,
+    "fields": {
+        "product_variant": 3,
+        "quantity": 0,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:47.909Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 4,
+    "fields": {
+        "product_variant": 4,
+        "quantity": 0,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:47.956Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 5,
+    "fields": {
+        "product_variant": 5,
+        "quantity": 0,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:47.993Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 6,
+    "fields": {
+        "product_variant": 6,
+        "quantity": 0,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.061Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 7,
+    "fields": {
+        "product_variant": 7,
+        "quantity": 0,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.112Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 8,
+    "fields": {
+        "product_variant": 8,
+        "quantity": 0,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.152Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 9,
+    "fields": {
+        "product_variant": 9,
+        "quantity": 0,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.186Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 10,
+    "fields": {
+        "product_variant": 10,
+        "quantity": 0,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.222Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 11,
+    "fields": {
+        "product_variant": 11,
+        "quantity": 4,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.254Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 12,
+    "fields": {
+        "product_variant": 12,
+        "quantity": 4,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.283Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 13,
+    "fields": {
+        "product_variant": 13,
+        "quantity": 1,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.314Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 14,
+    "fields": {
+        "product_variant": 14,
+        "quantity": 1,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.344Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 15,
+    "fields": {
+        "product_variant": 15,
+        "quantity": 2,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.389Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 16,
+    "fields": {
+        "product_variant": 16,
+        "quantity": 2,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.421Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 17,
+    "fields": {
+        "product_variant": 17,
+        "quantity": 4,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.451Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 18,
+    "fields": {
+        "product_variant": 18,
+        "quantity": 1,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.488Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 19,
+    "fields": {
+        "product_variant": 19,
+        "quantity": 2,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.521Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 20,
+    "fields": {
+        "product_variant": 20,
+        "quantity": 2,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.553Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 21,
+    "fields": {
+        "product_variant": 21,
+        "quantity": 23,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.583Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 22,
+    "fields": {
+        "product_variant": 22,
+        "quantity": 20,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.622Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 23,
+    "fields": {
+        "product_variant": 23,
+        "quantity": 12,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.654Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 24,
+    "fields": {
+        "product_variant": 24,
+        "quantity": 21,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.683Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 25,
+    "fields": {
+        "product_variant": 25,
+        "quantity": 18,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.715Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 26,
+    "fields": {
+        "product_variant": 26,
+        "quantity": 14,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.745Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 27,
+    "fields": {
+        "product_variant": 27,
+        "quantity": 11,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.775Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 28,
+    "fields": {
+        "product_variant": 28,
+        "quantity": 18,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.805Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 29,
+    "fields": {
+        "product_variant": 29,
+        "quantity": 22,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.835Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 30,
+    "fields": {
+        "product_variant": 30,
+        "quantity": 10,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.865Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 31,
+    "fields": {
+        "product_variant": 31,
+        "quantity": 17,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.929Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 32,
+    "fields": {
+        "product_variant": 32,
+        "quantity": 11,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.964Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 33,
+    "fields": {
+        "product_variant": 33,
+        "quantity": 19,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:48.997Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 34,
+    "fields": {
+        "product_variant": 34,
+        "quantity": 15,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.030Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 35,
+    "fields": {
+        "product_variant": 35,
+        "quantity": 16,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.070Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 36,
+    "fields": {
+        "product_variant": 36,
+        "quantity": 12,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.108Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 37,
+    "fields": {
+        "product_variant": 37,
+        "quantity": 21,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.149Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 38,
+    "fields": {
+        "product_variant": 38,
+        "quantity": 13,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.189Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 39,
+    "fields": {
+        "product_variant": 39,
+        "quantity": 23,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.221Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 40,
+    "fields": {
+        "product_variant": 40,
+        "quantity": 15,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.271Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 41,
+    "fields": {
+        "product_variant": 41,
+        "quantity": 17,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.316Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 42,
+    "fields": {
+        "product_variant": 42,
+        "quantity": 24,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.354Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 43,
+    "fields": {
+        "product_variant": 43,
+        "quantity": 25,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.389Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 44,
+    "fields": {
+        "product_variant": 44,
+        "quantity": 11,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.430Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 45,
+    "fields": {
+        "product_variant": 45,
+        "quantity": 25,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.477Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 46,
+    "fields": {
+        "product_variant": 46,
+        "quantity": 24,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.518Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 47,
+    "fields": {
+        "product_variant": 47,
+        "quantity": 21,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.559Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 48,
+    "fields": {
+        "product_variant": 48,
+        "quantity": 11,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.607Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 49,
+    "fields": {
+        "product_variant": 49,
+        "quantity": 17,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.652Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 50,
+    "fields": {
+        "product_variant": 50,
+        "quantity": 19,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.694Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 51,
+    "fields": {
+        "product_variant": 51,
+        "quantity": 25,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.739Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 52,
+    "fields": {
+        "product_variant": 52,
+        "quantity": 10,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.777Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 53,
+    "fields": {
+        "product_variant": 53,
+        "quantity": 10,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.815Z"
+    }
+},
+{
+    "model": "fitting_system.inventory",
+    "pk": 54,
+    "fields": {
+        "product_variant": 54,
+        "quantity": 17,
+        "low_stock_threshold": 5,
+        "last_updated": "2026-02-06T08:10:49.849Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 1,
+    "fields": {
+        "session_id": "33e8d83d-1535-450f-8085-b6b071cb2f67",
+        "height": "170.0",
+        "shoulder_width": "42.5",
+        "chest": "93.5",
+        "waist": "79.9",
+        "hip": "93.5",
+        "torso_length": "51.0",
+        "arm_length": "56.1",
+        "inseam": "76.5",
+        "body_shape": "rectangle",
+        "skin_tone": "medium",
+        "undertone": "warm",
+        "confidence_score": "0.30",
+        "frame_count": 1,
+        "scanned_at": "2026-02-14T12:37:34.007Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 2,
+    "fields": {
+        "session_id": "0bb9006d-65c6-4601-a107-ef063301913f",
+        "height": "170.0",
+        "shoulder_width": "42.5",
+        "chest": "93.5",
+        "waist": "79.9",
+        "hip": "93.5",
+        "torso_length": "51.0",
+        "arm_length": "56.1",
+        "inseam": "76.5",
+        "body_shape": "rectangle",
+        "skin_tone": "medium",
+        "undertone": "warm",
+        "confidence_score": "0.30",
+        "frame_count": 1,
+        "scanned_at": "2026-02-14T12:44:17.023Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 3,
+    "fields": {
+        "session_id": "c335ba12-aeb0-4f69-92f1-5170f2b7dd80",
+        "height": "170.0",
+        "shoulder_width": "42.5",
+        "chest": "93.5",
+        "waist": "79.9",
+        "hip": "93.5",
+        "torso_length": "51.0",
+        "arm_length": "56.1",
+        "inseam": "76.5",
+        "body_shape": "rectangle",
+        "skin_tone": "medium",
+        "undertone": "warm",
+        "confidence_score": "0.30",
+        "frame_count": 1,
+        "scanned_at": "2026-02-16T09:42:40.334Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 4,
+    "fields": {
+        "session_id": "b6cb4016-cdce-4899-b6e2-d62664055df8",
+        "height": "175.0",
+        "shoulder_width": "44.0",
+        "chest": "95.0",
+        "waist": "80.0",
+        "hip": "98.0",
+        "torso_length": "48.0",
+        "arm_length": "62.0",
+        "inseam": "78.0",
+        "body_shape": "rectangle",
+        "skin_tone": "medium",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-18T13:06:30.569Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 5,
+    "fields": {
+        "session_id": "74b0ffcf-bdb1-40f2-90bc-537f23bfa19f",
+        "height": "170.0",
+        "shoulder_width": "42.0",
+        "chest": "92.0",
+        "waist": "78.0",
+        "hip": "96.0",
+        "torso_length": "50.0",
+        "arm_length": "60.0",
+        "inseam": "78.0",
+        "body_shape": "rectangle",
+        "skin_tone": "intermediate",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-18T15:00:02.342Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 6,
+    "fields": {
+        "session_id": "fd274e84-f630-494e-8b80-d717e006b2eb",
+        "height": "170.0",
+        "shoulder_width": "42.0",
+        "chest": "92.0",
+        "waist": "78.0",
+        "hip": "96.0",
+        "torso_length": "50.0",
+        "arm_length": "60.0",
+        "inseam": "78.0",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-18T15:00:46.545Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 7,
+    "fields": {
+        "session_id": "025a7e85-025a-4f15-96ce-729a6c713c8b",
+        "height": "170.0",
+        "shoulder_width": "35.3",
+        "chest": "70.6",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "57.1",
+        "arm_length": "58.5",
+        "inseam": "87.4",
+        "body_shape": "rectangle",
+        "skin_tone": "dark",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T20:23:48.828Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 8,
+    "fields": {
+        "session_id": "5aab062a-729f-43dd-b4b2-86b8b8b6db19",
+        "height": "170.0",
+        "shoulder_width": "39.4",
+        "chest": "78.8",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "65.0",
+        "arm_length": "80.0",
+        "inseam": "75.1",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T20:24:38.194Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 9,
+    "fields": {
+        "session_id": "57a37a4d-4c6e-4b16-95e5-f82baba03961",
+        "height": "170.0",
+        "shoulder_width": "35.3",
+        "chest": "70.6",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "57.1",
+        "arm_length": "58.5",
+        "inseam": "87.4",
+        "body_shape": "rectangle",
+        "skin_tone": "intermediate",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T20:25:11.384Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 10,
+    "fields": {
+        "session_id": "ee7edd5a-8eea-4e5d-a6b7-2354d98fe3e8",
+        "height": "168.0",
+        "shoulder_width": "56.3",
+        "chest": "112.6",
+        "waist": "67.7",
+        "hip": "82.7",
+        "torso_length": "65.0",
+        "arm_length": "80.0",
+        "inseam": "55.0",
+        "body_shape": "rectangle",
+        "skin_tone": "dark",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T21:14:29.613Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 11,
+    "fields": {
+        "session_id": "e875a744-3dcc-4130-bb5a-c49c490e17ec",
+        "height": "175.0",
+        "shoulder_width": "36.3",
+        "chest": "72.6",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "58.7",
+        "arm_length": "60.2",
+        "inseam": "90.0",
+        "body_shape": "rectangle",
+        "skin_tone": "intermediate",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T21:15:48.703Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 12,
+    "fields": {
+        "session_id": "f51a33e2-d6ec-440c-b9d5-ff628ef16810",
+        "height": "170.0",
+        "shoulder_width": "37.9",
+        "chest": "75.8",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "65.0",
+        "arm_length": "80.0",
+        "inseam": "75.8",
+        "body_shape": "rectangle",
+        "skin_tone": "dark",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T21:39:35.108Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 13,
+    "fields": {
+        "session_id": "5ac3048a-115b-4131-9556-9012f066a825",
+        "height": "170.0",
+        "shoulder_width": "37.9",
+        "chest": "75.8",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "65.0",
+        "arm_length": "80.0",
+        "inseam": "75.8",
+        "body_shape": "rectangle",
+        "skin_tone": "dark",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T21:50:02.138Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 14,
+    "fields": {
+        "session_id": "ae54c1ea-fe54-4546-9603-7179129609ff",
+        "height": "168.0",
+        "shoulder_width": "56.3",
+        "chest": "112.6",
+        "waist": "67.7",
+        "hip": "82.7",
+        "torso_length": "65.0",
+        "arm_length": "80.0",
+        "inseam": "55.0",
+        "body_shape": "rectangle",
+        "skin_tone": "dark",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T21:50:51.604Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 15,
+    "fields": {
+        "session_id": "cc5de619-da33-41cc-9220-b8e4a6920dd8",
+        "height": "168.0",
+        "shoulder_width": "56.3",
+        "chest": "112.6",
+        "waist": "67.7",
+        "hip": "82.7",
+        "torso_length": "65.0",
+        "arm_length": "80.0",
+        "inseam": "55.0",
+        "body_shape": "rectangle",
+        "skin_tone": "dark",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T21:52:22.884Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 16,
+    "fields": {
+        "session_id": "a3ef5c2a-0c90-402f-97cf-3d101d10f0de",
+        "height": "170.0",
+        "shoulder_width": "38.4",
+        "chest": "76.8",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "58.6",
+        "arm_length": "62.4",
+        "inseam": "84.6",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T21:57:02.682Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 17,
+    "fields": {
+        "session_id": "9fb44691-2913-47a0-be48-6f855b3ba9db",
+        "height": "170.0",
+        "shoulder_width": "38.4",
+        "chest": "76.8",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "58.6",
+        "arm_length": "62.4",
+        "inseam": "84.6",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T22:06:30.850Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 18,
+    "fields": {
+        "session_id": "72fdca5e-4758-4509-b2ac-0c1cb9fc0fc6",
+        "height": "170.0",
+        "shoulder_width": "38.4",
+        "chest": "76.8",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "58.6",
+        "arm_length": "62.4",
+        "inseam": "84.6",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T22:19:11.204Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 19,
+    "fields": {
+        "session_id": "12ebedb7-7c1d-4205-a53a-3c0c06decb12",
+        "height": "175.0",
+        "shoulder_width": "36.3",
+        "chest": "72.6",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "58.7",
+        "arm_length": "60.2",
+        "inseam": "90.0",
+        "body_shape": "rectangle",
+        "skin_tone": "intermediate",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T22:31:34.874Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 20,
+    "fields": {
+        "session_id": "94fb4ad1-566e-445e-bdd0-8684a4e464ca",
+        "height": "170.0",
+        "shoulder_width": "38.4",
+        "chest": "103.7",
+        "waist": "59.2",
+        "hip": "70.0",
+        "torso_length": "58.6",
+        "arm_length": "62.4",
+        "inseam": "84.6",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T22:45:57.026Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 21,
+    "fields": {
+        "session_id": "5617575a-5378-4b5e-bc13-da87ddb76629",
+        "height": "175.0",
+        "shoulder_width": "36.3",
+        "chest": "98.0",
+        "waist": "59.2",
+        "hip": "70.0",
+        "torso_length": "58.7",
+        "arm_length": "60.2",
+        "inseam": "90.0",
+        "body_shape": "rectangle",
+        "skin_tone": "intermediate",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T22:49:00.229Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 22,
+    "fields": {
+        "session_id": "2e06df7c-c856-46cd-a0f8-5ccf1bae6487",
+        "height": "170.0",
+        "shoulder_width": "35.1",
+        "chest": "94.8",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "53.5",
+        "arm_length": "57.0",
+        "inseam": "77.3",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T23:02:03.079Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 23,
+    "fields": {
+        "session_id": "dc63f8d0-8a8d-4b94-bf0c-2bd7be121ed8",
+        "height": "170.0",
+        "shoulder_width": "35.1",
+        "chest": "94.8",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "53.5",
+        "arm_length": "57.0",
+        "inseam": "77.3",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T23:04:18.419Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 24,
+    "fields": {
+        "session_id": "87de428d-97cb-4ba9-87a4-bbaec8bd01af",
+        "height": "170.0",
+        "shoulder_width": "35.1",
+        "chest": "94.8",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "53.5",
+        "arm_length": "57.0",
+        "inseam": "77.3",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T23:06:24.972Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 25,
+    "fields": {
+        "session_id": "af5e6d11-0498-4a37-a2b3-a5f8c4326ff1",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T23:10:22.691Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 26,
+    "fields": {
+        "session_id": "0f54fb44-704c-44ce-a393-3099158bec13",
+        "height": "168.0",
+        "shoulder_width": "49.8",
+        "chest": "134.5",
+        "waist": "58.2",
+        "hip": "89.6",
+        "torso_length": "65.0",
+        "arm_length": "73.5",
+        "inseam": "55.0",
+        "body_shape": "rectangle",
+        "skin_tone": "dark",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T23:12:04.827Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 27,
+    "fields": {
+        "session_id": "98fc9354-a31e-49ad-851a-30672ab249fe",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-19T23:16:36.664Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 28,
+    "fields": {
+        "session_id": "7904a6c6-b054-4ea5-8d2b-0bef4c591e1f",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-20T02:59:00.821Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 29,
+    "fields": {
+        "session_id": "30bcd50d-5a90-475a-bc96-df77fcf5bc7d",
+        "height": "168.0",
+        "shoulder_width": "49.8",
+        "chest": "134.5",
+        "waist": "58.2",
+        "hip": "89.6",
+        "torso_length": "65.0",
+        "arm_length": "73.5",
+        "inseam": "55.0",
+        "body_shape": "rectangle",
+        "skin_tone": "dark",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-20T03:00:02.208Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 30,
+    "fields": {
+        "session_id": "e393cf5c-d399-42e5-86de-17876dbfe1c0",
+        "height": "175.0",
+        "shoulder_width": "33.3",
+        "chest": "89.9",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "53.9",
+        "arm_length": "55.2",
+        "inseam": "82.5",
+        "body_shape": "rectangle",
+        "skin_tone": "intermediate",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-20T03:01:13.813Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 31,
+    "fields": {
+        "session_id": "7e268f77-cd7e-4607-abed-1cee4e8b3de9",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-20T11:12:41.178Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 32,
+    "fields": {
+        "session_id": "225d422d-2a38-4216-8310-4ce6b19b016d",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-21T11:53:24.689Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 33,
+    "fields": {
+        "session_id": "d0419c48-5d9a-40c1-b428-80eed8d6a946",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-22T00:54:22.521Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 34,
+    "fields": {
+        "session_id": "18b1062b-f8ab-47f3-95ba-d67c830d308a",
+        "height": "168.0",
+        "shoulder_width": "37.0",
+        "chest": "99.9",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "65.0",
+        "arm_length": "80.0",
+        "inseam": "74.0",
+        "body_shape": "rectangle",
+        "skin_tone": "dark",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-22T02:34:25.193Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 35,
+    "fields": {
+        "session_id": "e61d5372-5c1c-4897-920a-e6bc505872f7",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-22T02:35:31.856Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 36,
+    "fields": {
+        "session_id": "7fd040ef-fa6c-48b7-aeea-7564e765bc3b",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-22T02:58:39.041Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 37,
+    "fields": {
+        "session_id": "1850417a-e56e-4ac2-95d3-8d4eed56fb80",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-22T03:46:04.991Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 38,
+    "fields": {
+        "session_id": "764f7019-2831-4581-811a-145493ca35d0",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-22T22:17:11.244Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 39,
+    "fields": {
+        "session_id": "7a00d475-6812-44ae-aba6-0f237d1b2595",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-22T22:26:46.257Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 40,
+    "fields": {
+        "session_id": "2858afe3-d307-435a-a515-e4d3aa81e3aa",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-22T22:29:23.652Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 41,
+    "fields": {
+        "session_id": "b7324911-f11e-4570-b5b3-b17e25e4274b",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-22T22:29:35.149Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 42,
+    "fields": {
+        "session_id": "1afb5bd6-4b7c-4c20-9bde-72a12da6a86e",
+        "height": "166.0",
+        "shoulder_width": "34.3",
+        "chest": "92.6",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.3",
+        "arm_length": "55.6",
+        "inseam": "75.5",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-22T22:44:10.600Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 43,
+    "fields": {
+        "session_id": "a0d239b6-d244-444c-8f93-fc7fa1924e0f",
+        "height": "168.0",
+        "shoulder_width": "49.8",
+        "chest": "134.5",
+        "waist": "58.2",
+        "hip": "89.6",
+        "torso_length": "65.0",
+        "arm_length": "73.5",
+        "inseam": "55.0",
+        "body_shape": "rectangle",
+        "skin_tone": "dark",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-24T01:31:55.964Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 44,
+    "fields": {
+        "session_id": "375e767a-6a50-4c02-a17f-f75f562a9afa",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "dark",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-24T01:40:21.540Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 45,
+    "fields": {
+        "session_id": "aa09f159-e1d3-4979-abb7-483e225a1c7d",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-24T01:46:04.824Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 46,
+    "fields": {
+        "session_id": "b693fff5-80be-4334-9107-98871a9aa60d",
+        "height": "168.0",
+        "shoulder_width": "49.8",
+        "chest": "134.5",
+        "waist": "58.2",
+        "hip": "89.6",
+        "torso_length": "65.0",
+        "arm_length": "73.5",
+        "inseam": "55.0",
+        "body_shape": "rectangle",
+        "skin_tone": "dark",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-24T01:50:58.709Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 47,
+    "fields": {
+        "session_id": "38bcb0c4-9d5c-465c-a7e3-075c5c3d4336",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-24T02:07:30.646Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 48,
+    "fields": {
+        "session_id": "5b1d9af9-b417-4d94-ba83-43221f50d3dd",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "dark",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-24T02:15:21.355Z"
+    }
+},
+{
+    "model": "fitting_system.bodyscan",
+    "pk": 49,
+    "fields": {
+        "session_id": "c58a1c13-5b46-4ad2-8f83-14bbf075f04f",
+        "height": "168.0",
+        "shoulder_width": "34.7",
+        "chest": "93.7",
+        "waist": "50.0",
+        "hip": "70.0",
+        "torso_length": "52.9",
+        "arm_length": "56.3",
+        "inseam": "76.4",
+        "body_shape": "rectangle",
+        "skin_tone": "tan",
+        "undertone": "warm",
+        "confidence_score": "0.85",
+        "frame_count": 1,
+        "scanned_at": "2026-02-24T20:52:09.926Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 1,
+    "fields": {
+        "body_scan": 1,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-14T12:37:36.057Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 2,
+    "fields": {
+        "body_scan": 1,
+        "product": 3,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-14T12:37:36.160Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 3,
+    "fields": {
+        "body_scan": 1,
+        "product": 4,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-14T12:37:36.332Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 4,
+    "fields": {
+        "body_scan": 1,
+        "product": 6,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-14T12:37:36.435Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 5,
+    "fields": {
+        "body_scan": 1,
+        "product": 5,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-14T12:37:36.594Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 6,
+    "fields": {
+        "body_scan": 2,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-14T12:44:18.766Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 7,
+    "fields": {
+        "body_scan": 2,
+        "product": 3,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-14T12:44:18.923Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 8,
+    "fields": {
+        "body_scan": 2,
+        "product": 4,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-14T12:44:19.030Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 9,
+    "fields": {
+        "body_scan": 2,
+        "product": 6,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-14T12:44:19.205Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 10,
+    "fields": {
+        "body_scan": 2,
+        "product": 5,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-14T12:44:19.310Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 11,
+    "fields": {
+        "body_scan": 3,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-16T09:42:42.495Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 12,
+    "fields": {
+        "body_scan": 3,
+        "product": 3,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-16T09:42:42.640Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 13,
+    "fields": {
+        "body_scan": 3,
+        "product": 4,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-16T09:42:43.085Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 14,
+    "fields": {
+        "body_scan": 3,
+        "product": 6,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-16T09:42:43.200Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 15,
+    "fields": {
+        "body_scan": 3,
+        "product": 5,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Earth Brown, Olive Green, Burgundy, Mustard Yellow, Terracotta",
+        "priority": 40,
+        "created_at": "2026-02-16T09:42:43.325Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 16,
+    "fields": {
+        "body_scan": 4,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Olive Green, Mustard Yellow, Terracotta, Rust Orange, Warm Beige",
+        "priority": 30,
+        "created_at": "2026-02-18T13:06:43.031Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 17,
+    "fields": {
+        "body_scan": 4,
+        "product": 3,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Olive Green, Mustard Yellow, Terracotta, Rust Orange, Warm Beige",
+        "priority": 30,
+        "created_at": "2026-02-18T13:06:44.707Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 18,
+    "fields": {
+        "body_scan": 4,
+        "product": 4,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Olive Green, Mustard Yellow, Terracotta, Rust Orange, Warm Beige",
+        "priority": 30,
+        "created_at": "2026-02-18T13:06:45.609Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 19,
+    "fields": {
+        "body_scan": 4,
+        "product": 6,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Olive Green, Mustard Yellow, Terracotta, Rust Orange, Warm Beige",
+        "priority": 30,
+        "created_at": "2026-02-18T13:06:47.230Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 20,
+    "fields": {
+        "body_scan": 4,
+        "product": 5,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "Olive Green, Mustard Yellow, Terracotta, Rust Orange, Warm Beige",
+        "priority": 30,
+        "created_at": "2026-02-18T13:06:48.207Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 21,
+    "fields": {
+        "body_scan": 5,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-18T15:00:02.365Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 22,
+    "fields": {
+        "body_scan": 6,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-18T15:00:46.565Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 23,
+    "fields": {
+        "body_scan": 7,
+        "product": 2,
+        "recommended_size": "XS",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T20:23:48.852Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 24,
+    "fields": {
+        "body_scan": 8,
+        "product": 2,
+        "recommended_size": "XS",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T20:24:38.215Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 25,
+    "fields": {
+        "body_scan": 9,
+        "product": 2,
+        "recommended_size": "XS",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T20:25:11.410Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 26,
+    "fields": {
+        "body_scan": 10,
+        "product": 2,
+        "recommended_size": "XL",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T21:14:29.635Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 27,
+    "fields": {
+        "body_scan": 11,
+        "product": 2,
+        "recommended_size": "XS",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T21:15:48.723Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 28,
+    "fields": {
+        "body_scan": 12,
+        "product": 2,
+        "recommended_size": "XS",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T21:39:35.131Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 29,
+    "fields": {
+        "body_scan": 13,
+        "product": 2,
+        "recommended_size": "XS",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T21:50:02.162Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 30,
+    "fields": {
+        "body_scan": 14,
+        "product": 2,
+        "recommended_size": "XL",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T21:50:51.624Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 31,
+    "fields": {
+        "body_scan": 15,
+        "product": 2,
+        "recommended_size": "XL",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T21:52:22.901Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 32,
+    "fields": {
+        "body_scan": 16,
+        "product": 2,
+        "recommended_size": "XS",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T21:57:02.696Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 33,
+    "fields": {
+        "body_scan": 17,
+        "product": 2,
+        "recommended_size": "XS",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T22:06:30.869Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 34,
+    "fields": {
+        "body_scan": 18,
+        "product": 2,
+        "recommended_size": "XS",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T22:19:11.226Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 35,
+    "fields": {
+        "body_scan": 19,
+        "product": 2,
+        "recommended_size": "XS",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T22:31:34.899Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 36,
+    "fields": {
+        "body_scan": 20,
+        "product": 2,
+        "recommended_size": "XL",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T22:45:57.043Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 37,
+    "fields": {
+        "body_scan": 21,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T22:49:00.246Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 38,
+    "fields": {
+        "body_scan": 22,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T23:02:03.104Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 39,
+    "fields": {
+        "body_scan": 23,
+        "product": 2,
+        "recommended_size": "L",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T23:04:18.435Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 40,
+    "fields": {
+        "body_scan": 24,
+        "product": 2,
+        "recommended_size": "L",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T23:06:24.989Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 41,
+    "fields": {
+        "body_scan": 25,
+        "product": 2,
+        "recommended_size": "S",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T23:10:22.708Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 42,
+    "fields": {
+        "body_scan": 26,
+        "product": 2,
+        "recommended_size": "XXL",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T23:12:04.842Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 43,
+    "fields": {
+        "body_scan": 27,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-19T23:16:36.681Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 44,
+    "fields": {
+        "body_scan": 28,
+        "product": 2,
+        "recommended_size": "L",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-20T02:59:00.841Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 45,
+    "fields": {
+        "body_scan": 29,
+        "product": 2,
+        "recommended_size": "XXL",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-20T03:00:02.230Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 46,
+    "fields": {
+        "body_scan": 30,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-20T03:01:13.830Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 47,
+    "fields": {
+        "body_scan": 31,
+        "product": 2,
+        "recommended_size": "L",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-20T11:12:41.196Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 48,
+    "fields": {
+        "body_scan": 32,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-21T11:53:24.712Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 49,
+    "fields": {
+        "body_scan": 33,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-22T00:54:22.542Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 50,
+    "fields": {
+        "body_scan": 34,
+        "product": 2,
+        "recommended_size": "L",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-22T02:34:25.223Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 51,
+    "fields": {
+        "body_scan": 35,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-22T02:35:31.873Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 52,
+    "fields": {
+        "body_scan": 36,
+        "product": 2,
+        "recommended_size": "L",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-22T02:58:39.060Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 53,
+    "fields": {
+        "body_scan": 37,
+        "product": 2,
+        "recommended_size": "L",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-22T03:46:05.015Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 54,
+    "fields": {
+        "body_scan": 38,
+        "product": 2,
+        "recommended_size": "L",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-22T22:17:11.275Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 55,
+    "fields": {
+        "body_scan": 39,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-22T22:26:46.290Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 56,
+    "fields": {
+        "body_scan": 40,
+        "product": 2,
+        "recommended_size": "L",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-22T22:29:23.683Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 57,
+    "fields": {
+        "body_scan": 41,
+        "product": 2,
+        "recommended_size": "L",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-22T22:29:35.174Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 58,
+    "fields": {
+        "body_scan": 42,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-22T22:44:10.617Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 59,
+    "fields": {
+        "body_scan": 43,
+        "product": 2,
+        "recommended_size": "XXL",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-24T01:31:55.981Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 60,
+    "fields": {
+        "body_scan": 44,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-24T01:40:21.557Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 61,
+    "fields": {
+        "body_scan": 45,
+        "product": 2,
+        "recommended_size": "S",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-24T01:46:04.842Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 62,
+    "fields": {
+        "body_scan": 46,
+        "product": 2,
+        "recommended_size": "XXL",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-24T01:50:58.725Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 63,
+    "fields": {
+        "body_scan": 47,
+        "product": 2,
+        "recommended_size": "M",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-24T02:07:30.668Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 64,
+    "fields": {
+        "body_scan": 48,
+        "product": 2,
+        "recommended_size": "L",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-24T02:15:21.380Z"
+    }
+},
+{
+    "model": "fitting_system.recommendation",
+    "pk": 65,
+    "fields": {
+        "body_scan": 49,
+        "product": 2,
+        "recommended_size": "L",
+        "recommended_fit": "regular",
+        "recommended_colors": "",
+        "priority": 100,
+        "created_at": "2026-02-24T20:52:09.952Z"
+    }
+}
+]

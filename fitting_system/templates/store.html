@@ -89,8 +89,11 @@
                     class="absolute inset-0 bg-gradient-to-br from-[#1B3A6B]/10 via-[#2E5FA3]/10 to-[#5B8FC9]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
                 </div>
 
-                <!-- Dynamic product image based on category -->
-                {% if product.category == 'shirt' and product.gender == 'men' %}
+                <!-- Dynamic product image: Priority to uploaded image, then fallback to static defaults -->
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}"
+                    class="w-full h-full object-cover">
+                {% elif product.category == 'shirt' and product.gender == 'men' %}
                 <img src="{% static 'images/products/mens_shirt.png' %}" alt="{{ product.name }}"
                     class="w-full h-full object-cover">
                 {% elif product.category == 'shirt' and product.gender == 'women' %}

@@ -39,7 +39,8 @@
                     <span class="text-lg font-semibold text-white/80">{% trans "AI Recommended Size" %}</span>
                 </div>
                 <p class="text-8xl font-black tracking-tight leading-none mb-3">{{ recommended_size }}</p>
-                <p class="text-white/70 text-sm">{% trans "Based on your body measurements analysed by YOLO + LLM" %}</p>
+                <p class="text-white/70 text-sm">{% trans "Based on your body measurements analysed by YOLO + LLM" %}
+                </p>
             </div>
         </div>
 
@@ -126,9 +127,12 @@
                     {% trans "Your Size" %}: {{ item.recommended_size }}
                 </div>
 
-                <!-- Product image -->
+                <!-- Product image: Priority to uploaded image, then fallback to static defaults -->
                 <div class="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
-                    {% if item.product.category == 'shirt' and item.product.gender == 'men' %}
+                    {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}"
+                        class="w-full h-full object-cover">
+                    {% elif item.product.category == 'shirt' and item.product.gender == 'men' %}
                     <img src="{% static 'images/products/mens_shirt.png' %}" alt="{{ item.product.name }}"
                         class="w-full h-full object-cover">
                     {% elif item.product.category == 'shirt' and item.product.gender == 'women' %}
@@ -181,7 +185,8 @@
                         <span class="w-10 h-10 rounded-full border-4 border-white shadow-md flex-shrink-0"
                             style="background-color: {{ item.color_hex }};"></span>
                         <div>
-                            <span class="text-xs text-gray-500 uppercase tracking-wide">{% trans "Available Color" %}</span>
+                            <span class="text-xs text-gray-500 uppercase tracking-wide">{% trans "Available Color"
+                                %}</span>
                             <p class="font-bold text-gray-700">{{ item.color_name }}</p>
                         </div>
                     </div>
@@ -209,7 +214,8 @@
                     d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4">
                 </path>
             </svg>
-            <p class="text-gray-600 text-lg font-medium">{% trans "No products in size" %} <strong>{{ recommended_size }}</strong> {% trans "in stock right now" %}</p>
+            <p class="text-gray-600 text-lg font-medium">{% trans "No products in size" %} <strong>{{ recommended_size
+                    }}</strong> {% trans "in stock right now" %}</p>
             <p class="text-gray-400 mt-2">{% trans "Check back later or browse our full catalogue" %}</p>
         </div>
         {% endif %}
