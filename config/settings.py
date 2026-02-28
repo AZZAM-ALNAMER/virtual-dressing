@@ -25,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2oq4$$$7$ti)p_7_26=$(l01z#iw%so931-pr8y9%s&m8_faq&'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-default-key-change-this')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = []
 
@@ -144,6 +144,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Gemini AI Configuration
-# Set your API key here or via environment variable GEMINI_API_KEY
-GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', 'AIzaSyCFzLus0YkXmZbsG_VA3HKih7Ap2pmBTis')
+# Set your API key here or via environment variable GEMINI_API_KEY in .env
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
 
