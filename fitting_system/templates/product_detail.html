@@ -8,11 +8,13 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Breadcrumb -->
     <nav class="flex items-center gap-2 text-sm mb-8 fade-in">
-        <a href="{% url 'fitting_system:index' %}" class="text-gray-500 hover:text-[#2E5FA3] transition">{% trans "Home" %}</a>
+        <a href="{% url 'fitting_system:index' %}" class="text-gray-500 hover:text-[#2E5FA3] transition">{% trans "Home"
+            %}</a>
         <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
         </svg>
-        <a href="{% url 'fitting_system:store' %}" class="text-gray-500 hover:text-[#2E5FA3] transition">{% trans "Store" %}</a>
+        <a href="{% url 'fitting_system:store' %}" class="text-gray-500 hover:text-[#2E5FA3] transition">{% trans
+            "Store" %}</a>
         <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
         </svg>
@@ -88,10 +90,11 @@
                 <div class="flex items-baseline gap-3 mb-6">
                     <span
                         class="text-5xl font-extrabold bg-gradient-to-r from-[#1B3A6B] to-[#2E5FA3] bg-clip-text text-transparent">
-                        ${{ product.price }}
+                        YER {{ product.price }}
                     </span>
-                    <span class="text-gray-500 line-through text-xl">${{ product.price|add:20 }}</span>
-                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-bold">{% trans "Save $20" %}</span>
+                    <span class="text-gray-500 line-through text-xl">YER {{ product.price|add:20 }}</span>
+                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-bold">{% trans "Save
+                        YER 20" %}</span>
                 </div>
                 <p class="text-gray-700 text-lg leading-relaxed mb-8">{{ product.description }}</p>
             </div>
@@ -133,7 +136,8 @@
                         class="group flex items-center gap-3 px-5 py-3 border-2 border-gray-200 rounded-xl hover:border-[#5B8FC9] transition transform hover:scale-105 hover:shadow-lg bg-white">
                         <div class="w-8 h-8 rounded-full border-3 border-white shadow-md ring-2 ring-gray-200 group-hover:ring-[#5B8FC9] transition"
                             style="background-color: {{ color.hex_code }};"></div>
-                        <span class="font-semibold text-gray-900 group-hover:text-[#2E5FA3] transition">{{ color.name }}</span>
+                        <span class="font-semibold text-gray-900 group-hover:text-[#2E5FA3] transition">{{ color.name
+                            }}</span>
                     </button>
                     {% empty %}
                     <p class="text-gray-500 italic">{% trans "No colors currently available" %}</p>

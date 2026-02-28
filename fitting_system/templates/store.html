@@ -26,7 +26,8 @@
                     </svg>
                     {% trans "Search" %}
                 </label>
-                <input type="text" name="search" value="{{ search_query }}" placeholder="{% trans 'Search for products...' %}"
+                <input type="text" name="search" value="{{ search_query }}"
+                    placeholder="{% trans 'Search for products...' %}"
                     class="w-full px-4 py-3 border-2 border-[#7DB8D8] rounded-xl focus:ring-2 focus:ring-[#5B8FC9] focus:border-[#5B8FC9] transition bg-white/80 backdrop-blur-sm">
             </div>
             <div class="flex-1 min-w-[150px]">
@@ -91,8 +92,7 @@
 
                 <!-- Dynamic product image: Priority to uploaded image, then fallback to static defaults -->
                 {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}"
-                    class="w-full h-full object-cover">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                 {% elif product.category == 'shirt' and product.gender == 'men' %}
                 <img src="{% static 'images/products/mens_shirt.png' %}" alt="{{ product.name }}"
                     class="w-full h-full object-cover">
@@ -137,7 +137,7 @@
                     <div>
                         <span
                             class="text-3xl font-extrabold bg-gradient-to-r from-[#1B3A6B] to-[#2E5FA3] bg-clip-text text-transparent">
-                            ${{ product.price }}
+                            YER {{ product.price }}
                         </span>
                     </div>
                     <div class="flex items-center gap-2">
@@ -194,7 +194,8 @@
         <div class="relative p-12 text-center">
             <h2 class="text-4xl font-extrabold text-white mb-4">{% trans "Not Sure About Your Size?" %}</h2>
             <p class="text-xl text-white/95 mb-8 max-w-2xl mx-auto">
-                {% trans "Try our AI-powered virtual fitting system for personalized size recommendations and perfect fit!" %}
+                {% trans "Try our AI-powered virtual fitting system for personalized size recommendations and perfect
+                fit!" %}
             </p>
             <a href="{% url 'fitting_system:scan' %}"
                 class="inline-flex items-center gap-3 bg-white text-[#1B3A6B] px-10 py-4 rounded-xl font-bold text-lg hover:shadow-2xl transition transform hover:scale-105">
