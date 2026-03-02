@@ -340,16 +340,15 @@
                 </div>
                 <div class="av-swatches-skin" id="avSkinSwatches">
                     <div class="av-swatch" style="background:#fde8d0" data-hex="fde8d0" data-skin="0"
-                        data-tip="Porcelain"></div>
-                    <div class="av-swatch" style="background:#f5cba7" data-hex="f5cba7" data-skin="1" data-tip="Ivory">
+                        data-tip="Very Light"></div>
+                    <div class="av-swatch" style="background:#f5cba7" data-hex="f5cba7" data-skin="1" data-tip="Light">
                     </div>
-                    <div class="av-swatch" style="background:#e8a87c" data-hex="e8a87c" data-skin="2" data-tip="Peach">
+                    <div class="av-swatch" style="background:#e8a87c" data-hex="e8a87c" data-skin="2"
+                        data-tip="Intermediate">
                     </div>
                     <div class="av-swatch" style="background:#c68642" data-hex="c68642" data-skin="3" data-tip="Tan">
                     </div>
-                    <div class="av-swatch" style="background:#8d5524" data-hex="8d5524" data-skin="4" data-tip="Brown">
-                    </div>
-                    <div class="av-swatch" style="background:#3d2c23" data-hex="3d2c23" data-skin="5" data-tip="Deep">
+                    <div class="av-swatch" style="background:#8d5524" data-hex="8d5524" data-skin="4" data-tip="Dark">
                     </div>
                 </div>
             </div>
@@ -425,124 +424,16 @@
     const container = document.getElementById('av-canvas-container');
 
     // ────────────────────────────────────────────────────────────────
-    //  CURATED PALETTES — one entry per skin tone (0-5)
+    //  DYNAMIC PALETTES — injected from Django / color_palettes.py
     // ────────────────────────────────────────────────────────────────
-    const SKIN_PALETTES = [
-        // 0 — Porcelain
-        {
-            shirts: [
-                { hex: 'e8d5f5', tip: 'Lavender' }, { hex: 'b5d8f7', tip: 'Baby Blue' },
-                { hex: 'f7c5d0', tip: 'Blush Pink' }, { hex: 'a8d8a8', tip: 'Sage Green' },
-                { hex: 'f5e6c8', tip: 'Cream' }, { hex: '8b9dc3', tip: 'Periwinkle' },
-                { hex: 'd4a5c9', tip: 'Mauve' }, { hex: '7fb5b5', tip: 'Teal Mist' },
-                { hex: 'c8e6c9', tip: 'Mint' }, { hex: 'ffccbc', tip: 'Peach Tint' },
-                { hex: '546e7a', tip: 'Blue Grey' }, { hex: '37474f', tip: 'Charcoal' },
-            ],
-            pants: [
-                { hex: 'cfd8dc', tip: 'Ash Grey' }, { hex: 'b0bec5', tip: 'Silver' },
-                { hex: '90a4ae', tip: 'Steel' }, { hex: '607d8b', tip: 'Slate' },
-                { hex: '455a64', tip: 'Dark Slate' }, { hex: '37474f', tip: 'Graphite' },
-                { hex: 'd7ccc8', tip: 'Warm Cream' }, { hex: 'bcaaa4', tip: 'Latte' },
-                { hex: '8d6e63', tip: 'Mocha' }, { hex: '5d4037', tip: 'Espresso' },
-                { hex: '1a237e', tip: 'Indigo' }, { hex: '111111', tip: 'Black' },
-            ],
-        },
-        // 1 — Ivory
-        {
-            shirts: [
-                { hex: 'e3f2fd', tip: 'Ice Blue' }, { hex: 'bbdefb', tip: 'Sky Blue' },
-                { hex: '90caf9', tip: 'Cornflower' }, { hex: 'ce93d8', tip: 'Lilac' },
-                { hex: 'f48fb1', tip: 'Pink Bloom' }, { hex: 'a5d6a7', tip: 'Mint Green' },
-                { hex: 'fff176', tip: 'Pale Yellow' }, { hex: 'ffcc80', tip: 'Peach' },
-                { hex: '80cbc4', tip: 'Seafoam' }, { hex: 'ef9a9a', tip: 'Rose' },
-                { hex: '546e7a', tip: 'Blue Grey' }, { hex: 'ffffff', tip: 'White' },
-            ],
-            pants: [
-                { hex: 'e0e0e0', tip: 'Pearl' }, { hex: 'bdbdbd', tip: 'Light Grey' },
-                { hex: '9e9e9e', tip: 'Mid Grey' }, { hex: '757575', tip: 'Ash' },
-                { hex: 'c3b091', tip: 'Khaki' }, { hex: 'a1887f', tip: 'Rosy Brown' },
-                { hex: '6d4c41', tip: 'Walnut' }, { hex: '4e342e', tip: 'Dark Brown' },
-                { hex: '1565c0', tip: 'Royal Blue' }, { hex: '0d47a1', tip: 'Deep Navy' },
-                { hex: '1b5e20', tip: 'Forest' }, { hex: '111111', tip: 'Black' },
-            ],
-        },
-        // 2 — Peach
-        {
-            shirts: [
-                { hex: 'ffffff', tip: 'White' }, { hex: 'f5f5f5', tip: 'Off-White' },
-                { hex: 'b3e5fc', tip: 'Light Blue' }, { hex: '0277bd', tip: 'Ocean Blue' },
-                { hex: '00695c', tip: 'Deep Teal' }, { hex: '558b2f', tip: 'Olive Green' },
-                { hex: 'f9a825', tip: 'Golden' }, { hex: 'e64a19', tip: 'Burnt Orange' },
-                { hex: '6a1b9a', tip: 'Deep Purple' }, { hex: 'ad1457', tip: 'Raspberry' },
-                { hex: '37474f', tip: 'Slate Grey' }, { hex: '111111', tip: 'Black' },
-            ],
-            pants: [
-                { hex: 'e8f5e9', tip: 'Pale Green' }, { hex: 'c3b091', tip: 'Khaki' },
-                { hex: 'd4c5a9', tip: 'Sand' }, { hex: '795548', tip: 'Brown' },
-                { hex: '4e342e', tip: 'Dark Brown' }, { hex: '263238', tip: 'Dark Slate' },
-                { hex: '1565c0', tip: 'Cobalt' }, { hex: '283593', tip: 'Indigo' },
-                { hex: '4a148c', tip: 'Plum' }, { hex: '880e4f', tip: 'Burgundy' },
-                { hex: '1b5e20', tip: 'Forest' }, { hex: '111111', tip: 'Black' },
-            ],
-        },
-        // 3 — Tan
-        {
-            shirts: [
-                { hex: 'ffffff', tip: 'White' }, { hex: 'fffde7', tip: 'Cream' },
-                { hex: 'e3f2fd', tip: 'Ice Blue' }, { hex: '0288d1', tip: 'Sky Blue' },
-                { hex: '01579b', tip: 'Navy' }, { hex: '004d40', tip: 'Deep Green' },
-                { hex: 'f57f17', tip: 'Amber' }, { hex: 'bf360c', tip: 'Rust Red' },
-                { hex: '4a148c', tip: 'Royal Purple' }, { hex: '880e4f', tip: 'Deep Rose' },
-                { hex: 'ffd600', tip: 'Sun Yellow' }, { hex: '111111', tip: 'Black' },
-            ],
-            pants: [
-                { hex: 'f5f5f5', tip: 'Off-White' }, { hex: 'd4c5a9', tip: 'Sand' },
-                { hex: 'c3b091', tip: 'Khaki' }, { hex: '8d6e63', tip: 'Mocha' },
-                { hex: '5d4037', tip: 'Espresso' }, { hex: '3e2723', tip: 'Mahogany' },
-                { hex: '1a237e', tip: 'Deep Blue' }, { hex: '0d47a1', tip: 'Navy' },
-                { hex: '006064', tip: 'Dark Teal' }, { hex: '1b5e20', tip: 'Dark Green' },
-                { hex: '37474f', tip: 'Graphite' }, { hex: '111111', tip: 'Black' },
-            ],
-        },
-        // 4 — Brown
-        {
-            shirts: [
-                { hex: 'ffffff', tip: 'White' }, { hex: 'fff9c4', tip: 'Butter' },
-                { hex: 'ffd54f', tip: 'Gold' }, { hex: 'ff8f00', tip: 'Mango' },
-                { hex: 'e65100', tip: 'Tangerine' }, { hex: '00bcd4', tip: 'Cyan' },
-                { hex: '0097a7', tip: 'Deep Cyan' }, { hex: '7c4dff', tip: 'Violet' },
-                { hex: 'd500f9', tip: 'Magenta' }, { hex: '76ff03', tip: 'Lime' },
-                { hex: 'f5f5f5', tip: 'Off-White' }, { hex: '111111', tip: 'Black' },
-            ],
-            pants: [
-                { hex: 'fafafa', tip: 'White' }, { hex: 'ffe082', tip: 'Pale Gold' },
-                { hex: 'd4c5a9', tip: 'Sand' }, { hex: 'a1887f', tip: 'Rosy Brown' },
-                { hex: '6d4c41', tip: 'Walnut' }, { hex: '3e2723', tip: 'Mahogany' },
-                { hex: '0d47a1', tip: 'Navy' }, { hex: '006064', tip: 'Teal' },
-                { hex: '1b5e20', tip: 'Forest' }, { hex: '880e4f', tip: 'Burgundy' },
-                { hex: '212121', tip: 'Almost Black' }, { hex: '111111', tip: 'Black' },
-            ],
-        },
-        // 5 — Deep
-        {
-            shirts: [
-                { hex: 'ffffff', tip: 'White' }, { hex: 'fffde7', tip: 'Ivory' },
-                { hex: 'fff176', tip: 'Lemon' }, { hex: 'ffd740', tip: 'Gold' },
-                { hex: 'ff6d00', tip: 'Bright Orange' }, { hex: '00e5ff', tip: 'Electric Blue' },
-                { hex: '00bfa5', tip: 'Aqua' }, { hex: '69f0ae', tip: 'Neon Mint' },
-                { hex: 'ea80fc', tip: 'Orchid' }, { hex: 'ff4081', tip: 'Hot Pink' },
-                { hex: 'f5f5f5', tip: 'Off-White' }, { hex: 'e0e0e0', tip: 'Light Grey' },
-            ],
-            pants: [
-                { hex: 'ffffff', tip: 'White' }, { hex: 'f5f5f5', tip: 'Off-White' },
-                { hex: 'e0e0e0', tip: 'Pearl' }, { hex: 'bdbdbd', tip: 'Silver' },
-                { hex: 'ffd740', tip: 'Gold' }, { hex: 'ffe082', tip: 'Pale Gold' },
-                { hex: '0d47a1', tip: 'Navy' }, { hex: '006064', tip: 'Teal' },
-                { hex: '880e4f', tip: 'Burgundy' }, { hex: '4a148c', tip: 'Plum' },
-                { hex: '212121', tip: 'Almost Black' }, { hex: '111111', tip: 'Black' },
-            ],
-        },
-    ];
+    const SKIN_TONE_KEYS = ['very_light', 'light', 'intermediate', 'tan', 'dark'];
+    const PALETTES_BY_KEY = JSON.parse('{{ palettes_json|escapejs }}');
+    const INITIAL_SKIN_KEY = '{{ skin_tone_key }}';
+    const REC_SHIRT_HEX = '{{ rec_shirt_hex }}';
+    const REC_PANTS_HEX = '{{ rec_pants_hex }}';
+
+    // Map skin swatch index → skin tone key
+    const INDEX_TO_KEY = { 0: 'very_light', 1: 'light', 2: 'intermediate', 3: 'tan', 4: 'dark' };
 
     // ────────────────────────────────────────────────────────────────
     //  THREE.JS SETUP
@@ -647,13 +538,15 @@
     let currentShirtHex = null;
     let currentPantsHex = null;
 
-    function buildClothingSwatches(skinIndex) {
-        const palette = SKIN_PALETTES[skinIndex];
+    function buildClothingSwatches(skinKey, defaultShirtHex, defaultPantsHex) {
+        const palette = PALETTES_BY_KEY[skinKey];
+        if (!palette) return;
         const shirtGrid = document.getElementById('avShirtSwatches');
         const pantsGrid = document.getElementById('avPantsSwatches');
 
-        const lightHexes = new Set(['ffffff', 'f5f5f5', 'fffde7', 'e3f2fd', 'e8f5e9', 'fff9c4', 'fafafa', 'e0e0e0', 'cfd8dc']);
+        const lightHexes = new Set(['ffffff', 'f5f5f5', 'fffde7', 'e0e0e0', 'cfd8dc', 'e8d5f5', 'b5d8f7', 'f7c5d0', 'bbdefb', 'a5d6a7', 'ef9a9a', 'fff176']);
 
+        // ── Shirt swatches ──
         shirtGrid.innerHTML = '';
         palette.shirts.forEach((item, i) => {
             const sw = document.createElement('div');
@@ -672,6 +565,7 @@
             shirtGrid.appendChild(sw);
         });
 
+        // ── Pants swatches ──
         pantsGrid.innerHTML = '';
         palette.pants.forEach((item, i) => {
             const sw = document.createElement('div');
@@ -690,13 +584,24 @@
             pantsGrid.appendChild(sw);
         });
 
-        currentShirtHex = palette.shirts[0].hex;
-        currentPantsHex = palette.pants[0].hex;
+        // Auto-select: prefer the Gemini-recommended hex, else first swatch
+        const shirtSw = shirtGrid.querySelectorAll('.av-swatch');
+        let shirtSelected = false;
+        if (defaultShirtHex) {
+            shirtSw.forEach(s => { if (s.dataset.hex === defaultShirtHex) { s.classList.add('active'); shirtSelected = true; } });
+        }
+        if (!shirtSelected && shirtSw[0]) shirtSw[0].classList.add('active');
+        currentShirtHex = defaultShirtHex || palette.shirts[0].hex;
         applyClothingColor(shirtMeshes, currentShirtHex);
-        applyClothingColor(pantsMeshes, currentPantsHex);
 
-        shirtGrid.querySelectorAll('.av-swatch')[0]?.classList.add('active');
-        pantsGrid.querySelectorAll('.av-swatch')[0]?.classList.add('active');
+        const pantsSw = pantsGrid.querySelectorAll('.av-swatch');
+        let pantsSelected = false;
+        if (defaultPantsHex) {
+            pantsSw.forEach(s => { if (s.dataset.hex === defaultPantsHex) { s.classList.add('active'); pantsSelected = true; } });
+        }
+        if (!pantsSelected && pantsSw[0]) pantsSw[0].classList.add('active');
+        currentPantsHex = defaultPantsHex || palette.pants[0].hex;
+        applyClothingColor(pantsMeshes, currentPantsHex);
     }
 
     // ────────────────────────────────────────────────────────────────
@@ -794,9 +699,9 @@
                 skinSwatches.forEach(s => s.classList.remove('active'));
                 targetSwatch.classList.add('active');
                 applySkinColor(targetSwatch.dataset.hex);
-                buildClothingSwatches(INITIAL_SKIN_INDEX);
+                buildClothingSwatches(INITIAL_SKIN_KEY, REC_SHIRT_HEX, REC_PANTS_HEX);
             } else {
-                buildClothingSwatches(0);
+                buildClothingSwatches('intermediate', REC_SHIRT_HEX, REC_PANTS_HEX);
             }
         },
         undefined,
@@ -811,8 +716,9 @@
             document.getElementById('avSkinSwatches').querySelectorAll('.av-swatch').forEach(s => s.classList.remove('active'));
             sw.classList.add('active');
             const skinIndex = parseInt(sw.dataset.skin);
+            const skinKey = INDEX_TO_KEY[skinIndex] || 'intermediate';
             applySkinColor(sw.dataset.hex);
-            buildClothingSwatches(skinIndex);
+            buildClothingSwatches(skinKey, null, null);
         });
     });
 
