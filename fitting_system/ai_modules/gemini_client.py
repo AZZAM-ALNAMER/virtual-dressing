@@ -202,30 +202,54 @@ Return ONLY a valid JSON object:
         logger.info(f"Gemini size recommendation: {recommended} ({result.get('reasoning', '')})")
         return result
 
-    def get_color_recommendations(self, skin_tone: str, undertone: str = "warm", body_shape: str = "rectangle", garment_type: str = None) -> List[str]:
+    def get_color_recommendations(self, skin_tone: str, undertone: str = "warm", body_shape: str = "rectangle", garment_type: str = None) -> Dict:
+        """
+        Ask Gemini to pick exactly ONE shirt colour and ONE pants colour
+        from the pre-approved palette for the given skin tone.
+
+        Returns:
+            dict with keys 'recommended_shirt' and 'recommended_pants'
+            (both are exact colour name strings from color_palettes.py).
+        """
         if not self.available:
             raise RuntimeError("Gemini AI is not available for color recommendations")
 
-        garment_context = f" for {garment_type}" if garment_type else ""
-        prompt = f"""You are a fashion color consultant. Recommend clothing colors{garment_context}.
+        from fitting_system.color_palettes import get_shirt_color_names, get_pants_color_names
+
+        shirt_options = get_shirt_color_names(skin_tone)
+        pants_options = get_pants_color_names(skin_tone)
+
+        prompt = f"""You are an expert fashion color consultant.
 
 Person's profile:
 - Skin tone: {skin_tone}
 - Undertone: {undertone}
 - Body shape: {body_shape}
 
-Return ONLY a JSON object:
-{{"recommended_colors": ["Color1", "Color2", ...]}}
+Available shirt colors (pick exactly ONE): {', '.join(shirt_options)}
+Available pants colors (pick exactly ONE): {', '.join(pants_options)}
 
-Provide 8-12 specific fashion color names (e.g. "Navy Blue", "Burgundy", "Emerald Green").
-Respond with ONLY the JSON."""
+Choose the single best shirt color and single best pants color from the lists above.
+You MUST only use color names from the provided lists. Do NOT invent new colors.
+
+Return ONLY a JSON object:
+{{"recommended_shirt": "<one of the shirt colors>", "recommended_pants": "<one of the pants colors>"}}"""
 
         response = self.model.generate_content(prompt)
         result = self._parse_json_response(response.text)
-        colors = result.get("recommended_colors", [])
-        if not colors:
-            raise ValueError("Gemini returned no color recommendations")
-        return colors
+
+        rec_shirt = result.get("recommended_shirt", "")
+        rec_pants = result.get("recommended_pants", "")
+
+        # Validate – fall back to first option if Gemini hallucinated
+        if rec_shirt not in shirt_options:
+            logger.warning(f"Gemini returned invalid shirt color '{rec_shirt}', falling back to '{shirt_options[0]}'")
+            rec_shirt = shirt_options[0]
+        if rec_pants not in pants_options:
+            logger.warning(f"Gemini returned invalid pants color '{rec_pants}', falling back to '{pants_options[0]}'")
+            rec_pants = pants_options[0]
+
+        return {"recommended_shirt": rec_shirt, "recommended_pants": rec_pants}
 
     def get_styling_advice(self, measurements: Dict, body_shape: str, skin_tone: str, undertone: str = "warm") -> str:
         if not self.available:

@@ -393,14 +393,55 @@ def avatar(request, session_id):
     first_rec = body_scan.recommendations.first()
     recommended_size = first_rec.recommended_size if first_rec else 'M'
 
-    # Determine gender: women scans use frame_count=0, men use frame_count>=1
-    # Also allow override via query param
+    # Determine gender
     gender = request.GET.get('gender', None)
     if not gender:
         gender = 'women' if body_scan.frame_count == 0 else 'men'
 
     # Map skin tone to avatar swatch
     skin_info = SKIN_TONE_MAP.get(body_scan.skin_tone, SKIN_TONE_MAP['intermediate'])
+
+    # ── Unified colour palette for this skin tone ──
+    from .color_palettes import get_shirt_colors, get_pants_colors, SKIN_TONE_PALETTES
+    import json as _json
+
+    skin_tone_key = body_scan.skin_tone
+    shirt_palette = get_shirt_colors(skin_tone_key)
+    pants_palette = get_pants_colors(skin_tone_key)
+
+    # Try to get Gemini-recommended defaults
+    rec_shirt_hex = shirt_palette[0]['hex']  # fallback to first
+    rec_pants_hex = pants_palette[0]['hex']  # fallback to first
+
+    try:
+        from .ai_modules.gemini_client import get_gemini_client
+        gemini = get_gemini_client()
+        if gemini.available:
+            color_rec = gemini.get_color_recommendations(
+                skin_tone=skin_tone_key,
+                undertone=body_scan.undertone,
+            )
+            rec_shirt_name = color_rec.get('recommended_shirt', '')
+            rec_pants_name = color_rec.get('recommended_pants', '')
+            # Map names → hex codes
+            for c in shirt_palette:
+                if c['name'] == rec_shirt_name:
+                    rec_shirt_hex = c['hex']
+                    break
+            for c in pants_palette:
+                if c['name'] == rec_pants_name:
+                    rec_pants_hex = c['hex']
+                    break
+    except Exception as e:
+        logger.warning(f"Failed to get Gemini color recommendation for avatar: {e}")
+
+    # Build full palettes JSON for all 5 skin tones (for skin-swatch switching)
+    palettes_for_js = {}
+    for st_key, palette in SKIN_TONE_PALETTES.items():
+        palettes_for_js[st_key] = {
+            'shirts': [{'hex': c['hex'].lstrip('#'), 'tip': c['name']} for c in palette['shirts']],
+            'pants':  [{'hex': c['hex'].lstrip('#'), 'tip': c['name']} for c in palette['pants']],
+        }
 
     context = {
         'body_scan':        body_scan,
@@ -412,6 +453,10 @@ def avatar(request, session_id):
         'skin_tone_label':  skin_info['label'],
         'skin_tone_display': body_scan.skin_tone.replace('_', ' ').title(),
         'undertone_display': body_scan.undertone.title(),
+        'skin_tone_key':    skin_tone_key,
+        'rec_shirt_hex':    rec_shirt_hex.lstrip('#'),
+        'rec_pants_hex':    rec_pants_hex.lstrip('#'),
+        'palettes_json':    _json.dumps(palettes_for_js),
     }
     return render(request, 'avatar.html', context)
 
