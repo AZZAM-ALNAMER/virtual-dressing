@@ -364,10 +364,9 @@ def recommendations(request, session_id):
     first_rec = body_scan.recommendations.first()
     recommended_size = first_rec.recommended_size if first_rec else 'M'
 
-    # Gender filter
-    gender = request.GET.get('gender', None)
-    if gender and gender not in ['men', 'women']:
-        gender = None
+    # Enforce scan-derived gender so recommendations are gender-specific.
+    # frame_count == 0 is used by this project for women/manual flow.
+    gender = 'women' if body_scan.frame_count == 0 else 'men'
 
     # Get skin-tone-recommended color names so product cards sync with avatar
     from .color_palettes import get_shirt_color_names, get_pants_color_names
@@ -417,7 +416,7 @@ def _get_matching_products(recommended_size: str, gender=None, preferred_colors=
     }
 
     if gender and gender in ['men', 'women']:
-        products = Product.objects.filter(Q(gender=gender) | Q(gender='unisex'))
+        products = Product.objects.filter(gender=gender)
     else:
         products = Product.objects.all()
 
