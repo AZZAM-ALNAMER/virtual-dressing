@@ -561,6 +561,8 @@ def inventory_dashboard(request):
     in_stock, low_stock, out_of_stock = [], [], []
 
     for variant in variants:
+        variant.localized_product_name = _(variant.product.name)
+        variant.localized_color_name = _translate_dynamic_label(variant.color.name)
         try:
             if variant.inventory.is_out_of_stock:
                 out_of_stock.append(variant)

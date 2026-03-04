@@ -38,8 +38,8 @@
             {% for variant in low_stock %}
             <div class="flex items-center justify-between bg-white rounded-lg p-4">
                 <div>
-                    <p class="font-medium text-gray-900">{{ variant.product.name }}</p>
-                    <p class="text-sm text-gray-600">{% trans "Size" %}: {{ variant.size.name }} | {% trans "Color" %}: {{ variant.color.name }}</p>
+                    <p class="font-medium text-gray-900">{{ variant.localized_product_name }}</p>
+                    <p class="text-sm text-gray-600">{% trans "Size" %}: {{ variant.size.name }} | {% trans "Color" %}: {{ variant.localized_color_name }}</p>
                 </div>
                 <span class="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-lg font-bold">
                     {{ variant.inventory.quantity|default:0 }} {% trans "left" %}
@@ -58,8 +58,8 @@
             {% for variant in out_of_stock %}
             <div class="flex items-center justify-between bg-white rounded-lg p-4">
                 <div>
-                    <p class="font-medium text-gray-900">{{ variant.product.name }}</p>
-                    <p class="text-sm text-gray-600">{% trans "Size" %}: {{ variant.size.name }} | {% trans "Color" %}: {{ variant.color.name }}</p>
+                    <p class="font-medium text-gray-900">{{ variant.localized_product_name }}</p>
+                    <p class="text-sm text-gray-600">{% trans "Size" %}: {{ variant.size.name }} | {% trans "Color" %}: {{ variant.localized_color_name }}</p>
                 </div>
                 <span class="px-4 py-2 bg-red-100 text-red-800 rounded-lg font-bold">
                     {% trans "Out of Stock" %}
@@ -96,7 +96,7 @@
                     {% for variant in in_stock %}
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-gray-900">{{ variant.product.name }}</div>
+                            <div class="text-sm font-medium text-gray-900">{{ variant.localized_product_name }}</div>
                             <div class="text-sm text-gray-500">{{ variant.product.category|title }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ variant.size.name }}</td>
@@ -104,7 +104,7 @@
                             <div class="flex items-center gap-2">
                                 <div class="w-4 h-4 rounded-full border"
                                     style="background-color: {{ variant.color.hex_code }};"></div>
-                                <span class="text-sm text-gray-900">{{ variant.color.name }}</span>
+                                <span class="text-sm text-gray-900">{{ variant.localized_color_name }}</span>
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
@@ -120,7 +120,7 @@
                     {% for variant in low_stock %}
                     <tr class="bg-yellow-50">
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-gray-900">{{ variant.product.name }}</div>
+                            <div class="text-sm font-medium text-gray-900">{{ variant.localized_product_name }}</div>
                             <div class="text-sm text-gray-500">{{ variant.product.category|title }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ variant.size.name }}</td>
@@ -128,7 +128,7 @@
                             <div class="flex items-center gap-2">
                                 <div class="w-4 h-4 rounded-full border"
                                     style="background-color: {{ variant.color.hex_code }};"></div>
-                                <span class="text-sm text-gray-900">{{ variant.color.name }}</span>
+                                <span class="text-sm text-gray-900">{{ variant.localized_color_name }}</span>
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-yellow-900">
@@ -144,7 +144,7 @@
                     {% for variant in out_of_stock %}
                     <tr class="bg-red-50">
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-gray-900">{{ variant.product.name }}</div>
+                            <div class="text-sm font-medium text-gray-900">{{ variant.localized_product_name }}</div>
                             <div class="text-sm text-gray-500">{{ variant.product.category|title }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ variant.size.name }}</td>
@@ -152,7 +152,7 @@
                             <div class="flex items-center gap-2">
                                 <div class="w-4 h-4 rounded-full border"
                                     style="background-color: {{ variant.color.hex_code }};"></div>
-                                <span class="text-sm text-gray-900">{{ variant.color.name }}</span>
+                                <span class="text-sm text-gray-900">{{ variant.localized_color_name }}</span>
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-red-900">0</td>
